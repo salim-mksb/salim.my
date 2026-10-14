@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our History & Legacy | Melawati Kebab Sdn Bhd (Salim Group)</title>
+    
+    <!-- Google Fonts: Bebas Neue & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Palette Terang */
+            --deep-red: #7A1820;
+            --deep-red-hover: #5A1117;
+            --warm-cream: #F9F6F0;
+            --forest-green: #2E6B4F;
+            --light-gray: #EAEAEA;
+            --border-color: #E0E0E0;
+            --text-dark: #222222;
+            --text-muted: #666666;
+            --white: #FFFFFF;
+            --bg-main: #FFFFFF;
+            --card-bg: #FFFFFF;
+            
+            --font-headline: 'Bebas Neue', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Mode Gelap (Night Mode) */
+        body.dark-mode {
+            --bg-main: #121212;
+            --warm-cream: #1E1E1E;
+            --card-bg: #2A2A2A;
+            --text-dark: #F1F1F1;
+            --text-muted: #B0B0B0;
+            --border-color: #333333;
+            --white: #1E1E1E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-body);
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            font-size: 13px;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .top-bar-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-bar-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Language Switcher & Theme Toggle */
+        .lang-switcher button, .theme-toggle-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #FFFFFF;
+            padding: 3px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-switcher button.active, .lang-switcher button:hover, .theme-toggle-btn:hover {
+            background-color: #FFFFFF;
+            color: var(--deep-red);
+        }
+
+        /* Navigation Header */
+        header {
+            background-color: var(--bg-main);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 2px solid var(--deep-red);
+            padding: 15px 5%;
+            transition: background-color 0.4s ease;
+        }
+
+        .navbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            height: 50px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.03);
+        }
+
+        /* Dropdown Navigation Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item > a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item > a:hover {
+            color: var(--deep-red);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            list-style: none;
+            min-width: 230px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1100;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 9px 20px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--warm-cream);
+            color: var(--deep-red);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.35s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--deep-red-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(122, 24, 32, 0.3);
+        }
+
+        /* HERO SECTION */
+        .history-hero {
+            position: relative;
+            background: linear-gradient(135deg, rgba(122, 24, 32, 0.94) 0%, rgba(20, 20, 20, 0.88) 100%),
+                        url('history/company-history.jpg') center/cover no-repeat;
+            color: #FFFFFF;
+            padding: 100px 5% 80px 5%;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .history-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(6px);
+            color: #FFFFFF;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .history-hero h1 {
+            font-family: var(--font-headline);
+            font-size: 68px;
+            letter-spacing: 1.5px;
+            line-height: 1;
+            margin-bottom: 18px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .history-hero p {
+            font-size: 18px;
+            font-weight: 300;
+            opacity: 0.95;
+            max-width: 720px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* SECTION PADDING & UTILITIES */
+        .section-padding {
+            padding: 80px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .bg-warm {
+            background-color: var(--warm-cream);
+        }
+
+        .section-tag {
+            color: var(--forest-green);
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-headline);
+            font-size: 46px;
+            color: var(--deep-red);
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        /* SECTION 4: CEO & WIFE SPOTLIGHT */
+        .spotlight-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 45px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .spotlight-img-frame {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(122, 24, 32, 0.15);
+            border: 3px solid var(--deep-red);
+            background-color: var(--warm-cream);
+        }
+
+        .spotlight-img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .spotlight-img-frame:hover .spotlight-img {
+            transform: scale(1.05);
+        }
+
+        .placeholder-image-fallback {
+            width: 100%;
+            height: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--warm-cream) 0%, var(--border-color) 100%);
+            color: var(--text-dark);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .placeholder-image-fallback i {
+            font-size: 50px;
+            color: var(--deep-red);
+            margin-bottom: 12px;
+        }
+
+        .quote-box {
+            background-color: var(--warm-cream);
+            border-left: 4px solid var(--deep-red);
+            padding: 18px 22px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+
+        /* SECTION 5: INTERACTIVE HISTORY TIMELINE */
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 50px auto 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Central Line */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--deep-red), var(--forest-green));
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        /* Node Circle */
+        .timeline-node {
+            position: absolute;
+            top: 32px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 4px solid var(--deep-red);
+            z-index: 10;
+            transition: all 0.35s ease;
+        }
+
+        .timeline-item.left .timeline-node {
+            right: -12px;
+        }
+
+        .timeline-item.right .timeline-node {
+            left: -12px;
+        }
+
+        .timeline-item:hover .timeline-node {
+            background-color: var(--deep-red);
+            transform: scale(1.3);
+        }
+
+        /* Milestone Card */
+        .timeline-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--deep-red);
+            box-shadow: 0 12px 28px rgba(122, 24, 32, 0.12);
+        }
+
+        .milestone-year {
+            font-family: var(--font-headline);
+            font-size: 38px;
+            color: var(--deep-red);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .milestone-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .milestone-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .milestone-img-wrapper {
+            margin-top: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 160px;
+        }
+
+        .milestone-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .timeline-card:hover .milestone-img {
+            transform: scale(1.06);
+        }
+
+        .expand-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--forest-green);
+            margin-top: 12px;
+        }
+
+        .expandable-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+            opacity: 0;
+            margin-top: 0;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 0;
+            font-size: 13.5px;
+            color: var(--text-dark);
+        }
+
+        .timeline-card.expanded .expandable-details {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 15px;
+            padding-top: 15px;
+        }
+
+        /* SECTION 6: GROWTH & LEGACY */
+        .legacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .legacy-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .legacy-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--deep-red);
+            box-shadow: 0 12px 28px rgba(122, 24, 32, 0.1);
+        }
+
+        .legacy-img-wrapper {
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--warm-cream);
+        }
+
+        .legacy-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .legacy-card:hover .legacy-img {
+            transform: scale(1.06);
+        }
+
+        .legacy-body {
+            padding: 28px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .legacy-body h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .legacy-body p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            background: linear-gradient(135deg, var(--deep-red) 0%, #4A0E13 100%);
+            color: #FFFFFF;
+            padding: 70px 5%;
+            text-align: center;
+            border-radius: 20px;
+            margin: 60px auto;
+            max-width: 1280px;
+            box-shadow: 0 10px 30px rgba(122, 24, 32, 0.2);
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-headline);
+            font-size: 50px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            max-width: 650px;
+            margin: 0 auto 30px auto;
+            opacity: 0.9;
+        }
+
+        .cta-btn-group {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background-color: #FFFFFF;
+            color: var(--deep-red);
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.35s ease;
+        }
+
+        .btn-white:hover {
+            background-color: var(--warm-cream);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        /* Reveal & Stagger Animation Styles */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .stagger-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating Action Controls */
+        .floating-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 14px;
+            z-index: 1200;
+        }
+
+        .wa-floating-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wa-label {
+            background-color: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            transition: all 0.35s ease;
+            animation: pulseGlow 3.5s infinite ease-in-out;
+        }
+
+        .floating-btn {
+            position: relative;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 22px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+        }
+
+        .btn-whatsapp { background-color: #25D366; }
+        .btn-whatsapp:hover { background-color: #20ba5a; }
+
+        .wa-headset-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #FFFFFF;
+        }
+
+        .btn-scroll { background-color: var(--deep-red); }
+        .btn-scroll:hover { background-color: var(--deep-red-hover); }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: translateY(0); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+            50% { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); }
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: var(--warm-cream);
+            color: var(--text-dark);
+            padding: 60px 5% 30px 5%;
+            border-top: 3px solid var(--deep-red);
+        }
+
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            height: 48px;
+            margin-bottom: 15px;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--deep-red);
+            margin-bottom: 10px;
+        }
+
+        .company-info {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .company-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .company-info i {
+            color: var(--deep-red);
+            margin-top: 4px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .company-info a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .company-info a:hover { color: var(--deep-red); }
+
+        .footer-col h5 {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 18px;
+            color: var(--deep-red);
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .footer-col h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--forest-green);
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--deep-red);
+            padding-left: 4px;
+        }
+
+        .social-links-list { list-style: none; padding: 0; }
+        .social-links-list li { margin-bottom: 10px; }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 220px;
+            padding: 9px 14px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .social-btn i { font-size: 18px; }
+        .social-btn.whatsapp i { color: #25D366; }
+        .social-btn.tiktok i { color: #000000; }
+        .social-btn.facebook i { color: #1877F2; }
+
+        .social-btn:hover {
+            border-color: var(--deep-red);
+            color: var(--deep-red);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(122, 24, 32, 0.1);
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Reduced Motion Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .stagger-item {
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .wa-label { animation: none !important; }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .spotlight-grid { grid-template-columns: 1fr; gap: 35px; }
+            .timeline-container::before { left: 30px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 15px; }
+            .timeline-item.left, .timeline-item.right { left: 0; text-align: left; }
+            .timeline-item.left .timeline-node, .timeline-item.right .timeline-node { left: 18px; right: auto; }
+            .history-hero h1 { font-size: 50px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+        }
+
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            .wa-label { display: none; }
+            .history-hero h1 { font-size: 38px; }
+            .spotlight-card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Announcement Bar -->
+<div class="top-bar">
+    <div class="top-bar-info">
+        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First</span>
+    </div>
+    <div class="top-bar-controls">
+        <div class="lang-switcher">
+            <button id="btnLangEN" class="active" onclick="switchLang('EN')">EN</button> | 
+            <button id="btnLangBM" onclick="switchLang('BM')">BM</button>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Day/Night Mode">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Navigation Header -->
+<header>
+    <div class="navbar">
+        <div class="brand-logo-container">
+            <a href="home.html">
+                <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a href="home.html"><span id="Home">Home</span> <i style="font-size:10px;"></i></a>
+            
+            </li>
+            <li class="nav-item">
+                <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="our_history.html" id="History">Our History</a></li>
+                    <li><a href="vision_mission.html" id="VisionMission">Vision & Mission</a></li>
+                    <li><a href="certifications.html" id="Certifications">Quality Assurance & Certifications</a></li>
+                    
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="product"><span id="mProduct">Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="meat-products.html" id="MealProducts">Meat Products</a></li>
+                    <li><a href="bakery-products.html" id="BakeryProducts">Bakery Products</a></li>
+                    <li><a href="products-catalogue.html" id="Catalogue">Products Catalogue</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="distributor.html"><span id="Distributor">Get our product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="find-distributor.html" id="FindDistributor">Find Our Distributor</a></li>
+                    <li><a href="become-distributor.html" id="BecomeDistributor">Become a Distributor</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="media.html"><span id="mMedia">Media</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="news-events.html" id="NewsEvents">News & Events</a></li>
+                    <li><a href="events-gallery.html" id="EventsGallery">Events Gallery</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="contact.html"><span id="mContact">Contact Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="general-enquiries.html" id="GeneralEnquiries">General Enquiries</a></li>
+                    <li><a href="sales-enquiries.html" id="SalesEnquiries">Sales Enquiries</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<!-- SECTION 3: HERO SECTION -->
+<section class="history-hero">
+    <div class="history-hero-content">
+        <span class="hero-badge" id="heroBadge"><i class="fa-solid fa-clock-rotate-left"></i> Our Heritage</span>
+        <h1 id="heroTitle">Our Journey, Our Legacy</h1>
+        <p id="heroDesc">From humble beginnings in 1996 to becoming a nationwide leader in Halal frozen food and kebab manufacturing — discover the vision, dedication, and people that built Salim Group.</p>
+    </div>
+</section>
+
+<!-- SECTION 4: CEO & WIFE SPOTLIGHT -->
+<section class="section-padding">
+    <div class="spotlight-card reveal">
+        <div class="spotlight-grid">
+            <div class="spotlight-img-frame">
+                <!-- Image uses local path: history/ceo-wife.jpg with clean placeholder fallback -->
+                <img src="history/ceo-wife.jpg" alt="Salim Founder & CEO with his Wife" class="spotlight-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-image-fallback" style="display: none;">
+                    <i class="fa-solid fa-user-group"></i>
+                    <p style="font-weight: 700; font-size: 16px; margin-top: 8px;">[CEO NAME] &amp; [WIFE'S NAME]</p>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Founders of Melawati Kebab Sdn Bhd (Salim Group)</p>
+                </div>
+            </div>
+
+            <div>
+                <span class="section-tag" id="spotlightTag">The People Behind Salim</span>
+                <h2 class="section-title" id="spotlightTitle">[CEO NAME] &amp; [WIFE'S NAME]</h2>
+                <p style="font-size: 14px; font-weight: 700; color: var(--forest-green); margin-top: -12px; margin-bottom: 15px;" id="spotlightRole">Founders &amp; Executive Board of Melawati Kebab Sdn Bhd</p>
+                
+                <p style="font-size: 15px; color: var(--text-dark); line-height: 1.7;" id="spotlightDesc">
+                    [INTRODUCTION: Insert details about the founders' journey here. Melawati Kebab was established with a shared passion for delivering authentic, high-quality, and 100% Halal culinary products to Malaysian families and businesses.]
+                </p>
+
+                <div class="quote-box" id="spotlightQuote">
+                    "[FOUNDER'S QUOTE: Our mission from day one has been to preserve authentic taste, uncompromising cleanliness, and genuine Halal integrity in every meal we manufacture.]"
+                </div>
+
+                <a href="home.html#contact" class="btn-primary" id="spotlightBtn">Contact Our Leadership <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 5: INTERACTIVE HISTORY TIMELINE -->
+<section class="section-padding bg-warm" style="border-radius:24px; margin-bottom: 50px;">
+    <div style="text-align: center; max-width: 750px; margin: 0 auto 30px auto;" class="reveal">
+        <span class="section-tag" id="timeTag">Milestones Through Time</span>
+        <h2 class="section-title" id="timeTitle">Key Chapters in Our Growth</h2>
+        <p style="font-size: 15px; color: var(--text-muted);" id="timeDesc">Explore the defining moments that shaped Melawati Kebab Sdn Bhd over the past two decades. Click on any card to view additional details.</p>
+    </div>
+
+    <div class="timeline-container">
+        
+        <!-- Milestone 1: 1996 -->
+        <div class="timeline-item left stagger-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card" onclick="toggleTimelineCard(this)" tabindex="0" aria-expanded="false">
+                <div class="milestone-year">1996</div>
+                <div class="milestone-title" id="m1Title">[1996: Establishment of Melawati Kebab]</div>
+                <div class="milestone-desc" id="m1Desc">[1996 MILESTONE DESCRIPTION: Founded as a pioneering local enterprise specializing in authentic kebab recipes and quality meat preparation.]</div>
+                
+                <div class="milestone-img-wrapper">
+                    <!-- Local image placeholder: history/company-history.jpg -->
+                    <img src="history/company-history.jpg" alt="1996 Historical Company Image" class="milestone-img" onerror="this.src='https://via.placeholder.com/500x200/7A1820/FFFFFF?text=History+Image+(history/company-history.jpg)';">
+                </div>
+
+                <div class="expand-hint"><i class="fa-solid fa-circle-plus"></i> <span id="hint1">Click to expand details</span></div>
+                <div class="expandable-details" id="m1Details">
+                    [1996 EXPANDED DETAILS: Additional historical context regarding initial product formulations and founding operations in Kuala Lumpur.]
+                </div>
+            </div>
+        </div>
+
+        <!-- Milestone 2: 2005 -->
+        <div class="timeline-item right stagger-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card" onclick="toggleTimelineCard(this)" tabindex="0" aria-expanded="false">
+                <div class="milestone-year">2005</div>
+                <div class="milestone-title" id="m2Title">[2005: Halal & Facility Certification]</div>
+                <div class="milestone-desc" id="m2Desc">[2005 MILESTONE DESCRIPTION: Secured official JAKIM Halal certification and expanded processing capabilities to serve commercial clients.]</div>
+
+                <div class="milestone-img-wrapper">
+                    <!-- Local image placeholder: history/company-milestone-1.jpg -->
+                    <img src="history/company-milestone-1.jpg" alt="2005 Facility Certification" class="milestone-img" onerror="this.src='https://via.placeholder.com/500x200/2E6B4F/FFFFFF?text=Milestone+1+(history/company-milestone-1.jpg)';">
+                </div>
+
+                <div class="expand-hint"><i class="fa-solid fa-circle-plus"></i> <span id="hint2">Click to expand details</span></div>
+                <div class="expandable-details" id="m2Details">
+                    [2005 EXPANDED DETAILS: Upgraded machinery, implemented strict food safety protocols, and introduced standardized packaging.]
+                </div>
+            </div>
+        </div>
+
+        <!-- Milestone 3: 2012 -->
+        <div class="timeline-item left stagger-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card" onclick="toggleTimelineCard(this)" tabindex="0" aria-expanded="false">
+                <div class="milestone-year">2012</div>
+                <div class="milestone-title" id="m3Title">[2012: Corporate Expansion & Bakery Division]</div>
+                <div class="milestone-desc" id="m3Desc">[2012 MILESTONE DESCRIPTION: Incorporated Melawati Kebab Sdn Bhd (778900-M) and launched the dedicated bakery line for Pita breads and wraps.]</div>
+
+                <div class="milestone-img-wrapper">
+                    <!-- Local image placeholder: history/company-building.jpg -->
+                    <img src="history/company-building.jpg" alt="2012 Company Building Expansion" class="milestone-img" onerror="this.src='https://via.placeholder.com/500x200/7A1820/FFFFFF?text=Company+Building+(history/company-building.jpg)';">
+                </div>
+
+                <div class="expand-hint"><i class="fa-solid fa-circle-plus"></i> <span id="hint3">Click to expand details</span></div>
+                <div class="expandable-details" id="m3Details">
+                    [2012 EXPANDED DETAILS: Relocated headquarters to Taman Desa Cheras and expanded production footprint to meet growing B2B market demand.]
+                </div>
+            </div>
+        </div>
+
+        <!-- Milestone 4: 2018 -->
+        <div class="timeline-item right stagger-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card" onclick="toggleTimelineCard(this)" tabindex="0" aria-expanded="false">
+                <div class="milestone-year">2018</div>
+                <div class="milestone-title" id="m4Title">[2018: Nationwide Cold-Chain Distribution]</div>
+                <div class="milestone-desc" id="m4Desc">[2018 MILESTONE DESCRIPTION: Built a comprehensive logistics supply chain servicing hypermarkets, retail agents, and restaurants nationwide.]</div>
+
+                <div class="milestone-img-wrapper">
+                    <!-- Local image placeholder: history/company-milestone-2.jpg -->
+                    <img src="history/company-milestone-2.jpg" alt="2018 Logistics Expansion" class="milestone-img" onerror="this.src='https://via.placeholder.com/500x200/2E6B4F/FFFFFF?text=Milestone+2+(history/company-milestone-2.jpg)';">
+                </div>
+
+                <div class="expand-hint"><i class="fa-solid fa-circle-plus"></i> <span id="hint4">Click to expand details</span></div>
+                <div class="expandable-details" id="m4Details">
+                    [2018 EXPANDED DETAILS: Partnered with regional distributors across West and East Malaysia to ensure 100% cold-chain integrity.]
+                </div>
+            </div>
+        </div>
+
+        <!-- Milestone 5: 2026 -->
+        <div class="timeline-item left stagger-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card" onclick="toggleTimelineCard(this)" tabindex="0" aria-expanded="false">
+                <div class="milestone-year">2026</div>
+                <div class="milestone-title" id="m5Title">[2026: Innovation & Digital Transformation]</div>
+                <div class="milestone-desc" id="m5Desc">[2026 MILESTONE DESCRIPTION: Modernizing operations, enhancing corporate presence, and expanding product range for global export markets.]</div>
+
+                <div class="milestone-img-wrapper">
+                    <!-- Local image placeholder: history/company-products.jpg -->
+                    <img src="history/company-products.jpg" alt="2026 Company Products" class="milestone-img" onerror="this.src='https://via.placeholder.com/500x200/7A1820/FFFFFF?text=Company+Products+(history/company-products.jpg)';">
+                </div>
+
+                <div class="expand-hint"><i class="fa-solid fa-circle-plus"></i> <span id="hint5">Click to expand details</span></div>
+                <div class="expandable-details" id="m5Details">
+                    [2026 EXPANDED DETAILS: Continuous R&D into ready-to-eat gourmet meals and digital customer support channels.]
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- SECTION 6: GROWTH AND LEGACY -->
+<section class="section-padding">
+    <div style="text-align: center; max-width: 700px; margin: 0 auto 30px auto;" class="reveal">
+        <span class="section-tag" id="legTag">Sustained Excellence</span>
+        <h2 class="section-title" id="legTitle">Pillars of Our Legacy</h2>
+        <p style="font-size: 15px; color: var(--text-muted);" id="legDesc">Four core values that have remained unchanged since our founding in 1996.</p>
+    </div>
+
+    <div class="legacy-grid">
+        <div class="legacy-card stagger-item">
+            <div class="legacy-img-wrapper">
+                <img src="history/company-building.jpg" alt="Company Building" class="legacy-img" onerror="this.src='https://via.placeholder.com/400x200/7A1820/FFFFFF?text=Facility+(history/company-building.jpg)';">
+            </div>
+            <div class="legacy-body">
+                <h3 id="leg1Title">Modern Infrastructure</h3>
+                <p id="leg1Desc">Continuous investment in hygienic production facilities and climate-controlled storage guarantees fresh, high-quality products.</p>
+            </div>
+        </div>
+
+        <div class="legacy-card stagger-item">
+            <div class="legacy-img-wrapper">
+                <img src="history/company-products.jpg" alt="Product Variety" class="legacy-img" onerror="this.src='https://via.placeholder.com/400x200/2E6B4F/FFFFFF?text=Products+(history/company-products.jpg)';">
+            </div>
+            <div class="legacy-body">
+                <h3 id="leg2Title">Diverse Product Range</h3>
+                <p id="leg2Desc">Expanding from specialty kebab slices into pita breads, burger patties, bakery wraps, and customized wholesale solutions.</p>
+            </div>
+        </div>
+
+        <div class="legacy-card stagger-item">
+            <div class="legacy-img-wrapper">
+                <img src="history/company-history.jpg" alt="Community Trust" class="legacy-img" onerror="this.src='https://via.placeholder.com/400x200/7A1820/FFFFFF?text=Legacy+(history/company-history.jpg)';">
+            </div>
+            <div class="legacy-body">
+                <h3 id="leg3Title">Trusted Community Partner</h3>
+                <p id="leg3Desc">Building lasting relationships with Muslim households, B2B commercial operators, and food vendors for over 20 years.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 7: CTA CLOSING -->
+<div class="cta-section reveal">
+    <h2 id="ctaTitle">Be Part of Our Next Chapter</h2>
+    <p id="ctaDesc">Explore opportunities to collaborate, become an authorized regional distributor, or discover our Halal product catalog today.</p>
+    <div class="cta-btn-group">
+        <a href="company-overview.html" class="btn-white" id="ctaBtn1"><i class="fa-solid fa-building"></i> Company Overview</a>
+        <a href="https://api.whatsapp.com/send/?phone=60124247708" target="_blank" class="btn-white" style="background-color: #25D366; color: #FFFFFF;" id="ctaBtn2"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer id="contact">
+    <div class="footer-grid">
+        <div>
+            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
+            <div class="company-name">Melawati Kebab Sdn Bhd <span style="font-size:13px; font-weight:normal; color:var(--text-muted);">(778900-M)</span></div>
+            <div class="company-info">
+                <p><i class="fa-solid fa-location-dot"></i> No 54-1F, Jalan 2/154D, Taman Desa Cheras,<br>56000 Kuala Lumpur, Malaysia</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60391079708">+603 9107 9708</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:melawatikebab1996@gmail.com">melawatikebab1996@gmail.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h5>Navigation</h5>
+            <ul>
+                <li><a href="home.html#home">Home</a></li>
+                <li><a href="company-overview.html">About Us</a></li>
+                <li><a href="home.html#product">Product</a></li>
+                <li><a href="home.html#distributor">Distributor</a></li>
+                <li><a href="home.html#media">Media</a></li>
+                <li><a href="home.html#contact">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h5>Follow Us</h5>
+            <ul class="social-links-list">
+                <li>
+                    <a href="https://api.whatsapp.com/send/?phone=60124247708&text=Hello%20Melawati%20Kebab,%20I%20have%20an%20enquiry" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.tiktok.com/@melawatikebabsince1996" target="_blank" rel="noopener noreferrer" class="social-btn tiktok">
+                        <i class="fa-brands fa-tiktok"></i> TikTok
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/MelawatiKebabSince1996/" target="_blank" rel="noopener noreferrer" class="social-btn facebook">
+                        <i class="fa-brands fa-facebook"></i> Facebook
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Melawati Kebab Sdn Bhd (778900-M). All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- Floating Action Controls -->
+<div class="floating-container">
+    <div class="wa-floating-wrapper">
+        <span class="wa-label" id="waLabel">Have an enquiry? Chat with Us</span>
+        <a href="#" id="waFloatingBtn" target="_blank" rel="noopener noreferrer" class="floating-btn btn-whatsapp" title="WhatsApp Chat">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="wa-headset-badge" title="Customer Support"><i class="fa-solid fa-headset"></i></span>
+        </a>
+    </div>
+
+    <button class="floating-btn btn-scroll" id="dynamicScrollBtn" onclick="handleDynamicScroll()" title="Scroll Navigation">
+        <i class="fa-solid fa-arrow-down" id="scrollIcon"></i>
+    </button>
+</div>
+
+<!-- JavaScript Controls & Bilingual Dictionary -->
+<script>
+    // 1. Language Dictionaries & Persistent State
+    let currentLang = localStorage.getItem('preferredLang') || 'EN';
+
+    const langData = {
+        EN: {
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
+            waLabel: 'Have an enquiry? Chat with Us',
+            waTooltip: 'Chat with Us on WhatsApp',
+            waMsg: 'Hello Melawati Kebab, I have an enquiry regarding your company history.',
+            scrollBottomTooltip: 'Scroll to Bottom',
+            scrollTopTooltip: 'Scroll to Top',
+            // Nav Menu
+            mHome: 'Home',
+            mCompanyOverview: 'Company Overview',
+            mAbout: 'About Us',
+            mHistory: 'Our History',
+            mVisionMission: 'Vision & Mission',
+            mCertifications: 'Quality Assurance & Certifications',
+            mProduct: 'Product',
+            mMealProducts: 'Meal Products',
+            mBakeryProducts: 'Bakery Products',
+            mCatalogue: 'Products Catalogue',
+            mDistributor: 'Distributor',
+            mFindDistributor: 'Find Our Distributor',
+            mBecomeDistributor: 'Become a Distributor',
+            mMedia: 'Media',
+            mNewsEvents: 'News & Events',
+            mEventsGallery: 'Events Gallery',
+            mContact: 'Contact Us',
+            mGeneralEnquiries: 'General Enquiries',
+            mSalesEnquiries: 'Sales Enquiries',
+            // Hero
+            heroBadge: '<i class="fa-solid fa-clock-rotate-left"></i> Our Heritage',
+            heroTitle: 'Our Journey, Our Legacy',
+            heroDesc: 'From humble beginnings in 1996 to becoming a nationwide leader in Halal frozen food and kebab manufacturing — discover the vision, dedication, and people that built Salim Group.',
+            // Spotlight
+            spotlightTag: 'The People Behind Salim',
+            spotlightTitle: '[CEO NAME] & [WIFE\'S NAME]',
+            spotlightRole: 'Founders & Executive Board of Melawati Kebab Sdn Bhd',
+            spotlightDesc: '[INTRODUCTION: Insert details about the founders\' journey here. Melawati Kebab was established with a shared passion for delivering authentic, high-quality, and 100% Halal culinary products to Malaysian families and businesses.]',
+            spotlightQuote: '"[FOUNDER\'S QUOTE: Our mission from day one has been to preserve authentic taste, uncompromising cleanliness, and genuine Halal integrity in every meal we manufacture.]"',
+            spotlightBtn: 'Contact Our Leadership',
+            // Timeline
+            timeTag: 'Milestones Through Time',
+            timeTitle: 'Key Chapters in Our Growth',
+            timeDesc: 'Explore the defining moments that shaped Melawati Kebab Sdn Bhd over the past two decades. Click on any card to view additional details.',
+            m1Title: '[1996: Establishment of Melawati Kebab]',
+            m1Desc: '[1996 MILESTONE DESCRIPTION: Founded as a pioneering local enterprise specializing in authentic kebab recipes and quality meat preparation.]',
+            m1Details: '[1996 EXPANDED DETAILS: Additional historical context regarding initial product formulations and founding operations in Kuala Lumpur.]',
+            m2Title: '[2005: Halal & Facility Certification]',
+            m2Desc: '[2005 MILESTONE DESCRIPTION: Secured official JAKIM Halal certification and expanded processing capabilities to serve commercial clients.]',
+            m2Details: '[2005 EXPANDED DETAILS: Upgraded machinery, implemented strict food safety protocols, and introduced standardized packaging.]',
+            m3Title: '[2012: Corporate Expansion & Bakery Division]',
+            m3Desc: '[2012 MILESTONE DESCRIPTION: Incorporated Melawati Kebab Sdn Bhd (778900-M) and launched the dedicated bakery line for Pita breads and wraps.]',
+            m3Details: '[2012 EXPANDED DETAILS: Relocated headquarters to Taman Desa Cheras and expanded production footprint to meet growing B2B market demand.]',
+            m4Title: '[2018: Nationwide Cold-Chain Distribution]',
+            m4Desc: '[2018 MILESTONE DESCRIPTION: Built a comprehensive logistics supply chain servicing hypermarkets, retail agents, and restaurants nationwide.]',
+            m4Details: '[2018 EXPANDED DETAILS: Partnered with regional distributors across West and East Malaysia to ensure 100% cold-chain integrity.]',
+            m5Title: '[2026: Innovation & Digital Transformation]',
+            m5Desc: '[2026 MILESTONE DESCRIPTION: Modernizing operations, enhancing corporate presence, and expanding product range for global export markets.]',
+            m5Details: '[2026 EXPANDED DETAILS: Continuous R&D into ready-to-eat gourmet meals and digital customer support channels.]',
+            hint1: 'Click to expand details',
+            hint2: 'Click to expand details',
+            hint3: 'Click to expand details',
+            hint4: 'Click to expand details',
+            hint5: 'Click to expand details',
+            // Legacy
+            legTag: 'Sustained Excellence',
+            legTitle: 'Pillars of Our Legacy',
+            legDesc: 'Four core values that have remained unchanged since our founding in 1996.',
+            leg1Title: 'Modern Infrastructure',
+            leg1Desc: 'Continuous investment in hygienic production facilities and climate-controlled storage guarantees fresh, high-quality products.',
+            leg2Title: 'Diverse Product Range',
+            leg2Desc: 'Expanding from specialty kebab slices into pita breads, burger patties, bakery wraps, and customized wholesale solutions.',
+            leg3Title: 'Trusted Community Partner',
+            leg3Desc: 'Building lasting relationships with Muslim households, B2B commercial operators, and food vendors for over 20 years.',
+            // CTA
+            ctaTitle: 'Be Part of Our Next Chapter',
+            ctaDesc: 'Explore opportunities to collaborate, become an authorized regional distributor, or discover our Halal product catalog today.',
+            ctaBtn1: 'Company Overview',
+            ctaBtn2: 'Chat on WhatsApp'
+        },
+        BM: {
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Utama Kualiti',
+            waLabel: 'Ada Pertanyaan? Hubungi Kami',
+            waTooltip: 'Sembang dengan Kami di WhatsApp',
+            waMsg: 'Salam Melawati Kebab, saya ada pertanyaan berkenaan sejarah syarikat anda.',
+            scrollBottomTooltip: 'Tatal ke Bawah',
+            scrollTopTooltip: 'Tatal ke Atas',
+            // Nav Menu
+            mHome: 'Utama',
+            mCompanyOverview: 'Gambaran Keseluruhan Syarikat',
+            mAbout: 'Tentang Kami',
+            mHistory: 'Sejarah Kami',
+            mVisionMission: 'Visi & Misi',
+            mCertifications: 'Jaminan Kualiti & Persijilan',
+            mProduct: 'Produk',
+            mMealProducts: 'Produk Makanan',
+            mBakeryProducts: 'Produk Bakeri',
+            mCatalogue: 'Katalog Produk',
+            mDistributor: 'Pengedar',
+            mFindDistributor: 'Cari Pengedar Kami',
+            mBecomeDistributor: 'Menjadi Pengedar',
+            mMedia: 'Media',
+            mNewsEvents: 'Berita & Acara',
+            mEventsGallery: 'Galeri Acara',
+            mContact: 'Hubungi Kami',
+            mGeneralEnquiries: 'Pertanyaan Umum',
+            mSalesEnquiries: 'Pertanyaan Jualan',
+            // Hero
+            heroBadge: '<i class="fa-solid fa-clock-rotate-left"></i> Warisan Kami',
+            heroTitle: 'Perjalanan & Warisan Kami',
+            heroDesc: 'Daripada permulaan secara kecil-kecilan pada tahun 1996 hingga menjadi pemimpin pengeluaran makanan sejuk beku Halal dan kebab di seluruh negara — ketahui visi, dedikasi, dan insan di sebalik Salim Group.',
+            // Spotlight
+            spotlightTag: 'Pengasas Di Sebalik Salim',
+            spotlightTitle: '[NAMA CEO] &amp; [NAMA ISTERI]',
+            spotlightRole: 'Pengasas &amp; Lembaga Eksekutif Melawati Kebab Sdn Bhd',
+            spotlightDesc: '[PENGENALAN: Masukkan butiran perjalanan pengasas di sini. Melawati Kebab ditubuhkan dengan minat bersama untuk membekalkan produk kulinari yang autentik, berkualiti tinggi, dan 100% Halal kepada keluarga dan perniagaan di Malaysia.]',
+            spotlightQuote: '"[PETIKAN PENGASAS: Misi kami sejak hari pertama adalah untuk memelihara rasa autentik, kebersihan tanpa kompromi, dan integriti Halal sebenar dalam setiap hidangan yang kami keluarkan.]"',
+            spotlightBtn: 'Hubungi Kepimpinan Kami',
+            // Timeline
+            timeTag: 'Pencapaian Mengikut Masa',
+            timeTitle: 'Bab Utama Dalam Pertumbuhan Kami',
+            timeDesc: 'Terokai detik-detik penting yang membentuk Melawati Kebab Sdn Bhd sepanjang dua dekad yang lalu. Tekan mana-mana kad untuk melihat butiran lanjut.',
+            m1Title: '[1996: Penubuhan Melawati Kebab]',
+            m1Desc: '[KETERANGAN PENCAPAIAN 1996: Ditubuhkan sebagai perintis perniagaan tempatan yang pakar dalam resipi kebab autentik dan penyediaan daging berkualiti.]',
+            m1Details: '[BUTIRAN LANJUT 1996: Konteks sejarah tambahan mengenai formulasi produk awal dan operasi penubuhan di Kuala Lumpur.]',
+            m2Title: '[2005: Persijilan Halal & Kemudahan]',
+            m2Desc: '[KETERANGAN PENCAPAIAN 2005: Memperoleh persijilan Halal JAKIM rasmi dan meningkatkan kapasiti pemprosesan untuk melayani pelanggan komersial.]',
+            m2Details: '[BUTIRAN LANJUT 2005: Menaik taraf mesin, melaksanakan protokol keselamatan makanan yang ketat, dan memperkenalkan pembungkusan berskala.]',
+            m3Title: '[2012: Pengembangan Korporat & Bahagian Bakeri]',
+            m3Desc: '[KETERANGAN PENCAPAIAN 2012: Memperbadankan Melawati Kebab Sdn Bhd (778900-M) dan melancarkan talian bakeri khas untuk Roti Pita dan wrap.]',
+            m3Details: '[BUTIRAN LANJUT 2012: Memindahkan ibu pejabat ke Taman Desa Cheras dan meluaskan tapak pengeluaran bagi memenuhi permintaan pasaran B2B.]',
+            m4Title: '[2018: Pengedaran Rantai Sejuk Seluruh Negara]',
+            m4Desc: '[KETERANGAN PENCAPAIAN 2018: Membina rangkaian bekalan logistik komprehensif yang melayani pasar raya besar, ejen runcit, dan restoran di seluruh negara.]',
+            m4Details: '[BUTIRAN LANJUT 2018: Bekerjasama dengan pengedar daerah di seluruh Semenanjung dan Timur Malaysia bagi memastikan 100% integriti rantai sejuk.]',
+            m5Title: '[2026: Inovasi & Transformasi Digital]',
+            m5Desc: '[KETERANGAN PENCAPAIAN 2026: Memodenkan operasi, meningkatkan kehadiran korporat, dan meluaskan rangkaian produk untuk pasaran eksport global.]',
+            m5Details: '[BUTIRAN LANJUT 2026: Penyelidikan & Pembangunan (R&D) berterusan dalam hidangan gourmet sedia dimakan dan saluran sokongan pelanggan digital.]',
+            hint1: 'Klik untuk lihat butiran',
+            hint2: 'Klik untuk lihat butiran',
+            hint3: 'Klik untuk lihat butiran',
+            hint4: 'Klik untuk lihat butiran',
+            hint5: 'Klik untuk lihat butiran',
+            // Legacy
+            legTag: 'Kecemerlangan Berterusan',
+            legTitle: 'Tonggak Warisan Kami',
+            legDesc: 'Empat nilai teras yang kekal tidak berubah sejak penubuhan kami pada tahun 1996.',
+            leg1Title: 'Infrastruktur Moden',
+            leg1Desc: 'Pelaburan berterusan dalam kemudahan pengeluaran yang bersih dan storan kawalan suhu menjamin produk yang segar dan berkualiti tinggi.',
+            leg2Title: 'Kepelbagaian Rangkaian Produk',
+            leg2Desc: 'Meluas daripada hiasan daging kebab khas kepada roti pita, kepingan burger, wrap bakeri, dan penyelesaian borong tersuai.',
+            leg3Title: 'Rakan Komuniti Dipercayai',
+            leg3Desc: 'Membina hubungan berterusan dengan isi rumah Muslim, pengendali komersial B2B, dan peniaga makanan selama lebih 20 tahun.',
+            // CTA
+            ctaTitle: 'Sertai Bab Kami Yang Seterusnya',
+            ctaDesc: 'Terokai peluang untuk bekerjasama, menjadi pengedar daerah yang diiktiraf, atau terokai katalog produk Halal kami hari ini.',
+            ctaBtn1: 'Gambaran Keseluruhan Syarikat',
+            ctaBtn2: 'Sembang di WhatsApp'
+        }
+    };
+
+    function switchLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('preferredLang', lang);
+
+        document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
+        document.getElementById('btnLangBM').classList.toggle('active', lang === 'BM');
+
+        const data = langData[lang];
+
+        document.getElementById('topAnnouncement').innerHTML = data.topAnnouncement;
+        document.getElementById('waLabel').innerText = data.waLabel;
+        document.getElementById('waFloatingBtn').setAttribute('title', data.waTooltip);
+
+        const waPhone = '60124247708';
+        const encodedMsg = encodeURIComponent(data.waMsg);
+        document.getElementById('waFloatingBtn').href = `https://api.whatsapp.com/send/?phone=${waPhone}&text=${encodedMsg}`;
+
+        for (let key in data) {
+            const el = document.getElementById(key);
+            if (el && !key.startsWith('wa') && !key.startsWith('scroll') && !key.startsWith('top')) {
+                if(key === 'heroBadge') {
+                    el.innerHTML = data[key];
+                } else if(key === 'spotlightTitle') {
+                    el.innerHTML = data[key];
+                } else {
+                    el.innerText = data[key];
+                }
+            }
+        }
+
+        updateScrollButton();
+    }
+
+    // 2. Interactive Timeline Card Expansion
+    function toggleTimelineCard(cardElement) {
+        cardElement.classList.toggle('expanded');
+        const isExpanded = cardElement.classList.contains('expanded');
+        cardElement.setAttribute('aria-expanded', isExpanded);
+    }
+
+    // 3. Single Dynamic Scroll Button Control (~1200ms duration)
+    let currentScrollMode = 'down';
+
+    function updateScrollButton() {
+        const scrollBtn = document.getElementById('dynamicScrollBtn');
+        const icon = document.getElementById('scrollIcon');
+        if(!scrollBtn || !icon) return;
+
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop < 120) {
+            currentScrollMode = 'down';
+            icon.className = 'fa-solid fa-arrow-down';
+            scrollBtn.setAttribute('title', langData[currentLang].scrollBottomTooltip);
+        } else {
+            currentScrollMode = 'up';
+            icon.className = 'fa-solid fa-arrow-up';
+            scrollBtn.setAttribute('title', langData[currentLang].scrollTopTooltip);
+        }
+    }
+
+    function smoothScrollTo(targetPosition, duration = 1200) {
+        const startPosition = window.pageYOffset || document.documentElement.scrollTop;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            
+            const ease = progress < 0.5 
+                ? 2 * progress * progress 
+                : -1 + (4 - 2 * progress) * progress;
+
+            window.scrollTo(0, startPosition + (distance * ease));
+
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            }
+        }
+        requestAnimationFrame(animation);
+    }
+
+    function handleDynamicScroll() {
+        if (currentScrollMode === 'down') {
+            smoothScrollTo(document.documentElement.scrollHeight, 1200);
+        } else {
+            smoothScrollTo(0, 1200);
+        }
+    }
+
+    window.addEventListener('scroll', updateScrollButton);
+
+    // 4. Day / Night Mode Toggle
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        themeToggleBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    });
+
+    // 5. Reveal & Stagger Animation Trigger
+    function triggerReveal() {
+        document.querySelectorAll('.reveal, .stagger-item').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.92) {
+                el.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        switchLang(currentLang);
+        triggerReveal();
+    });
+    window.addEventListener('load', triggerReveal);
+    window.addEventListener('scroll', triggerReveal);
+</script>
+
+</body>
+</html>

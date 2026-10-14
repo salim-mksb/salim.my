@@ -1,0 +1,1697 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Assurance & Certifications | Melawati Kebab Sdn Bhd</title>
+    
+    <!-- Google Fonts: Bebas Neue & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Palette Terang */
+            --deep-red: #7A1820;
+            --deep-red-hover: #5A1117;
+            --warm-cream: #F9F6F0;
+            --forest-green: #2E6B4F;
+            --light-gray: #EAEAEA;
+            --border-color: #E0E0E0;
+            --text-dark: #222222;
+            --text-muted: #666666;
+            --white: #FFFFFF;
+            --bg-main: #FFFFFF;
+            --card-bg: #FFFFFF;
+            
+            --font-headline: 'Bebas Neue', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Mode Gelap (Night Mode) */
+        body.dark-mode {
+            --bg-main: #121212;
+            --warm-cream: #1E1E1E;
+            --card-bg: #2A2A2A;
+            --text-dark: #F1F1F1;
+            --text-muted: #B0B0B0;
+            --border-color: #333333;
+            --white: #1E1E1E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-body);
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            font-size: 13px;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .top-bar-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-bar-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Language Switcher & Day/Night Mode */
+        .lang-switcher button, .theme-toggle-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #FFFFFF;
+            padding: 3px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-switcher button.active, .lang-switcher button:hover, .theme-toggle-btn:hover {
+            background-color: #FFFFFF;
+            color: var(--deep-red);
+        }
+
+        /* Navigation Header */
+        header {
+            background-color: var(--bg-main);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 2px solid var(--deep-red);
+            padding: 15px 5%;
+            transition: background-color 0.4s ease;
+        }
+
+        .navbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            height: 50px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.03);
+        }
+
+        /* Dropdown Navigation Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item > a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item > a:hover {
+            color: var(--deep-red);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            list-style: none;
+            min-width: 230px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1100;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 9px 20px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--warm-cream);
+            color: var(--deep-red);
+        }
+
+        /* Hero Banner Moden */
+        .qa-hero-section {
+            padding: 60px 5% 40px 5%;
+            background: radial-gradient(circle at 10% 20%, rgba(122, 24, 32, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(46, 107, 79, 0.08) 0%, transparent 50%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .qa-hero-wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .qa-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(46, 107, 79, 0.12);
+            color: var(--forest-green);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .qa-hero-title {
+            font-family: var(--font-headline);
+            font-size: clamp(40px, 5.5vw, 68px);
+            color: var(--deep-red);
+            line-height: 0.95;
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .qa-hero-desc {
+            font-size: clamp(14px, 1.8vw, 16px);
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .hero-stats-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat-pill {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-stat-pill i {
+            font-size: 20px;
+            color: var(--deep-red);
+        }
+
+        .hero-stat-text h5 {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+
+        .hero-stat-text span {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .hero-card-showcase {
+            background: linear-gradient(135deg, var(--deep-red) 0%, #4A0E13 100%);
+            border-radius: 20px;
+            padding: 35px 30px;
+            color: #FFFFFF;
+            position: relative;
+            box-shadow: 0 12px 30px rgba(122, 24, 32, 0.25);
+            overflow: hidden;
+        }
+
+        .hero-card-showcase::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-card-showcase h4 {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .hero-card-showcase p {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .badge-mini-grid {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .mini-badge {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Seksyen Tajuk Utama */
+        .section-center-head {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 40px auto;
+        }
+
+        .section-tag {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--forest-green);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .section-title-large {
+            font-family: var(--font-headline);
+            font-size: clamp(34px, 4.5vw, 52px);
+            color: var(--deep-red);
+            line-height: 0.95;
+        }
+
+        /* 1. BENTO-BOX CERTIFICATION CARDS */
+        .bento-cert-section {
+            padding: 80px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+        }
+
+        .bento-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 30px;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            border-color: var(--deep-red);
+        }
+
+        .bento-card.col-7 { grid-column: span 7; }
+        .bento-card.col-5 { grid-column: span 5; }
+        .bento-card.col-6 { grid-column: span 6; }
+
+        .bento-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .bento-img {
+            max-height: 80px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));
+        }
+
+        .bento-tag-status {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background-color: var(--warm-cream);
+            color: var(--deep-red);
+            border: 1px solid var(--border-color);
+        }
+
+        .bento-body h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .bento-body .bento-issuer {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--forest-green);
+            display: block;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .bento-body p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .bento-checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 15px;
+        }
+
+        .bento-checklist li {
+            font-size: 13px;
+            color: var(--text-dark);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bento-checklist li i {
+            color: var(--forest-green);
+            font-size: 12px;
+        }
+
+        /* Mobile Swipe Indicator Text */
+        .mobile-swipe-hint {
+            display: none;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--forest-green);
+            margin-bottom: 15px;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* 2. ANIMATED TIMELINE WORKFLOW (1-4 WITH SCROLL PROGRESS) */
+        .scroll-workflow-section {
+            background-color: var(--warm-cream);
+            padding: 90px 5%;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .workflow-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-track-wrapper {
+            position: relative;
+            padding-left: 70px;
+        }
+
+        .timeline-base-line {
+            position: absolute;
+            left: 28px;
+            top: 25px;
+            bottom: 25px;
+            width: 5px;
+            background-color: var(--border-color);
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .timeline-progress-line {
+            position: absolute;
+            left: 28px;
+            top: 25px;
+            width: 5px;
+            height: 0%;
+            background: linear-gradient(180deg, var(--deep-red) 0%, var(--forest-green) 100%);
+            border-radius: 10px;
+            z-index: 2;
+            transition: height 0.1s linear;
+        }
+
+        .workflow-step-item {
+            position: relative;
+            margin-bottom: 50px;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .workflow-step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .workflow-node {
+            position: absolute;
+            left: -70px;
+            top: 0;
+            width: 61px;
+            height: 61px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 3px solid var(--border-color);
+            color: var(--text-muted);
+            font-family: var(--font-headline);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .workflow-step-item.active .workflow-node {
+            background-color: var(--deep-red);
+            border-color: #FFFFFF;
+            color: #FFFFFF;
+            transform: scale(1.12);
+            box-shadow: 0 6px 20px rgba(122, 24, 32, 0.4);
+        }
+
+        .workflow-content-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .workflow-step-item.active .workflow-content-card {
+            border-color: var(--deep-red);
+            box-shadow: 0 8px 25px rgba(122, 24, 32, 0.08);
+        }
+
+        .wf-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .wf-card-header h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .wf-badge {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--forest-green);
+            background-color: rgba(46, 107, 79, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .workflow-content-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* 3. QUALITY GUARANTEE FEATURES */
+        .guarantee-section {
+            padding: 80px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .guarantee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .guarantee-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .guarantee-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--deep-red);
+        }
+
+        .g-icon-wrap {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(122, 24, 32, 0.08);
+            color: var(--deep-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 18px auto;
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+
+        .guarantee-box:hover .g-icon-wrap {
+            transform: scale(1.1);
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+        }
+
+        .guarantee-box h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .guarantee-box p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* 4. AUDIT CALLOUT BANNER */
+        .audit-banner-section {
+            padding: 0 5% 80px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .audit-banner-inner {
+            background: linear-gradient(135deg, var(--deep-red) 0%, #4A0E13 100%);
+            border-radius: 20px;
+            padding: 45px 40px;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            box-shadow: 0 10px 30px rgba(122, 24, 32, 0.2);
+        }
+
+        .audit-info h3 {
+            font-family: var(--font-headline);
+            font-size: clamp(28px, 3.5vw, 44px);
+            line-height: 1;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .audit-info p {
+            font-size: 14px;
+            opacity: 0.9;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        .btn-audit-doc {
+            background-color: #FFFFFF;
+            color: var(--deep-red);
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .btn-audit-doc:hover {
+            background-color: var(--warm-cream);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+        }
+
+        /* Floating Action Controls */
+        .floating-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 14px;
+            z-index: 1200;
+        }
+
+        .wa-floating-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wa-label {
+            background-color: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            transition: all 0.35s ease;
+            animation: pulseGlow 3.5s infinite ease-in-out;
+        }
+
+        .floating-btn {
+            position: relative;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 22px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #20ba5a;
+        }
+
+        .wa-headset-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #FFFFFF;
+        }
+
+        .btn-scroll {
+            background-color: var(--deep-red);
+        }
+
+        .btn-scroll:hover {
+            background-color: var(--deep-red-hover);
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: translateY(0); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+            50% { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); }
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: var(--warm-cream);
+            color: var(--text-dark);
+            padding: 60px 5% 30px 5%;
+            border-top: 3px solid var(--deep-red);
+        }
+
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            height: 48px;
+            margin-bottom: 15px;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--deep-red);
+            margin-bottom: 10px;
+        }
+
+        .company-info {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .company-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .company-info i {
+            color: var(--deep-red);
+            margin-top: 4px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .company-info a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .company-info a:hover {
+            color: var(--deep-red);
+        }
+
+        .footer-col h5 {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 18px;
+            color: var(--deep-red);
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .footer-col h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--forest-green);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--deep-red);
+            padding-left: 4px;
+        }
+
+        .social-links-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-links-list li {
+            margin-bottom: 10px;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 220px;
+            padding: 9px 14px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .social-btn i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn.whatsapp i { color: #25D366; }
+        .social-btn.tiktok i { color: #000000; }
+        .social-btn.facebook i { color: #1877F2; }
+
+        .social-btn:hover {
+            border-color: var(--deep-red);
+            color: var(--deep-red);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(122, 24, 32, 0.1);
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* =========================================================
+           RESPONSIVE MOBILE ADJUSTMENTS (DENGAN HORIZONTAL SWIPE)
+           ========================================================= */
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .qa-hero-wrapper { grid-template-columns: 1fr; gap: 30px; }
+            .audit-banner-inner { flex-direction: column; text-align: center; padding: 35px 25px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+        }
+
+        /* KHAAS UNTUK MOBILE HORIZONTAL SWIPE (ACCREDITATIONS BENTO GRID) */
+        @media (max-width: 768px) {
+            .mobile-swipe-hint {
+                display: flex; /* Papar teks hint di mobile */
+            }
+
+            .bento-cert-section {
+                padding: 50px 0 60px 0; /* Padding tepi dikosongkan supaya swipe sampai ke bucu */
+                overflow: hidden;
+            }
+
+            .bento-cert-section .section-center-head {
+                padding: 0 5%;
+            }
+
+            .bento-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 18px;
+                padding: 10px 5% 25px 5%;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+            }
+
+            .bento-grid::-webkit-scrollbar {
+                display: none; /* Sembunyikan scrollbar di Chrome/Safari */
+            }
+
+            .bento-card {
+                flex: 0 0 85vw; /* Kapasiti 85% lebar skrin, sisa 15% nampak kad sebelah */
+                max-width: 330px;
+                scroll-snap-align: center; /* Kunci kedudukan di tengah */
+            }
+
+            .bento-card.col-7, 
+            .bento-card.col-5, 
+            .bento-card.col-6 { 
+                grid-column: auto; /* Reset semula grid span */
+            }
+
+            /* Adjust Workflow untuk Mobile */
+            .timeline-track-wrapper { padding-left: 55px; }
+            .timeline-base-line, .timeline-progress-line { left: 20px; }
+            .workflow-node {
+                left: -55px;
+                width: 46px;
+                height: 46px;
+                font-size: 20px;
+            }
+            .workflow-content-card { padding: 20px; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-stats-row { flex-direction: column; }
+            .hero-stat-pill { width: 100%; }
+            .guarantee-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            .wa-label { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Announcement Bar -->
+<div class="top-bar">
+    <div class="top-bar-info">
+        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First</span>
+    </div>
+    <div class="top-bar-controls">
+        <div class="lang-switcher">
+            <button id="btnLangEN" class="active" onclick="switchLang('EN')">EN</button> | 
+            <button id="btnLangBM" onclick="switchLang('BM')">BM</button>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Day/Night Mode">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Navigation Header -->
+<header>
+    <div class="navbar">
+        <div class="brand-logo-container">
+            <a href="index.php">
+                <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a href="home.html"><span id="Home">Home</span> <i style="font-size:10px;"></i></a>
+            </li>
+            <li class="nav-item">
+                <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="our_history.html" id="History">Our History</a></li>
+                    <li><a href="vision_mission.html" id="VisionMission">Vision & Mission</a></li>
+                    <li><a href="certifications.html" id="Certifications">Quality Assurance & Certifications</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="product.html"><span id="mProduct">Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="meat-products" id="MealProducts">Meat Products</a></li>
+                    <li><a href="bakery-products" id="BakeryProducts">Bakery Products</a></li>
+                    <li><a href="products-catalogue" id="Catalogue">Products Catalogue</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="distributor"><span id="Distributor">Get our product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="find-distributor" id="FindDistributor">Find Our Distributor</a></li>
+                    <li><a href="become-distributor" id="BecomeDistributor">Become a Distributor</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="media"><span id="mMedia">Media</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="news-events" id="NewsEvents">News & Events</a></li>
+                    <li><a href="events-gallery" id="EventsGallery">Events Gallery</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="contact"><span id="mContact">Contact Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="general-enquiries" id="GeneralEnquiries">General Enquiries</a></li>
+                    <li><a href="sales-enquiries" id="SalesEnquiries">Sales Enquiries</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<!-- HERO SECTION MODEN -->
+<section class="qa-hero-section">
+    <div class="qa-hero-wrapper">
+        <div class="qa-hero-main">
+            <span class="qa-hero-badge" id="heroBadge"><i class="fa-solid fa-shield-halal"></i> Quality First Culture</span>
+            <h1 class="qa-hero-title" id="heroTitle">QUALITY ASSURANCE & CERTIFICATIONS</h1>
+            <p class="qa-hero-desc" id="heroDesc">We uphold uncompromising standards of food purity, Halal integrity, and automated production safety across our entire range of frozen meats and bakeries.</p>
+            
+            <div class="hero-stats-row">
+                <div class="hero-stat-pill">
+                    <i class="fa-solid fa-certificate"></i>
+                    <div class="hero-stat-text">
+                        <h5>JAKIM Halal</h5>
+                        <span id="hs1">100% Verified</span>
+                    </div>
+                </div>
+                <div class="hero-stat-pill">
+                    <i class="fa-solid fa-shield-virus"></i>
+                    <div class="hero-stat-text">
+                        <h5>MeSTI KKM</h5>
+                        <span id="hs2">Ministry Certified</span>
+                    </div>
+                </div>
+                <div class="hero-stat-pill">
+                    <i class="fa-solid fa-snowflake"></i>
+                    <div class="hero-stat-text">
+                        <h5>-18°C Cold Chain</h5>
+                        <span id="hs3">Zero Breakage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-card-showcase">
+            <h4 id="hcTitle">PROVEN EXCELLENCE</h4>
+            <p id="hcDesc">Equipped with strict batch-testing protocols, UV sanitization, and automated packaging lines for total customer confidence.</p>
+            <div class="badge-mini-grid">
+                <div class="mini-badge"><i class="fa-solid fa-circle-check"></i> <span id="mb1">MS 1500 Standard</span></div>
+                <div class="mini-badge"><i class="fa-solid fa-circle-check"></i> <span id="mb2">GMP Compliant</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 1. BENTO-BOX CERTIFICATIONS GRID (BOLEH SWIPE KIRI-KANAN DI MOBILE) -->
+<section class="bento-cert-section">
+    <div class="section-center-head">
+        <span class="section-tag" id="bentoTagline">ACCREDITATIONS</span>
+        <h2 class="section-title-large" id="bentoTitle">GOVERNMENT RECOGNIZED STANDARDS</h2>
+    </div>
+
+    <!-- Mobile Hint Indicator -->
+    <div class="mobile-swipe-hint" id="swipeHint">
+        <i class="fa-solid fa-hand-pointer"></i> <span id="swipeHintText">Swipe left & right to view all</span> <i class="fa-solid fa-arrow-right-long"></i>
+    </div>
+
+    <div class="bento-grid">
+        <!-- Bento 1: JAKIM Halal -->
+        <div class="bento-card col-7">
+            <div class="bento-header">
+                <img src="logo/halall.png" alt="JAKIM Halal Logo" class="bento-img" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Halal_Malaysia_logo.svg/1200px-Halal_Malaysia_logo.svg.png';">
+                <span class="bento-tag-status" id="b1Status">Verified Halal</span>
+            </div>
+            <div class="bento-body">
+                <h3 id="b1Title">JAKIM Halal Certification</h3>
+                <span class="bento-issuer" id="b1Issuer">Department of Islamic Development Malaysia (JAKIM)</span>
+                <p id="b1Desc">Certified under Malaysian Halal Standards (MS 1500). Guarantees that all meat, marinade ingredients, and slaughter processes strictly follow Halalan Toyyiban principles.</p>
+                <ul class="bento-checklist">
+                    <li><i class="fa-solid fa-check"></i> <span id="b1c1">100% Halal Certified Slaughter Sourced</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span id="b1c2">Zero Alcohol & Porcine Cross-Contamination</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bento 2: MeSTI KKM -->
+        <div class="bento-card col-5">
+            <div class="bento-header">
+                <img src="logo/mesti.png" alt="MeSTI Logo" class="bento-img" onerror="this.src='https://via.placeholder.com/150x90/7A1820/FFFFFF?text=MeSTI+Certified';">
+                <span class="bento-tag-status" id="b2Status">KKM Approved</span>
+            </div>
+            <div class="bento-body">
+                <h3 id="b2Title">MeSTI Certification</h3>
+                <span class="bento-issuer" id="b2Issuer">Ministry of Health Malaysia (KKM)</span>
+                <p id="b2Desc">Ensures strict operational cleanliness, factory pest management, and clean water filtration systems in our manufacturing plant.</p>
+                <ul class="bento-checklist">
+                    <li><i class="fa-solid fa-check"></i> <span id="b2c1">Full Product Traceability</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span id="b2c2">Daily Factory Sanitization</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bento 3: GMP & HACCP -->
+        <div class="bento-card col-6">
+            <div class="bento-header">
+                <img src="logo/haccp.png" alt="GMP HACCP" class="bento-img" onerror="this.src='https://via.placeholder.com/150x90/2E6B4F/FFFFFF?text=GMP+%26+HACCP';">
+                <span class="bento-tag-status" id="b3Status">Safety Benchmark</span>
+            </div>
+            <div class="bento-body">
+                <h3 id="b3Title">GMP & HACCP Guidelines</h3>
+                <span class="bento-issuer" id="b3Issuer">Good Manufacturing Practice</span>
+                <p id="b3Desc">Hazard Analysis Critical Control Point (HACCP) practices prevent potential biological and physical contamination before products leave the plant.</p>
+            </div>
+        </div>
+
+        <!-- Bento 4: DVS Veterinary -->
+        <div class="bento-card col-6">
+            <div class="bento-header">
+                <img src="logo/vhm.png" alt="Veterinary Health" class="bento-img" onerror="this.src='https://via.placeholder.com/150x90/7A1820/FFFFFF?text=DVS+Inspected';">
+                <span class="bento-tag-status" id="b4Status">DVS Inspected</span>
+            </div>
+            <div class="bento-body">
+                <h3 id="b4Title">Veterinary Health Compliance</h3>
+                <span class="bento-issuer" id="b4Issuer">Dept. of Veterinary Services (DVS)</span>
+                <p id="b4Desc">Raw meat is exclusively sourced from government-approved, disease-free abattoirs that meet strict veterinary health criteria.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. ANIMATED TIMELINE WORKFLOW (PROGRESS SCROLL LINE) -->
+<section class="scroll-workflow-section" id="workflowSection">
+    <div class="section-center-head">
+        <span class="section-tag" id="wfTagline">STEP-BY-STEP CONTROL</span>
+        <h2 class="section-title-large" id="wfTitle">OUR 4-STAGE QUALITY WORKFLOW</h2>
+    </div>
+
+    <div class="workflow-container">
+        <div class="timeline-track-wrapper">
+            <!-- Garisan Latar Belakang & Progress Line (Bergerak Sewaktu Scroll) -->
+            <div class="timeline-base-line"></div>
+            <div class="timeline-progress-line" id="timelineProgressLine"></div>
+
+            <!-- Step 1 -->
+            <div class="workflow-step-item" id="wfStep1">
+                <div class="workflow-node">1</div>
+                <div class="workflow-content-card">
+                    <div class="wf-card-header">
+                        <h4 id="wf1Title">Certified Raw Meat Inspection</h4>
+                        <span class="wf-badge"><i class="fa-solid fa-truck-ramp-box"></i> <span id="wf1Tag">Stage 01</span></span>
+                    </div>
+                    <p id="wf1Desc">Raw meat cutlets arrive under strict temperature-controlled logistics from accredited Halal abattoirs. Immediate inspection ensures ideal freshness, color, and cold preservation.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="workflow-step-item" id="wfStep2">
+                <div class="workflow-node">2</div>
+                <div class="workflow-content-card">
+                    <div class="wf-card-header">
+                        <h4 id="wf2Title">Automated Hygienic Manufacturing</h4>
+                        <span class="wf-badge"><i class="fa-solid fa-industry"></i> <span id="wf2Tag">Stage 02</span></span>
+                    </div>
+                    <p id="wf2Desc">Inside cleanroom facilities with air filtration systems, staff in full protective suits operate automated marinating, blending, and kebab cone-shaping equipment.</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="workflow-step-item" id="wfStep3">
+                <div class="workflow-node">3</div>
+                <div class="workflow-content-card">
+                    <div class="wf-card-header">
+                        <h4 id="wf3Title">Rapid Industrial Flash Freezing</h4>
+                        <span class="wf-badge"><i class="fa-solid fa-snowflake"></i> <span id="wf3Tag">Stage 03</span></span>
+                    </div>
+                    <p id="wf3Desc">Products undergo blast freezing down to -18°C instantly. This locks in authentic taste, tender texture, and natural moisture without needing artificial chemicals.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="workflow-step-item" id="wfStep4">
+                <div class="workflow-node">4</div>
+                <div class="workflow-content-card">
+                    <div class="wf-card-header">
+                        <h4 id="wf4Title">Lab Sampling & Barcode Tracking</h4>
+                        <span class="wf-badge"><i class="fa-solid fa-vial-circle-check"></i> <span id="wf4Tag">Stage 04</span></span>
+                    </div>
+                    <p id="wf4Desc">Every finished lot undergoes metal detector screening, microbial lab testing, and barcode assignment for end-to-end batch traceability before store delivery.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. QUALITY GUARANTEE FEATURES -->
+<section class="guarantee-section">
+    <div class="section-center-head">
+        <span class="section-tag" id="gTagline">ZERO COMPROMISE</span>
+        <h2 class="section-title-large" id="gTitle">OUR CORE HYGIENE PROMISES</h2>
+    </div>
+
+    <div class="guarantee-grid">
+        <div class="guarantee-box">
+            <div class="g-icon-wrap"><i class="fa-solid fa-temperature-arrow-down"></i></div>
+            <h4 id="g1Title">Unbroken Cold Chain</h4>
+            <p id="g1Desc">Kept strictly at or below -18°C throughout freezing, storage, and refrigerated truck transportation.</p>
+        </div>
+
+        <div class="guarantee-box">
+            <div class="g-icon-wrap"><i class="fa-solid fa-spray-can-sparkles"></i></div>
+            <h4 id="g2Title">Daily UV Sanitization</h4>
+            <p id="g2Desc">Equipment and production lines are thoroughly washed and UV-sanitized before and after every shift.</p>
+        </div>
+
+        <div class="guarantee-box">
+            <div class="g-icon-wrap"><i class="fa-solid fa-microchip"></i></div>
+            <h4 id="g3Title">Metal Detection Screening</h4>
+            <p id="g3Desc">Every packaged item passes through automated metal detectors to eliminate any physical hazard risk.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 4. AUDIT DOCUMENT CALLOUT BANNER -->
+<section class="audit-banner-section">
+    <div class="audit-banner-inner">
+        <div class="audit-info">
+            <h3 id="abTitle">NEED CERTIFICATE COPIES FOR B2B OR AUDIT?</h3>
+            <p id="abDesc">We provide full documentation including Halal certificates, MeSTI compliance papers, specification sheets, and batch lab analysis for commercial partners.</p>
+        </div>
+        <a href="contact.html" class="btn-audit-doc" id="abBtn">Request Documents <i class="fa-solid fa-file-pdf"></i></a>
+    </div>
+</section>
+
+<!-- Floating Action Controls -->
+<div class="floating-container">
+    <div class="wa-floating-wrapper">
+        <span class="wa-label" id="waLabelText">Talk to Sales & QA</span>
+        <a href="https://wa.me/60123456789?text=Hi%20Melawati%20Kebab,%20I%20have%20an%20enquiry%20regarding%20quality%20and%20certifications." target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="wa-headset-badge"><i class="fa-solid fa-headset"></i></span>
+        </a>
+    </div>
+    <button class="floating-btn btn-scroll" id="scrollTopBtn" title="Scroll to Top" style="display: none;">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
+            <div class="company-name">MELAWATI KEBAB SDN BHD</div>
+            <div class="company-info">
+                <p><i class="fa-solid fa-location-dot"></i> No. 12 & 14, Jalan SB Jaya 3, Taman Industri SB Jaya, 47000 Sungai Buloh, Selangor, Malaysia.</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60361567890">+60 3-6156 7890</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@melawatikebab.com">info@melawatikebab.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h5 id="footerQuickLinks">Quick Links</h5>
+            <ul>
+                <li><a href="company_overview.html">About Melawati Kebab</a></li>
+                <li><a href="product.html">Our Product Range</a></li>
+                <li><a href="certifications.html">Quality & Certifications</a></li>
+                <li><a href="find-distributor.html">Distributor Network</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h5 id="footerConnect">Connect With Us</h5>
+            <ul class="social-links-list">
+                <li>
+                    <a href="https://wa.me/60123456789" target="_blank" class="social-btn whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tiktok.com" target="_blank" class="social-btn tiktok">
+                        <i class="fa-brands fa-tiktok"></i> TikTok
+                    </a>
+                </li>
+                <li>
+                    <a href="https://facebook.com" target="_blank" class="social-btn facebook">
+                        <i class="fa-brands fa-facebook-f"></i> Facebook
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; <?php echo date('Y'); ?> Melawati Kebab Sdn Bhd. All Rights Reserved.</p>
+        <p>Premium Halal Frozen Food Supplier & Manufacturer</p>
+    </div>
+</footer>
+
+<!-- JavaScript Logic -->
+<script>
+    // 1. ANIMASI SCROLL PROGRESS LINE UNTUK WORKFLOW (1-4)
+    function animateWorkflowProgress() {
+        const section = document.getElementById('workflowSection');
+        const progressLine = document.getElementById('timelineProgressLine');
+        if (!section || !progressLine) return;
+
+        const sectionRect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        const totalHeight = sectionRect.height;
+        const currentScroll = windowHeight * 0.6 - sectionRect.top;
+
+        let percentage = (currentScroll / totalHeight) * 100;
+        if (percentage < 0) percentage = 0;
+        if (percentage > 100) percentage = 100;
+
+        progressLine.style.height = percentage + '%';
+
+        const steps = [
+            document.getElementById('wfStep1'),
+            document.getElementById('wfStep2'),
+            document.getElementById('wfStep3'),
+            document.getElementById('wfStep4')
+        ];
+
+        steps.forEach((step) => {
+            if (!step) return;
+            const stepRect = step.getBoundingClientRect();
+            if (stepRect.top < windowHeight * 0.65) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        if (window.scrollY > 300) {
+            scrollTopBtn.style.display = 'flex';
+        } else {
+            scrollTopBtn.style.display = 'none';
+        }
+    }
+
+    window.addEventListener('scroll', animateWorkflowProgress);
+    window.addEventListener('load', animateWorkflowProgress);
+
+    // 2. DATASET TRANSLATION (EN / BM)
+    const translations = {
+        EN: {
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
+            Home: 'Home',
+            About: 'About Us',
+            History: 'Our History',
+            VisionMission: 'Vision & Mission',
+            Certifications: 'Quality Assurance & Certifications',
+            mProduct: 'Product',
+            MealProducts: 'Meal Products',
+            BakeryProducts: 'Bakery Products',
+            Catalogue: 'Products Catalogue',
+            Distributor: 'Get our product',
+            FindDistributor: 'Find Our Distributor',
+            BecomeDistributor: 'Become a Distributor',
+            mMedia: 'Media',
+            NewsEvents: 'News & Events',
+            EventsGallery: 'Events Gallery',
+            mContact: 'Contact Us',
+            GeneralEnquiries: 'General Enquiries',
+            SalesEnquiries: 'Sales Enquiries',
+
+            heroBadge: '<i class="fa-solid fa-shield-halal"></i> Quality First Culture',
+            heroTitle: 'QUALITY ASSURANCE & CERTIFICATIONS',
+            heroDesc: 'We uphold uncompromising standards of food purity, Halal integrity, and automated production safety across our entire range of frozen meats and bakeries.',
+            hs1: '100% Verified',
+            hs2: 'Ministry Certified',
+            hs3: 'Zero Breakage',
+            hcTitle: 'PROVEN EXCELLENCE',
+            hcDesc: 'Equipped with strict batch-testing protocols, UV sanitization, and automated packaging lines for total customer confidence.',
+            mb1: 'MS 1500 Standard',
+            mb2: 'GMP Compliant',
+
+            bentoTagline: 'ACCREDITATIONS',
+            bentoTitle: 'GOVERNMENT RECOGNIZED STANDARDS',
+            swipeHintText: 'Swipe left & right to view all',
+
+            b1Status: 'Verified Halal',
+            b1Title: 'JAKIM Halal Certification',
+            b1Issuer: 'Department of Islamic Development Malaysia (JAKIM)',
+            b1Desc: 'Certified under Malaysian Halal Standards (MS 1500). Guarantees that all meat, marinade ingredients, and slaughter processes strictly follow Halalan Toyyiban principles.',
+            b1c1: '100% Halal Certified Slaughter Sourced',
+            b1c2: 'Zero Alcohol & Porcine Cross-Contamination',
+
+            b2Status: 'KKM Approved',
+            b2Title: 'MeSTI Certification',
+            b2Issuer: 'Ministry of Health Malaysia (KKM)',
+            b2Desc: 'Ensures strict operational cleanliness, factory pest management, and clean water filtration systems in our manufacturing plant.',
+            b2c1: 'Full Product Traceability',
+            b2c2: 'Daily Factory Sanitization',
+
+            b3Status: 'Safety Benchmark',
+            b3Title: 'GMP & HACCP Guidelines',
+            b3Issuer: 'Good Manufacturing Practice',
+            b3Desc: 'Hazard Analysis Critical Control Point (HACCP) practices prevent potential biological and physical contamination before products leave the plant.',
+
+            b4Status: 'DVS Inspected',
+            b4Title: 'Veterinary Health Compliance',
+            b4Issuer: 'Dept. of Veterinary Services (DVS)',
+            b4Desc: 'Raw meat is exclusively sourced from government-approved, disease-free abattoirs that meet strict veterinary health criteria.',
+
+            wfTagline: 'STEP-BY-STEP CONTROL',
+            wfTitle: 'OUR 4-STAGE QUALITY WORKFLOW',
+
+            wf1Title: 'Certified Raw Meat Inspection',
+            wf1Tag: 'Stage 01',
+            wf1Desc: 'Raw meat cutlets arrive under strict temperature-controlled logistics from accredited Halal abattoirs. Immediate inspection ensures ideal freshness, color, and cold preservation.',
+
+            wf2Title: 'Automated Hygienic Manufacturing',
+            wf2Tag: 'Stage 02',
+            wf2Desc: 'Inside cleanroom facilities with air filtration systems, staff in full protective suits operate automated marinating, blending, and kebab cone-shaping equipment.',
+
+            wf3Title: 'Rapid Industrial Flash Freezing',
+            wf3Tag: 'Stage 03',
+            wf3Desc: 'Products undergo blast freezing down to -18°C instantly. This locks in authentic taste, tender texture, and natural moisture without needing artificial chemicals.',
+
+            wf4Title: 'Lab Sampling & Barcode Tracking',
+            wf4Tag: 'Stage 04',
+            wf4Desc: 'Every finished lot undergoes metal detector screening, microbial lab testing, and barcode assignment for end-to-end batch traceability before store delivery.',
+
+            gTagline: 'ZERO COMPROMISE',
+            gTitle: 'OUR CORE HYGIENE PROMISES',
+            g1Title: 'Unbroken Cold Chain',
+            g1Desc: 'Kept strictly at or below -18°C throughout freezing, storage, and refrigerated truck transportation.',
+            g2Title: 'Daily UV Sanitization',
+            g2Desc: 'Equipment and production lines are thoroughly washed and UV-sanitized before and after every shift.',
+            g3Title: 'Metal Detection Screening',
+            g3Desc: 'Every packaged item passes through automated metal detectors to eliminate any physical hazard risk.',
+
+            abTitle: 'NEED CERTIFICATE COPIES FOR B2B OR AUDIT?',
+            abDesc: 'We provide full documentation including Halal certificates, MeSTI compliance papers, specification sheets, and batch lab analysis for commercial partners.',
+            abBtn: 'Request Documents <i class="fa-solid fa-file-pdf"></i>',
+
+            waLabelText: 'Talk to Sales & QA',
+            footerQuickLinks: 'Quick Links',
+            footerConnect: 'Connect With Us'
+        },
+        BM: {
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Utamakan Kualiti',
+            Home: 'Utama',
+            About: 'Tentang Kami',
+            History: 'Sejarah Kami',
+            VisionMission: 'Visi & Misi',
+            Certifications: 'Jaminan Kualiti & Sijil Pengiktirafan',
+            mProduct: 'Produk',
+            MealProducts: 'Produk Daging & Kebab',
+            BakeryProducts: 'Produk Bakeri',
+            Catalogue: 'Katalog Produk',
+            Distributor: 'Dapatkan Produk Kami',
+            FindDistributor: 'Cari Pengedar Kami',
+            BecomeDistributor: 'Jadi Pengedar',
+            mMedia: 'Media',
+            NewsEvents: 'Berita & Acara',
+            EventsGallery: 'Galeri Acara',
+            mContact: 'Hubungi Kami',
+            GeneralEnquiries: 'Pertanyaan Umum',
+            SalesEnquiries: 'Pertanyaan Jualan',
+
+            heroBadge: '<i class="fa-solid fa-shield-halal"></i> Budaya Utama Kualiti',
+            heroTitle: 'JAMINAN KUALITI & SIJIL PENGIKTIRAFAN',
+            heroDesc: 'Kami memegang teguh piawaian kesucian makanan, integriti Halal, dan keselamatan pemprosesan automatik bagi seluruh rangkaian produk sejuk beku kami.',
+            hs1: '100% Diiktiraf',
+            hs2: 'Persijilan Kementerian',
+            hs3: 'Rantaian Sejuk Ketat',
+            hcTitle: 'KECERMERLANGAN TERBUKTI',
+            hcDesc: 'Dilengkapi protokol ujian sampel kelompok, sanitasi UV, dan talian pembungkusan automatik untuk keyakinan penuh anda.',
+            mb1: 'Piawaian MS 1500',
+            mb2: 'Pematuhan GMP',
+
+            bentoTagline: 'PENGIKTIRAFAN',
+            bentoTitle: 'PIAWAIAN DIIKTIRAF KERAJAAN',
+            swipeHintText: 'Sapu ke kiri & kanan untuk lihat semua',
+
+            b1Status: 'Disahkan Halal',
+            b1Title: 'Persijilan Halal JAKIM',
+            b1Issuer: 'Jabatan Kemajuan Islam Malaysia (JAKIM)',
+            b1Desc: 'Diiktiraf di bawah Piawaian Halal Malaysia (MS 1500). Menjamin semua daging, bahan perapan, dan proses sembelihan mengikut prinsip Halalan Toyyiban.',
+            b1c1: 'Sumber Sembelihan Diiktiraf 100% Halal',
+            b1c2: 'Bebas Alkohol & Pencemaran Silang',
+
+            b2Status: 'Kelulusan KKM',
+            b2Title: 'Persijilan MeSTI',
+            b2Issuer: 'Kementerian Kesihatan Malaysia (KKM)',
+            b2Desc: 'Memastikan kebersihan operasi, kawalan makhluk perosak, dan penapisan air bersih yang ketat di kilang pengeluaran kami.',
+            b2c1: 'Penjejakan Penuh Produk',
+            b2c2: 'Sanitasi Kilang Setiap Hari',
+
+            b3Status: 'Penanda Aras Keselamatan',
+            b3Title: 'Garis Panduan GMP & HACCP',
+            b3Issuer: 'Amalan Pengilangan Yang Baik',
+            b3Desc: 'Amalan Hazard Analysis Critical Control Point (HACCP) mengelakkan potensi pencemaran biologi dan fizikal sebelum produk dikeluarkan.',
+
+            b4Status: 'Pemeriksaan DVS',
+            b4Title: 'Pematuhan Kesihatan Veterinar',
+            b4Issuer: 'Jabatan Perkhidmatan Veterinar (DVS)',
+            b4Desc: 'Daging mentah diperoleh secara eksklusif daripada rumah sembelihan yang diluluskan kerajaan dan bebas penyakit.',
+
+            wfTagline: 'KAWALAN LANGKAH DEMI LANGKAH',
+            wfTitle: 'ALIRAN KERJA KUALITI 4-PERINGKAT KAMI',
+
+            wf1Title: 'Pemeriksaan Daging Mentah Diiktiraf',
+            wf1Tag: 'Peringkat 01',
+            wf1Desc: 'Daging mentah tiba dalam logistik terkawal suhu daripada rumah sembelihan Halal berdaftar. Pemeriksaan serta-merta memastikan kesegaran dan warna kualiti.',
+
+            wf2Title: 'Pemprosesan Automatik Higienis',
+            wf2Tag: 'Peringkat 02',
+            wf2Desc: 'Di dalam fasiliti bilik bersih bertapis udara, staf beroperasi dengan pakaian perlindungan penuh mengendalikan mesin perapan dan pembentuk kebab.',
+
+            wf3Title: 'Pembekuan Pantas Flash Freezing',
+            wf3Tag: 'Peringkat 03',
+            wf3Desc: 'Produk melalui pembekuan pantas hingga -18°C secara serta merta untuk mengunci rasa asli dan kejelitasan daging tanpa bahan kimia tiruan.',
+
+            wf4Title: 'Ujian Sampel Makmal & Penjejakan Kod Bar',
+            wf4Tag: 'Peringkat 04',
+            wf4Desc: 'Setiap lot menjalani ujian imbasan pengesan logam, ujian mikrob makmal, dan penetapan kod bar untuk penjejakan lot sehingga ke kedai.',
+
+            gTagline: 'TANPA KOMPROMI',
+            gTitle: 'JANJI UTAMA KEBERSIHAN KAMI',
+            g1Title: 'Rantaian Sejuk Tanpa Putus',
+            g1Desc: 'Dikekalkan secara konsisten pada atau bawah -18°C sepanjang pembekuan, penyimpanan, dan penghantaran trak sejuk.',
+            g2Title: 'Sanitasi UV Harian',
+            g2Desc: 'Peralatan dan talian pengeluaran dibasuh secara mendalam dan disanitasi lampu UV sebelum serta selepas setiap syif.',
+            g3Title: 'Imbasan Pengesan Logam',
+            g3Desc: 'Setiap item dibungkus melepasi pengesan logam automatik bagi menghapuskan sebarang risiko bahaya fizikal.',
+
+            abTitle: 'PERLUKAN SALINAN SIJIL UNTUK B2B ATAU AUDIT?',
+            abDesc: 'Kami menyediakan dokumentasi penuh termasuk sijil Halal, dokumen MeSTI, helaian spesifikasi, dan analisis makmal untuk rakan komersial.',
+            abBtn: 'Minta Dokumen <i class="fa-solid fa-file-pdf"></i>',
+
+            waLabelText: 'Sembang Jualan & QA',
+            footerQuickLinks: 'Pautan Pantas',
+            footerConnect: 'Ikuti Kami'
+        }
+    };
+
+    // Switch Language Function
+    function switchLang(lang) {
+        document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
+        document.getElementById('btnLangBM').classList.toggle('active', lang === 'BM');
+
+        const langData = translations[lang];
+        if (!langData) return;
+
+        for (let key in langData) {
+            const el = document.getElementById(key);
+            if (el) {
+                el.innerHTML = langData[key];
+            }
+        }
+    }
+
+    // Day / Night Mode Toggle
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        themeToggleBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Load Saved Theme
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+
+    // Scroll to Top Click
+    document.getElementById('scrollTopBtn').addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
+
+</body>
+</html>

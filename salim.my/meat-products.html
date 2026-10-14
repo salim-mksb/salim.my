@@ -1,0 +1,1251 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meat & Poultry Products | Melawati Kebab Sdn Bhd</title>
+    
+    <!-- Google Fonts: Bebas Neue & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Palette Terang Melawati Red */
+            --deep-red: #7A1820;
+            --deep-red-hover: #5A1117;
+            --bright-red: #C0262D;
+            --warm-cream: #F9F6F0;
+            --forest-green: #2E6B4F;
+            --light-gray: #F5F5F5;
+            --border-color: #E2E2E2;
+            --text-dark: #222222;
+            --text-muted: #666666;
+            --white: #FFFFFF;
+            --bg-main: #FFFFFF;
+            --card-bg: #FFFFFF;
+            
+            --font-headline: 'Bebas Neue', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Mode Gelap (Night Mode) */
+        body.dark-mode {
+            --bg-main: #121212;
+            --warm-cream: #1A1A1A;
+            --card-bg: #222222;
+            --text-dark: #F1F1F1;
+            --text-muted: #B0B0B0;
+            --border-color: #333333;
+            --white: #222222;
+            --light-gray: #1C1C1C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-body);
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            font-size: 13px;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .top-bar-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-bar-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-switcher button, .theme-toggle-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #FFFFFF;
+            padding: 3px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-switcher button.active, .lang-switcher button:hover, .theme-toggle-btn:hover {
+            background-color: #FFFFFF;
+            color: var(--deep-red);
+        }
+
+        /* Navigation Header */
+        header {
+            background-color: var(--bg-main);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 2px solid var(--deep-red);
+            padding: 15px 5%;
+            transition: background-color 0.4s ease;
+        }
+
+        .navbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            height: 50px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.03);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item > a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item > a:hover {
+            color: var(--deep-red);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            list-style: none;
+            min-width: 230px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1100;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 9px 20px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--warm-cream);
+            color: var(--deep-red);
+        }
+
+        /* HERO HEADER (MINIMALIST & CLEAN) */
+        .meat-hero {
+            padding: 45px 5% 25px 5%;
+            text-align: center;
+            background-color: var(--bg-main);
+        }
+
+        .meat-hero-tag {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--bright-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .meat-hero-title {
+            font-family: var(--font-headline);
+            font-size: clamp(36px, 5vw, 56px);
+            color: var(--deep-red);
+            line-height: 1;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .meat-hero-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* KEWPIE STYLE SUB-NAVIGATION BAR (STUCK AT TOP ON SCROLL) */
+        .kewpie-nav-wrapper {
+            position: sticky;
+            top: 80px;
+            z-index: 900;
+            background-color: var(--bg-main);
+            border-bottom: 2px solid var(--border-color);
+            padding: 10px 5%;
+            transition: background-color 0.4s ease;
+        }
+
+        .kewpie-nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Sub-Categories Horizontal Tabs */
+        .kewpie-tabs {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .kewpie-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .kewpie-tab-item {
+            position: relative;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .kewpie-tab-item:hover, .kewpie-tab-item.active {
+            color: var(--bright-red);
+        }
+
+        .kewpie-tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--bright-red);
+            border-radius: 2px;
+            animation: slideLine 0.3s ease forwards;
+        }
+
+        @keyframes slideLine {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Search Input Box */
+        .kewpie-search {
+            position: relative;
+            width: 260px;
+        }
+
+        .kewpie-search input {
+            width: 100%;
+            padding: 8px 15px 8px 36px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-dark);
+            font-size: 13px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .kewpie-search input:focus {
+            border-color: var(--bright-red);
+            box-shadow: 0 0 8px rgba(192, 38, 45, 0.15);
+        }
+
+        .kewpie-search i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* KEWPIE STYLE PRODUCT GRID SECTION */
+        .kewpie-products-section {
+            padding: 50px 5% 90px 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .kewpie-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        /* KEWPIE PRODUCT CARD WITH HOVER FLIP / REVEAL DESCRIPTION EFFECT */
+        .kewpie-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            height: 380px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kewpie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(122, 24, 32, 0.12);
+            border-color: var(--bright-red);
+        }
+
+        /* Front State (Image & Title) */
+        .kewpie-card-front {
+            padding: 25px 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .kewpie-img-wrap {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .kewpie-img-wrap img {
+            max-height: 180px;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.08));
+        }
+
+        .kewpie-card:hover .kewpie-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .kewpie-brand-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--warm-cream);
+            color: var(--deep-red);
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .kewpie-card-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--bright-red);
+            line-height: 1.3;
+            margin-top: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .kewpie-spec-tag {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* Back Hover State (Description Reveal Like Kewpie's 2nd Card) */
+        .kewpie-card-back {
+            position: absolute;
+            inset: 0;
+            background-color: var(--card-bg);
+            padding: 30px 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.95);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 12px;
+            z-index: 5;
+        }
+
+        .kewpie-card:hover .kewpie-card-back {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .kewpie-back-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--bright-red);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .kewpie-back-desc {
+            font-size: 13px;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            overflow-y: auto;
+        }
+
+        .btn-kewpie-wa {
+            background-color: var(--bright-red);
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(192, 38, 45, 0.2);
+        }
+
+        .btn-kewpie-wa:hover {
+            background-color: #25D366;
+            transform: scale(1.03);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Empty Search Result */
+        .kewpie-no-result {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 70px 20px;
+            display: none;
+        }
+
+        .kewpie-no-result i {
+            font-size: 48px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* Floating Controls */
+        .floating-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 14px;
+            z-index: 1200;
+        }
+
+        .wa-floating-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wa-label {
+            background-color: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            transition: all 0.35s ease;
+            animation: pulseGlow 3.5s infinite ease-in-out;
+        }
+
+        .floating-btn {
+            position: relative;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 22px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #20ba5a;
+        }
+
+        .wa-headset-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #FFFFFF;
+        }
+
+        .btn-scroll {
+            background-color: var(--deep-red);
+        }
+
+        .btn-scroll:hover {
+            background-color: var(--deep-red-hover);
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: translateY(0); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+            50% { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); }
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: var(--warm-cream);
+            color: var(--text-dark);
+            padding: 60px 5% 30px 5%;
+            border-top: 3px solid var(--deep-red);
+        }
+
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            height: 48px;
+            margin-bottom: 15px;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--deep-red);
+            margin-bottom: 10px;
+        }
+
+        .company-info {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .company-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .company-info i {
+            color: var(--deep-red);
+            margin-top: 4px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .company-info a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .company-info a:hover {
+            color: var(--deep-red);
+        }
+
+        .footer-col h5 {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 18px;
+            color: var(--deep-red);
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .footer-col h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--forest-green);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--deep-red);
+            padding-left: 4px;
+        }
+
+        .social-links-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-links-list li {
+            margin-bottom: 10px;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 220px;
+            padding: 9px 14px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .social-btn i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn.whatsapp i { color: #25D366; }
+        .social-btn.tiktok i { color: #000000; }
+        .social-btn.facebook i { color: #1877F2; }
+
+        .social-btn:hover {
+            border-color: var(--deep-red);
+            color: var(--deep-red);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(122, 24, 32, 0.1);
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* RESPONSIVE LAYOUT */
+        @media (max-width: 1024px) {
+            .kewpie-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .kewpie-nav-wrapper { top: 70px; }
+            .kewpie-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; } /* 2 Columns on Mobile */
+            .kewpie-card { height: 320px; }
+            .kewpie-img-wrap { height: 150px; }
+            .kewpie-img-wrap img { max-height: 130px; }
+            .kewpie-card-title { font-size: 14px; }
+            .kewpie-search { width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            .wa-label { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Announcement Bar -->
+<div class="top-bar">
+    <div class="top-bar-info">
+        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First</span>
+    </div>
+    <div class="top-bar-controls">
+        <div class="lang-switcher">
+            <button id="btnLangEN" class="active" onclick="switchLang('EN')">EN</button> | 
+            <button id="btnLangBM" onclick="switchLang('BM')">BM</button>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Day/Night Mode">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Navigation Header -->
+<header>
+    <div class="navbar">
+        <div class="brand-logo-container">
+            <a href="index.php">
+                <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a href="home.html"><span id="Home">Home</span> <i style="font-size:10px;"></i></a>
+            </li>
+            <li class="nav-item">
+                <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="our_history.html" id="History">Our History</a></li>
+                    <li><a href="vision_mission.html" id="VisionMission">Vision & Mission</a></li>
+                    <li><a href="certifications.html" id="Certifications">Quality Assurance & Certifications</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="product.html"><span id="mProduct">Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="meat-products" id="MealProducts">Meal Products</a></li>
+                    <li><a href="bakery-products" id="BakeryProducts">Bakery Products</a></li>
+                    <li><a href="products-catalogue" id="Catalogue">Products Catalogue</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="distributor"><span id="Distributor">Get our product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="find-distributor" id="FindDistributor">Find Our Distributor</a></li>
+                    <li><a href="become-distributor" id="BecomeDistributor">Become a Distributor</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="media"><span id="mMedia">Media</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="news-events" id="NewsEvents">News & Events</a></li>
+                    <li><a href="events-gallery" id="EventsGallery">Events Gallery</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="contact"><span id="mContact">Contact Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="general-enquiries" id="GeneralEnquiries">General Enquiries</a></li>
+                    <li><a href="sales-enquiries" id="SalesEnquiries">Sales Enquiries</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<!-- HERO HEADER MINIMALIST -->
+<section class="meat-hero">
+    <span class="meat-hero-tag" id="heroTag">100% JAKIM HALAL CERTIFIED</span>
+    <h1 class="meat-hero-title" id="heroTitle">MEAT & POULTRY PRODUCTS</h1>
+    <p class="meat-hero-desc" id="heroDesc">Discover our authentic line of frozen kebab poles, marinated meats, burger patties, meatballs, sausages, and crispy fried items.</p>
+</section>
+
+<!-- KEWPIE STYLE SUB-NAVIGATION & SEARCH BAR -->
+<div class="kewpie-nav-wrapper">
+    <div class="kewpie-nav-container">
+        <ul class="kewpie-tabs">
+            <li class="kewpie-tab-item active" onclick="filterCategory('all', this)" id="tabAll">All</li>
+            <li class="kewpie-tab-item" onclick="filterCategory('kebab-perap', this)" id="tabKebab">Kebab & Perap</li>
+            <li class="kewpie-tab-item" onclick="filterCategory('burger-oblong', this)" id="tabBurger">Burger & Oblong</li>
+            <li class="kewpie-tab-item" onclick="filterCategory('bebola-minced', this)" id="tabBebola">Bebola & Minced</li>
+            <li class="kewpie-tab-item" onclick="filterCategory('sosej-frank', this)" id="tabSosej">Sosej & Frankfurters</li>
+            <li class="kewpie-tab-item" onclick="filterCategory('fried-nugget', this)" id="tabAyam">Ayam Goreng & Nuggets</li>
+        </ul>
+
+        <div class="kewpie-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="kewpieSearch" placeholder="Search meat products..." onkeyup="searchProducts()">
+        </div>
+    </div>
+</div>
+
+<!-- KEWPIE STYLE PRODUCT GRID -->
+<section class="kewpie-products-section">
+    <div class="kewpie-grid" id="kewpieGrid">
+        <!-- Dynamic Product Cards Output Here -->
+    </div>
+
+    <!-- Empty Search State -->
+    <div class="kewpie-no-result" id="noResult">
+        <i class="fa-solid fa-drumstick-bite"></i>
+        <h4 id="noResTitle">No meat products match your search</h4>
+        <p id="noResSub" style="font-size:13px; color:var(--text-muted);">Try searching with another keyword like "Burger", "Perap", "Kebab", or "Sosej".</p>
+    </div>
+</section>
+
+<!-- Floating Action Controls -->
+<div class="floating-container">
+    <div class="wa-floating-wrapper">
+        <span class="wa-label" id="waLabelText">Talk to Sales</span>
+        <a href="https://wa.me/60123456789?text=Hi%20Melawati%20Kebab,%20I%20have%20an%20enquiry%20regarding%20your%20meat%20products." target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="wa-headset-badge"><i class="fa-solid fa-headset"></i></span>
+        </a>
+    </div>
+    <button class="floating-btn btn-scroll" id="scrollTopBtn" title="Scroll to Top" style="display: none;">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
+            <div class="company-name">MELAWATI KEBAB SDN BHD</div>
+            <div class="company-info">
+                <p><i class="fa-solid fa-location-dot"></i> No. 12 & 14, Jalan SB Jaya 3, Taman Industri SB Jaya, 47000 Sungai Buloh, Selangor, Malaysia.</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60361567890">+60 3-6156 7890</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@melawatikebab.com">info@melawatikebab.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h5 id="footerQuickLinks">Quick Links</h5>
+            <ul>
+                <li><a href="company_overview.html">About Melawati Kebab</a></li>
+                <li><a href="product.html">Our Product Range</a></li>
+                <li><a href="certifications.html">Quality & Certifications</a></li>
+                <li><a href="find-distributor.html">Distributor Network</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h5 id="footerConnect">Connect With Us</h5>
+            <ul class="social-links-list">
+                <li>
+                    <a href="https://wa.me/60123456789" target="_blank" class="social-btn whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                    </a>
+                </li>
+                <li>
+                    <a href="https://tiktok.com" target="_blank" class="social-btn tiktok">
+                        <i class="fa-brands fa-tiktok"></i> TikTok
+                    </a>
+                </li>
+                <li>
+                    <a href="https://facebook.com" target="_blank" class="social-btn facebook">
+                        <i class="fa-brands fa-facebook-f"></i> Facebook
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; <?php echo date('Y'); ?> Melawati Kebab Sdn Bhd. All Rights Reserved.</p>
+        <p>Premium Halal Frozen Food Supplier & Manufacturer</p>
+    </div>
+</footer>
+
+<!-- JavaScript Database & Kewpie Card Logic -->
+<script>
+    // DATABASE KHUSUS MEAT PRODUCTS SAHAJA (DARIPADA SENARAI GAMBAR ANDA)
+    const meatProductsList = [
+        // BURGER & OBLONG
+        { title: "Salim Chicken Burger 350", category: "burger-oblong", brand: "Salim", spec: "350g", desc: "Tender chicken burger patties made with high-grade minced chicken meat and subtle seasoning.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Burger 300", category: "burger-oblong", brand: "Salim", spec: "300g", desc: "Classic chicken patties designed for quick frying and food stall grilling.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Meat Burger 350", category: "burger-oblong", brand: "Salim", spec: "350g", desc: "Juicy beef burger patties crafted with rich beef flavor for food stalls and home cooking.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Meat Burger 300", category: "burger-oblong", brand: "Salim", spec: "300g", desc: "Economical beef burger patties offering great taste and value.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Burger (Gold) 420", category: "burger-oblong", brand: "Salim Gold", spec: "420g", desc: "Premium thick Gold-edition chicken patties with higher meat content and aromatic spices.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Burger (Gold) 360", category: "burger-oblong", brand: "Salim Gold", spec: "360g", desc: "Gold series chicken burger offering extra juiciness and rich aroma.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Meat Burger (Gold) 420", category: "burger-oblong", brand: "Salim Gold", spec: "420g", desc: "Thick, gourmet Gold series beef patties for premium burger stalls and restaurants.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Meat Burger (Gold) 360", category: "burger-oblong", brand: "Salim Gold", spec: "360g", desc: "Rich Gold series beef patty providing excellent bite and deep savory flavor.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Grilled Chicken Burger 750", category: "burger-oblong", brand: "Salim Grilled", spec: "750g", desc: "Flame-grilled chicken burger patties marinated with smokey herbs.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Grilled Meat Burger 750", category: "burger-oblong", brand: "Salim Grilled", spec: "750g", desc: "Heavyweight grilled beef burger patties packed with charred savory aroma.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Grilled Lamb Burger 750", category: "burger-oblong", brand: "Salim Grilled", spec: "750g", desc: "Specialty lamb burger patties spiced with rosemary and Mediterranean herbs.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Square Burger 400", category: "burger-oblong", brand: "Salim", spec: "400g", desc: "Square-shaped chicken burger patties formatted for specialized square burger buns.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Meat Square Burger 400", category: "burger-oblong", brand: "Salim", spec: "400g", desc: "Square-shaped beef patties ensuring corner-to-corner meat in every bite.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Oblong 500", category: "burger-oblong", brand: "Salim", spec: "500g", desc: "Elongated chicken oblong patties designed for long oblong buns and grill griddles.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Meat Oblong 500", category: "burger-oblong", brand: "Salim", spec: "500g", desc: "Long savory beef oblong patties spiced for roadside oblong burger stalls.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Lamb Oblong 500", category: "burger-oblong", brand: "Salim", spec: "500g", desc: "Premium lamb oblong patties with rich spices for a gourmet street burger experience.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" },
+
+        // KEBAB & PERAP
+        { title: "Kebab Ayam 1kg", category: "kebab-perap", brand: "Kebab", spec: "1kg Pack", desc: "Pre-sliced marinated chicken kebab meat ready to pan-fry, bake, or stir-fry.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Ayam Tiang 3kg", category: "kebab-perap", brand: "Kebab Tiang", spec: "3kg Tiang", desc: "Compact 3kg chicken kebab cone suited for small stalls or event catering.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Ayam Tiang 5kg", category: "kebab-perap", brand: "Kebab Tiang", spec: "5kg Tiang", desc: "Medium-sized 5kg chicken kebab pole formulated for consistent daily roasting.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Ayam Tiang 8kg", category: "kebab-perap", brand: "Kebab Tiang", spec: "8kg Tiang", desc: "Commercial 8kg chicken kebab pole for busy night markets and food courts.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Ayam Tiang 10kg", category: "kebab-perap", brand: "Kebab Tiang", spec: "10kg Tiang", desc: "Heavy-duty 10kg chicken kebab cone delivering high yield for major outlets.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Daging 1kg", category: "kebab-perap", brand: "Kebab", spec: "1kg Pack", desc: "Sliced beef kebab meat infused with traditional Middle Eastern spice marination.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Daging Tiang 3kg", category: "kebab-perap", brand: "Kebab Tiang", spec: "3kg Tiang", desc: "3kg beef kebab pole made from layered quality beef cuts for tender shaving.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Daging Tiang 5kg", category: "kebab-perap", brand: "Kebab Tiang", spec: "5kg Tiang", desc: "5kg commercial beef kebab pole offering steady roasting and juicy texture.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Kambing 1kg", category: "kebab-perap", brand: "Kebab", spec: "1kg Pack", desc: "Marinated mutton kebab slices full of aromatic spices.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Kambing Tiang 3kg", category: "kebab-perap", brand: "Kebab Tiang", spec: "3kg Tiang", desc: "3kg lamb kebab cone delivering authentic rich mutton flavors.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Kebab Kambing Tiang 5kg", category: "kebab-perap", brand: "Kebab Tiang", spec: "5kg Tiang", desc: "5kg lamb kebab pole for high-demand Mediterranean food outlets.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Kambing Perap Berempah 500g", category: "kebab-perap", brand: "Salim Perap", spec: "500g", desc: "Tender lamb shoulder chops marinated in traditional herbs and spices.", img: "uploads/products/banner3.jpg", fallbackImg: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Kambing Perap Berempah 800g", category: "kebab-perap", brand: "Salim Perap", spec: "800g", desc: "Family-pack spiced marinated lamb chops ready to pan-grill.", img: "uploads/products/banner3.jpg", fallbackImg: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Kambing Perap Lada Hitam 500g", category: "kebab-perap", brand: "Salim Perap", spec: "500g", desc: "Lamb shoulder chops glazed with bold black pepper marinade.", img: "uploads/products/banner3.jpg", fallbackImg: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Kambing Perap Lada Hitam 800g", category: "kebab-perap", brand: "Salim Perap", spec: "800g", desc: "800g Black Pepper marinated lamb chops for family BBQs.", img: "uploads/products/banner3.jpg", fallbackImg: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Ayam Perap Berempah Separuh", category: "kebab-perap", brand: "Salim Perap", spec: "Half Chicken", desc: "Half chicken marinated in rich Malay-spiced gravy ready for roasting or air-frying.", img: "uploads/products/banner3.jpg", fallbackImg: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Ayam Perap Berempah Seekor", category: "kebab-perap", brand: "Salim Perap", spec: "Whole Chicken", desc: "Whole marinated spiced chicken ideal for oven roasting or outdoor BBQ.", img: "uploads/products/banner3.jpg", fallbackImg: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Ayam Perap Lada Hitam Separuh", category: "kebab-perap", brand: "Salim Perap", spec: "Half Chicken", desc: "Half chicken marinated in savory black pepper sauce.", img: "uploads/products/banner3.jpg", fallbackImg: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Ayam Perap Lada Hitam Seekor", category: "kebab-perap", brand: "Salim Perap", spec: "Whole Chicken", desc: "Whole black pepper marinated chicken for roasting.", img: "uploads/products/banner3.jpg", fallbackImg: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80" },
+
+        // BEBOLA & MINCED
+        { title: "Salim Meatball Original 1000", category: "bebola-minced", brand: "Salim", spec: "1000g", desc: "Springy original beef meatballs suited for soups, pasta, or deep frying.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Meatball Blackpepper 1000", category: "bebola-minced", brand: "Salim", spec: "1000g", desc: "Beef meatballs spiced with cracked black pepper for an extra kick.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Meatball Original 500", category: "bebola-minced", brand: "Salim", spec: "500g", desc: "500g pack original beef meatballs for home cooking.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Meatball Blackpepper 500", category: "bebola-minced", brand: "Salim", spec: "500g", desc: "500g Black pepper beef meatballs.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Ball Original 1000", category: "bebola-minced", brand: "Salim", spec: "1000g", desc: "Tender chicken meatballs perfect for oden, steamboat, and soups.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Ball Blackpepper 1000", category: "bebola-minced", brand: "Salim", spec: "1000g", desc: "Chicken meatballs seasoned with black pepper sauce.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Ball Original 500", category: "bebola-minced", brand: "Salim", spec: "500g", desc: "500g original chicken meatballs.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Ball Blackpepper 500", category: "bebola-minced", brand: "Salim", spec: "500g", desc: "500g black pepper chicken meatballs.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Minced Chicken 1000", category: "bebola-minced", brand: "Salim", spec: "1000g", desc: "Pure frozen minced chicken meat for commercial dumpling or burger filling.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Minced Chicken 400", category: "bebola-minced", brand: "Salim", spec: "400g", desc: "400g retail minced chicken pack.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Minced Meat 1000", category: "bebola-minced", brand: "Salim", spec: "1000g", desc: "Premium frozen ground beef for bolognese, patties, and savory fillings.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Minced Meat 400", category: "bebola-minced", brand: "Salim", spec: "400g", desc: "400g ground beef retail pack.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80" },
+
+        // SOSEJ & FRANKFURTERS
+        { title: "Salim Jumbo Sausage Cheese 800", category: "sosej-frank", brand: "Salim Jumbo", spec: "800g", desc: "Jumbo chicken sausages stuffed with gooey melt-in-your-mouth cheese.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Jumbo Sausage Blackpepper 800", category: "sosej-frank", brand: "Salim Jumbo", spec: "800g", desc: "Spicy black pepper jumbo sausages with firm casing.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Jumbo Sausage Original 800", category: "sosej-frank", brand: "Salim Jumbo", spec: "800g", desc: "Classic original flavor jumbo sausages for grilling and frying.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Jumbo Sausage Pulut 800", category: "sosej-frank", brand: "Salim Jumbo", spec: "800g", desc: "Specialty jumbo sausages stuffed with sticky pulut rice.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Cocktail 450", category: "sosej-frank", brand: "Salim", spec: "450g", desc: "Bite-sized chicken cocktail sausages perfect for catering platters.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Chicken Cocktail 800", category: "sosej-frank", brand: "Salim", spec: "800g", desc: "800g pack mini chicken cocktail sausages.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Smoked Meat Frankfurter 340", category: "sosej-frank", brand: "Salim Smoked", spec: "340g", desc: "Hickory-smoked beef frankfurters with a snap casing.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Smoked Chicken Frankfurter 340", category: "sosej-frank", brand: "Salim Smoked", spec: "340g", desc: "Smoked chicken frankfurters for hotdogs and BBQ.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Frankfurter Pulut 340", category: "sosej-frank", brand: "Salim", spec: "340g", desc: "Frankfurter sausages filled with sticky rice.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim VP Chicken Frankfurter 300", category: "sosej-frank", brand: "Salim VP", spec: "300g", desc: "Vacuum-packed chicken frankfurters locking in natural moisture.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim VP Chicken Frankfurter 900", category: "sosej-frank", brand: "Salim VP", spec: "900g", desc: "900g commercial vacuum pack chicken frankfurters.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" },
+
+        // AYAM GORENG & NUGGETS
+        { title: "Salim Tempura Chicken Nuggets 1000", category: "fried-nugget", brand: "Salim Tempura", spec: "1000g", desc: "Crispy tempura-battered chicken nuggets with tender interior.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Tempura Chicken Nuggets Hot & Spicy 800", category: "fried-nugget", brand: "Salim Tempura", spec: "800g", desc: "Tempura nuggets seasoned with chili spice coating.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Tempura Chicken Nuggets Crispy 800", category: "fried-nugget", brand: "Salim Tempura", spec: "800g", desc: "Extra crunchy tempura chicken nuggets.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Tempura Chicken Nuggets Cheese 700", category: "fried-nugget", brand: "Salim Tempura", spec: "700g", desc: "Tempura nuggets stuffed with melted cheddar cheese.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Crispy Wings Fried Chicken", category: "fried-nugget", brand: "Salim Crispy", spec: "Chicken Wings", desc: "Crunchy fried chicken wings coated in savory flour seasoning.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Crispy Drummet Fried Chicken", category: "fried-nugget", brand: "Salim Crispy", spec: "Drummet", desc: "Juicy chicken drummets coated in crispy southern batter.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Crispy Chiki 800g", category: "fried-nugget", brand: "Salim Crispy", spec: "800g", desc: "Crispy chicken cutlet strips for wraps and rice bowls.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Crispy Chiki Spicy 800g", category: "fried-nugget", brand: "Salim Crispy", spec: "800g", desc: "Spicy breaded chicken strips.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" },
+        { title: "Salim Popcorn Fried Chicken 800g", category: "fried-nugget", brand: "Salim", spec: "800g", desc: "Bite-sized crispy popcorn chicken pieces for snacks.", img: "uploads/products/banner1.jpg", fallbackImg: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80" }
+    ];
+
+    let currentActiveTab = 'all';
+
+    // RENDER KEWPIE STYLE CARDS
+    function renderKewpieGrid(items) {
+        const grid = document.getElementById('kewpieGrid');
+        const noRes = document.getElementById('noResult');
+        grid.innerHTML = '';
+
+        if (items.length === 0) {
+            noRes.style.display = 'block';
+            return;
+        }
+
+        noRes.style.display = 'none';
+
+        items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'kewpie-card';
+
+            const waMsg = encodeURIComponent(`Hi Melawati Kebab, I am interested in ordering: ${item.title} (${item.spec})`);
+
+            card.innerHTML = `
+                <!-- Front View -->
+                <div class="kewpie-card-front">
+                    <div class="kewpie-img-wrap">
+                        <span class="kewpie-brand-badge">${item.brand}</span>
+                        <img src="${item.img}" alt="${item.title}" onerror="this.src='${item.fallbackImg}';">
+                    </div>
+                    <div>
+                        <div class="kewpie-card-title">${item.title}</div>
+                        <div class="kewpie-spec-tag"><i class="fa-solid fa-weight-hanging"></i> ${item.spec}</div>
+                    </div>
+                </div>
+
+                <!-- Back Reveal Hover View (Style Kewpie) -->
+                <div class="kewpie-card-back">
+                    <div>
+                        <div class="kewpie-back-title">${item.title}</div>
+                        <div class="kewpie-back-desc">${item.desc}</div>
+                    </div>
+                    <a href="https://wa.me/60123456789?text=${waMsg}" target="_blank" class="btn-kewpie-wa">
+                        Order via WhatsApp <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            `;
+
+            grid.appendChild(card);
+        });
+    }
+
+    // FILTER TAB CATEGORIES
+    function filterCategory(cat, element) {
+        currentActiveTab = cat;
+        document.querySelectorAll('.kewpie-tab-item').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+        searchProducts();
+    }
+
+    // SEARCH FUNCTION
+    function searchProducts() {
+        const query = document.getElementById('kewpieSearch').value.toLowerCase().trim();
+
+        const filtered = meatProductsList.filter(item => {
+            const matchTab = (currentActiveTab === 'all' || item.category === currentActiveTab);
+            const matchQuery = item.title.toLowerCase().includes(query) || item.brand.toLowerCase().includes(query) || item.spec.toLowerCase().includes(query);
+            return matchTab && matchQuery;
+        });
+
+        renderKewpieGrid(filtered);
+    }
+
+    // INITIAL LOAD
+    window.addEventListener('DOMContentLoaded', () => {
+        renderKewpieGrid(meatProductsList);
+    });
+
+    // TRANSLATIONS (EN / BM)
+    const translations = {
+        EN: {
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
+            Home: 'Home',
+            About: 'About Us',
+            History: 'Our History',
+            VisionMission: 'Vision & Mission',
+            Certifications: 'Quality Assurance & Certifications',
+            mProduct: 'Product',
+            MealProducts: 'Meal Products',
+            BakeryProducts: 'Bakery Products',
+            Catalogue: 'Products Catalogue',
+            Distributor: 'Get our product',
+            FindDistributor: 'Find Our Distributor',
+            BecomeDistributor: 'Become a Distributor',
+            mMedia: 'Media',
+            NewsEvents: 'News & Events',
+            EventsGallery: 'Events Gallery',
+            mContact: 'Contact Us',
+            GeneralEnquiries: 'General Enquiries',
+            SalesEnquiries: 'Sales Enquiries',
+
+            heroTag: '100% JAKIM HALAL CERTIFIED',
+            heroTitle: 'MEAT & POULTRY PRODUCTS',
+            heroDesc: 'Discover our authentic line of frozen kebab poles, marinated meats, burger patties, meatballs, sausages, and crispy fried items.',
+
+            tabAll: 'All',
+            tabKebab: 'Kebab & Perap',
+            tabBurger: 'Burger & Oblong',
+            tabBebola: 'Bebola & Minced',
+            tabSosej: 'Sosej & Frankfurters',
+            tabAyam: 'Ayam Goreng & Nuggets',
+
+            noResTitle: 'No meat products match your search',
+            noResSub: 'Try searching with another keyword like "Burger", "Perap", "Kebab", or "Sosej".',
+
+            waLabelText: 'Talk to Sales',
+            footerQuickLinks: 'Quick Links',
+            footerConnect: 'Connect With Us'
+        },
+        BM: {
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Utamakan Kualiti',
+            Home: 'Utama',
+            About: 'Tentang Kami',
+            History: 'Sejarah Kami',
+            VisionMission: 'Visi & Misi',
+            Certifications: 'Jaminan Kualiti & Sijil Pengiktirafan',
+            mProduct: 'Produk',
+            MealProducts: 'Produk Daging & Kebab',
+            BakeryProducts: 'Produk Bakeri',
+            Catalogue: 'Katalog Produk',
+            Distributor: 'Dapatkan Produk Kami',
+            FindDistributor: 'Cari Pengedar Kami',
+            BecomeDistributor: 'Jadi Pengedar',
+            mMedia: 'Media',
+            NewsEvents: 'Berita & Acara',
+            EventsGallery: 'Galeri Acara',
+            mContact: 'Hubungi Kami',
+            GeneralEnquiries: 'Pertanyaan Umum',
+            SalesEnquiries: 'Pertanyaan Jualan',
+
+            heroTag: 'DIKTIRAF 100% HALAL JAKIM',
+            heroTitle: 'PRODUK DAGING & AYAM',
+            heroDesc: 'Terokai rangkaian kon kebab sejuk beku, daging perapan, patie burger, bebola, sosej, dan produk ayam goreng crispy kami.',
+
+            tabAll: 'Semua',
+            tabKebab: 'Kebab & Perap',
+            tabBurger: 'Burger & Oblong',
+            tabBebola: 'Bebola & Minced',
+            tabSosej: 'Sosej & Frankfurters',
+            tabAyam: 'Ayam Goreng & Nuggets',
+
+            noResTitle: 'Tiada produk daging ditemui',
+            noResSub: 'Cuba cari menggunakan kata kunci lain contohnya "Burger", "Perap", "Kebab", atau "Sosej".',
+
+            waLabelText: 'Sembang Jualan',
+            footerQuickLinks: 'Pautan Pantas',
+            footerConnect: 'Ikuti Kami'
+        }
+    };
+
+    function switchLang(lang) {
+        document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
+        document.getElementById('btnLangBM').classList.toggle('active', lang === 'BM');
+
+        const langData = translations[lang];
+        if (!langData) return;
+
+        for (let key in langData) {
+            const el = document.getElementById(key);
+            if (el) {
+                el.innerHTML = langData[key];
+            }
+        }
+        document.getElementById('kewpieSearch').placeholder = lang === 'BM' ? 'Cari produk daging...' : 'Search meat products...';
+    }
+
+    // Dark Mode Toggle
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        themeToggleBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+
+    // Scroll to Top
+    window.addEventListener('scroll', () => {
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        if (window.scrollY > 300) {
+            scrollTopBtn.style.display = 'flex';
+        } else {
+            scrollTopBtn.style.display = 'none';
+        }
+    });
+
+    document.getElementById('scrollTopBtn').addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
+
+</body>
+</html>
