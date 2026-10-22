@@ -919,9 +919,11 @@ session_start();
             gap: 10px;
         }
 
-        /* RESPONSIVE MEDIA QUERIES */
+        /* RESPONSIVE MEDIA QUERIES & MOBILE MENU ACCORDION */
         @media (max-width: 992px) {
-            .mobile-menu-btn { display: block; }
+            .mobile-menu-btn { 
+                display: block; 
+            }
 
             .nav-links {
                 display: none;
@@ -932,12 +934,37 @@ session_start();
                 width: 100%;
                 background-color: var(--card-bg);
                 border-bottom: 2px solid var(--deep-red);
-                padding: 20px 5%;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                padding: 15px 5%;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+                max-height: 80vh;
+                overflow-y: auto;
             }
 
-            .nav-links.active { display: flex; }
-            .nav-item { width: 100%; }
+            .nav-links.active { 
+                display: flex; 
+            }
+
+            .nav-item { 
+                width: 100%; 
+            }
+
+            .nav-item > a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 0;
+                border-bottom: 1px solid var(--border-color);
+                font-size: 15px;
+            }
+
+            .nav-item > a i {
+                transition: transform 0.3s ease;
+            }
+
+            .nav-item.active > a i {
+                transform: rotate(180deg);
+                color: var(--deep-red);
+            }
 
             .dropdown-menu {
                 position: static;
@@ -946,11 +973,23 @@ session_start();
                 transform: none;
                 box-shadow: none;
                 border: none;
-                padding-left: 15px;
-                display: none;
+                padding: 5px 0 10px 12px;
+                display: none; /* Sembunyi secara lalai, dipapar bila .nav-item ada class .active */
+                background-color: transparent;
+                border-left: 2px solid var(--deep-red);
+                margin-left: 10px;
+                margin-top: 5px;
             }
 
-            .nav-item.active .dropdown-menu { display: block; }
+            .nav-item.active .dropdown-menu { 
+                display: block; 
+            }
+
+            .dropdown-menu li a {
+                padding: 8px 12px;
+                font-size: 13.5px;
+                color: var(--text-dark);
+            }
 
             .slider-section { height: 380px; width: 95%; }
             .slide-title { font-size: 42px; }
@@ -1057,7 +1096,7 @@ session_start();
 <header>
     <div class="navbar">
         <div class="brand-logo-container">
-            <a href="index.php">
+            <a href="index.html">
                 <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
             </a>
         </div>
@@ -1068,7 +1107,7 @@ session_start();
 
         <ul class="nav-links" id="navLinks">
             <li class="nav-item">
-                <a href="home.html"><span id="Home">Home</span></a>
+                <a href="index.html"><span id="Home">Home</span></a>
             </li>
             <li class="nav-item">
                 <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
@@ -1311,7 +1350,7 @@ session_start();
         <div class="footer-col">
             <h5 id="footerColQuick">Quick Links</h5>
             <ul>
-                <li><a href="home.html" id="footHome">Home</a></li>
+                <li><a href="index.html" id="footHome">Home</a></li>
                 <li><a href="company_overview.html" id="footAbout">About Us</a></li>
                 <li><a href="product.html" id="footProduct">Products</a></li>
                 <li><a href="distributor.html" id="footDist">Distributor</a></li>
@@ -1343,7 +1382,7 @@ session_start();
 
 <!-- JavaScript Integration -->
 <script>
-    // 1. Mobile Navigation Toggle
+    // 1. Mobile Navigation Toggle & Accordion Logic
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
 
@@ -1359,26 +1398,44 @@ session_start();
         });
     }
 
-    // Dropdown toggle for mobile
+    // PEMBAIKAN SUBMENU MOBILE: Klik menu induk untuk toggle paparan anak menu
     document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', () => {
-            if (window.innerWidth <= 992 && item.querySelector('.dropdown-menu')) {
-                item.classList.toggle('active');
-            }
-        });
+        const parentLink = item.querySelector('a');
+        const dropdown = item.querySelector('.dropdown-menu');
+
+        if (dropdown && parentLink) {
+            parentLink.addEventListener('click', (e) => {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault(); // Elak navigasi serta-merta
+                    e.stopPropagation();
+
+                    // Tutup submenu lain yang sedang terbuka
+                    document.querySelectorAll('.nav-item').forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+
+                    // Buka / Tutup menu semasa
+                    item.classList.toggle('active');
+                }
+            });
+        }
     });
 
     // 2. Day / Night Mode Toggle
     const themeToggleBtn = document.getElementById('themeToggleBtn');
-    themeToggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const icon = themeToggleBtn.querySelector('i');
-        if (document.body.classList.contains('dark-mode')) {
-            icon.className = 'fa-solid fa-sun';
-        } else {
-            icon.className = 'fa-solid fa-moon';
-        }
-    });
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggleBtn.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        });
+    }
 
     // 3. Banner Slider
     const sliderWrapper = document.getElementById('sliderWrapper');
@@ -1526,17 +1583,19 @@ session_start();
 
     // 7. Scroll to Top Button
     const scrollTopBtn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollTopBtn.classList.add('visible');
-        } else {
-            scrollTopBtn.classList.remove('visible');
-        }
-    });
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
 
-    scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
     // 8. Multi-language Dictionary (EN & BM - 6 ITEMS DICTIONARY)
     const translations = {
