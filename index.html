@@ -520,7 +520,7 @@ session_start();
             line-height: 1.35;
         }
 
-        /* WHY CHOOSE US: 3D CIRCULAR ROTATION ANIMATION */
+        /* WHY CHOOSE US: 3D CIRCULAR ROTATION ANIMATION (6 KAD) */
         .why-us-section {
             padding: 80px 5%;
             background-color: var(--warm-cream);
@@ -551,7 +551,7 @@ session_start();
         .why-3d-scene {
             width: 100%;
             max-width: 1000px;
-            height: 400px;
+            height: 420px;
             margin: 0 auto;
             perspective: 1000px;
             position: relative;
@@ -572,13 +572,13 @@ session_start();
         .why-card-3d {
             position: absolute;
             width: 300px;
-            height: 300px;
+            height: 310px;
             left: 10px;
-            top: 10px;
+            top: 5px;
             background-color: var(--card-bg);
             border: 2px solid var(--border-color);
             border-radius: 16px;
-            padding: 28px 24px;
+            padding: 24px 20px;
             text-align: center;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
             backface-visibility: visible;
@@ -594,42 +594,38 @@ session_start();
             box-shadow: 0 16px 35px rgba(122, 24, 32, 0.15);
         }
 
-        /* 3 Cards set at 0deg, 120deg, 240deg in 3D circle */
-        .why-card-3d:nth-child(1) { transform: rotateY(0deg) translateZ(280px); }
-        .why-card-3d:nth-child(2) { transform: rotateY(120deg) translateZ(280px); }
-        .why-card-3d:nth-child(3) { transform: rotateY(240deg) translateZ(280px); }
+        /* 6 Kad disusun pada sudut 0deg, 60deg, 120deg, 180deg, 240deg, 300deg */
+        .why-card-3d:nth-child(1) { transform: rotateY(0deg) translateZ(320px); }
+        .why-card-3d:nth-child(2) { transform: rotateY(60deg) translateZ(320px); }
+        .why-card-3d:nth-child(3) { transform: rotateY(120deg) translateZ(320px); }
+        .why-card-3d:nth-child(4) { transform: rotateY(180deg) translateZ(320px); }
+        .why-card-3d:nth-child(5) { transform: rotateY(240deg) translateZ(320px); }
+        .why-card-3d:nth-child(6) { transform: rotateY(300deg) translateZ(320px); }
 
-        .why-icon-3d {
-            width: 58px;
-            height: 58px;
-            background-color: rgba(122, 24, 32, 0.1);
-            color: var(--deep-red);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            margin-bottom: 18px;
-            transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease;
+        .why-img-3d {
+            height: 60px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            margin-bottom: 14px;
+            transition: transform 0.4s ease;
         }
 
-        .why-card-3d:hover .why-icon-3d {
-            transform: rotate(12deg) scale(1.15);
-            background-color: var(--deep-red);
-            color: #FFFFFF;
+        .why-card-3d:hover .why-img-3d {
+            transform: scale(1.1);
         }
 
         .why-card-3d h3 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .why-card-3d p {
-            font-size: 13px;
+            font-size: 12.5px;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.45;
         }
 
         /* 3D Nav Controls */
@@ -976,22 +972,25 @@ session_start();
             .cert-card { padding: 16px 10px; }
             .cert-badge-img { height: 55px; }
 
-            /* 3D Carousel Mobile Adjustments */
-            .why-3d-scene { height: 320px; }
-            .why-3d-carousel { width: 230px; height: 250px; }
+            /* 3D Carousel Mobile Adjustments (6 Kad) */
+            .why-3d-scene { height: 340px; }
+            .why-3d-carousel { width: 230px; height: 260px; }
             .why-card-3d {
                 width: 220px;
-                height: 240px;
+                height: 250px;
                 left: 5px;
                 top: 5px;
-                padding: 18px 14px;
+                padding: 16px 12px;
             }
-            .why-card-3d:nth-child(1) { transform: rotateY(0deg) translateZ(180px); }
-            .why-card-3d:nth-child(2) { transform: rotateY(120deg) translateZ(180px); }
-            .why-card-3d:nth-child(3) { transform: rotateY(240deg) translateZ(180px); }
-            .why-card-3d h3 { font-size: 16px; margin-bottom: 6px; }
-            .why-card-3d p { font-size: 11.5px; }
-            .why-icon-3d { width: 44px; height: 44px; font-size: 20px; margin-bottom: 12px; }
+            .why-card-3d:nth-child(1) { transform: rotateY(0deg) translateZ(200px); }
+            .why-card-3d:nth-child(2) { transform: rotateY(60deg) translateZ(200px); }
+            .why-card-3d:nth-child(3) { transform: rotateY(120deg) translateZ(200px); }
+            .why-card-3d:nth-child(4) { transform: rotateY(180deg) translateZ(200px); }
+            .why-card-3d:nth-child(5) { transform: rotateY(240deg) translateZ(200px); }
+            .why-card-3d:nth-child(6) { transform: rotateY(300deg) translateZ(200px); }
+            .why-card-3d h3 { font-size: 15px; margin-bottom: 4px; }
+            .why-card-3d p { font-size: 11px; }
+            .why-img-3d { height: 45px; margin-bottom: 8px; }
 
             .section-header h2 { font-size: 38px; }
             .slider-section { height: 320px; }
@@ -1069,7 +1068,7 @@ session_start();
 
         <ul class="nav-links" id="navLinks">
             <li class="nav-item">
-                <a href="index.html"><span id="Home">Home</span></a>
+                <a href="home.html"><span id="Home">Home</span></a>
             </li>
             <li class="nav-item">
                 <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
@@ -1178,7 +1177,7 @@ session_start();
     </div>
 </section>
 
-<!-- Certification Section (HALAL, MeSTI, GMP, BUATAN MALAYSIA) -->
+<!-- Certification Section -->
 <section class="cert-section reveal" id="certifications">
     <div class="cert-container">
         <div class="cert-header">
@@ -1193,17 +1192,17 @@ session_start();
                 <p id="cert1Desc">Fully Halal certified by JAKIM Malaysia.</p>
             </div>
             <div class="cert-card stagger-item">
-                <img src="logo/mestii.png" alt="MeSTI Certification" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=MeSTI';">
+                <img src="logo/mesti.png" alt="MeSTI Certification" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=MeSTI';">
                 <h4 id="cert2Title">MeSTI CERTIFIED</h4>
                 <p id="cert2Desc">Complies with KKM food hygiene standards.</p>
             </div>
             <div class="cert-card stagger-item">
-                <img src="logo/gmpp.png" alt="GMP Certified" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/7A1820/FFFFFF?text=GMP';">
+                <img src="logo/gmp.png" alt="GMP Certified" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/7A1820/FFFFFF?text=GMP';">
                 <h4 id="cert3Title">GMP CERTIFIED</h4>
                 <p id="cert3Desc">Strict hygiene and quality control standards.</p>
             </div>
             <div class="cert-card stagger-item">
-                <img src="logo/buatan-malaysiaa.png" alt="Buatan Malaysia" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=BUATAN+MALAYSIA';">
+                <img src="logo/bm.png" alt="Buatan Malaysia" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=BUATAN+MALAYSIA';">
                 <h4 id="cert4Title">BUATAN MALAYSIA</h4>
                 <p id="cert4Desc">100% locally produced premium product.</p>
             </div>
@@ -1211,49 +1210,72 @@ session_start();
     </div>
 </section>
 
-<!-- Why Choose Us Section (3D CIRCULAR ANIMATION ROTATION) -->
+<!-- Why Choose Us Section (3D CIRCULAR ROTATION SCENE - 6 ITEMS) -->
 <section class="why-us-section reveal">
     <div class="section-header">
         <h2 id="whyHeading">WHY CHOOSE MELAWATI KEBAB?</h2>
         <p id="whyDesc">We are committed to delivering excellence in every bite with strict quality standards and authentic taste.</p>
     </div>
 
-    <!-- 3D Circular Rotation Scene -->
+    <!-- 3D Circular Rotation Scene (6 Cards) -->
     <div class="why-3d-scene" id="why3dScene">
         <div class="why-3d-carousel" id="why3dCarousel">
+            
+            <!-- Kad 1: logo/why1.png -->
             <div class="why-card-3d">
-                <div class="why-icon-3d">
-                    <i class="fa-solid fa-shield-halal"></i>
-                </div>
-                <h3 id="whyCard1Title">100% Halal Guaranteed</h3>
-                <p id="whyCard1Desc">All ingredients are strictly sourced and processed under JAKIM's Halal compliance rules for absolute peace of mind.</p>
+                <img src="logo/why1.png" alt="Great Taste" class="why-img-3d" onerror="this.style.display='none';">
+                <h3 id="whyCard1Title">Great Taste & Premium Quality</h3>
+                <p id="whyCard1Desc">Our products are made with carefully selected, high-quality ingredients to deliver consistent taste and quality in every serving.</p>
             </div>
 
+            <!-- Kad 2: logo/why2.png -->
             <div class="why-card-3d">
-                <div class="why-icon-3d">
-                    <i class="fa-solid fa-drumstick-bite"></i>
-                </div>
-                <h3 id="whyCard2Title">Premium Ingredients</h3>
-                <p id="whyCard2Desc">We select choice cuts of meat and authentic natural spices to bring out unbeatable juiciness and rich flavour.</p>
+                <img src="logo/why2.png" alt="Wide Variety" class="why-img-3d" onerror="this.style.display='none';">
+                <h3 id="whyCard2Title">Wide Variety of Choices</h3>
+                <p id="whyCard2Desc">We offer a diverse range of products, flavours and pack sizes to suit different preferences, business needs and occasions.</p>
             </div>
 
+            <!-- Kad 3: logo/why3.png -->
             <div class="why-card-3d">
-                <div class="why-icon-3d">
-                    <i class="fa-solid fa-truck-ramp-box"></i>
-                </div>
-                <h3 id="whyCard3Title">Reliable Cold Chain</h3>
-                <p id="whyCard3Desc">Our robust nationwide distribution ensures frozen freshness from our factory straight to your kitchen or retail store.</p>
+                <img src="logo/why3.png" alt="Easy to Prepare" class="why-img-3d" onerror="this.style.display='none';">
+                <h3 id="whyCard3Title">Convenient & Easy to Prepare</h3>
+                <p id="whyCard3Desc">Our products are designed for convenient preparation, helping you save time while enjoying delicious meals with ease.</p>
             </div>
+
+            <!-- Kad 4: logo/why4.png -->
+            <div class="why-card-3d">
+                <img src="logo/why4.png" alt="Affordable Pricing" class="why-img-3d" onerror="this.style.display='none';">
+                <h3 id="whyCard4Title">Competitive & Affordable Pricing</h3>
+                <p id="whyCard4Desc">We are committed to offering quality products at competitive prices, providing excellent value for our customers.</p>
+            </div>
+
+            <!-- Kad 5: logo/why5.png -->
+            <div class="why-card-3d">
+                <img src="logo/why5.png" alt="Halalan Toyyiban" class="why-img-3d" onerror="this.style.display='none';">
+                <h3 id="whyCard5Title">Halalan Toyyiban</h3>
+                <p id="whyCard5Desc">Our products are Halal-certified by the Department of Islamic Development Malaysia (JAKIM), reflecting our commitment to quality, safety and compliance.</p>
+            </div>
+
+            <!-- Kad 6: logo/why6.png -->
+            <div class="why-card-3d">
+                <img src="logo/why6.png" alt="Customer-Focused" class="why-img-3d" onerror="this.style.display='none';">
+                <h3 id="whyCard6Title">Customer-Focused</h3>
+                <p id="whyCard6Desc">Our customers are at the heart of everything we do. We value your feedback and continuously strive to improve our products and services.</p>
+            </div>
+
         </div>
     </div>
 
-    <!-- 3D Controls -->
+    <!-- 3D Controls (6 Dots) -->
     <div class="why-3d-controls">
         <button class="why-3d-btn" id="whyPrev3d" title="Previous Feature"><i class="fa-solid fa-arrow-left"></i></button>
         <div class="why-3d-dots" id="why3dDots">
             <span class="dot-3d active" data-step="0"></span>
             <span class="dot-3d" data-step="1"></span>
             <span class="dot-3d" data-step="2"></span>
+            <span class="dot-3d" data-step="3"></span>
+            <span class="dot-3d" data-step="4"></span>
+            <span class="dot-3d" data-step="5"></span>
         </div>
         <button class="why-3d-btn" id="whyNext3d" title="Next Feature"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
@@ -1289,7 +1311,7 @@ session_start();
         <div class="footer-col">
             <h5 id="footerColQuick">Quick Links</h5>
             <ul>
-                <li><a href="index.html" id="footHome">Home</a></li>
+                <li><a href="home.html" id="footHome">Home</a></li>
                 <li><a href="company_overview.html" id="footAbout">About Us</a></li>
                 <li><a href="product.html" id="footProduct">Products</a></li>
                 <li><a href="distributor.html" id="footDist">Distributor</a></li>
@@ -1424,7 +1446,7 @@ session_start();
         });
     }
 
-    // 5. WHY CHOOSE US - 3D CIRCULAR ROTATION LOGIC
+    // 5. WHY CHOOSE US - 3D CIRCULAR ROTATION LOGIC (6 KAD = 60 DEGREE STEP)
     const why3dCarousel = document.getElementById('why3dCarousel');
     const whyPrev3d = document.getElementById('whyPrev3d');
     const whyNext3d = document.getElementById('whyNext3d');
@@ -1433,8 +1455,8 @@ session_start();
     let autoRotate3dTimer;
 
     function update3dCarousel(step) {
-        current3dStep = (step + 3) % 3;
-        const angle = current3dStep * -120;
+        current3dStep = (step + 6) % 6;
+        const angle = current3dStep * -60;
         why3dCarousel.style.transform = `rotateY(${angle}deg)`;
 
         why3dDots.forEach((dot, idx) => {
@@ -1516,7 +1538,7 @@ session_start();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 8. Multi-language Dictionary (EN & BM - TERJEMAHAN LENGKAP & KEMAS)
+    // 8. Multi-language Dictionary (EN & BM - 6 ITEMS DICTIONARY)
     const translations = {
         EN: {
             topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
@@ -1566,12 +1588,18 @@ session_start();
             cert4Desc: '100% locally produced premium product.',
             whyHeading: 'WHY CHOOSE MELAWATI KEBAB?',
             whyDesc: 'We are committed to delivering excellence in every bite with strict quality standards and authentic taste.',
-            whyCard1Title: '100% Halal Guaranteed',
-            whyCard1Desc: 'All ingredients are strictly sourced and processed under JAKIM\'s Halal compliance rules for absolute peace of mind.',
-            whyCard2Title: 'Premium Ingredients',
-            whyCard2Desc: 'We select choice cuts of meat and authentic natural spices to bring out unbeatable juiciness and rich flavour.',
-            whyCard3Title: 'Reliable Cold Chain',
-            whyCard3Desc: 'Our robust nationwide distribution ensures frozen freshness from our factory straight to your kitchen or retail store.',
+            whyCard1Title: 'Great Taste & Premium Quality',
+            whyCard1Desc: 'Our products are made with carefully selected, high-quality ingredients to deliver consistent taste and quality in every serving.',
+            whyCard2Title: 'Wide Variety of Choices',
+            whyCard2Desc: 'We offer a diverse range of products, flavours and pack sizes to suit different preferences, business needs and occasions.',
+            whyCard3Title: 'Convenient & Easy to Prepare',
+            whyCard3Desc: 'Our products are designed for convenient preparation, helping you save time while enjoying delicious meals with ease.',
+            whyCard4Title: 'Competitive & Affordable Pricing',
+            whyCard4Desc: 'We are committed to offering quality products at competitive prices, providing excellent value for our customers.',
+            whyCard5Title: 'Halalan Toyyiban',
+            whyCard5Desc: 'Our products are Halal-certified by the Department of Islamic Development Malaysia (JAKIM), reflecting our commitment to quality, safety and compliance.',
+            whyCard6Title: 'Customer-Focused',
+            whyCard6Desc: 'Our customers are at the heart of everything we do. We value your feedback and continuously strive to improve our products and services.',
             waLabel: 'Inquiry / Contact Us',
             footerColQuick: 'Quick Links',
             footHome: 'Home',
@@ -1631,12 +1659,18 @@ session_start();
             cert4Desc: 'Produk tempatan berkualiti tinggi buatan Malaysia.',
             whyHeading: 'MENGAPA PILIH MELAWATI KEBAB?',
             whyDesc: 'Kami komited menyampaikan kelazatan dalam setiap gigitan dengan standard kualiti yang ketat dan rasa asli.',
-            whyCard1Title: '100% Dijamin Halal',
-            whyCard1Desc: 'Semua bahan mentah diperolehi dan diproses mengikut pematuhan ketat Halal JAKIM untuk ketenangan jiwa anda.',
-            whyCard2Title: 'Bahan-bahan Premium',
-            whyCard2Desc: 'Kami memilih potongan daging terbaik dan rempah ratus asli bagi menghasilkan rasa yang juicy dan lazat.',
-            whyCard3Title: 'Rangkaian Logistik Sejuk Beku',
-            whyCard3Desc: 'Pengedaran yang cekap memastikan kesegaran produk dikekalkan dari kilang terus ke dapur atau kedai anda.',
+            whyCard1Title: 'Rasa Hebat & Kualiti Premium',
+            whyCard1Desc: 'Produk kami diperbuat daripada bahan terpilih berkualiti tinggi untuk menyampaikan rasa dan kualiti yang konsisten dalam setiap hidangan.',
+            whyCard2Title: 'Pelbagai Pilihan Produk',
+            whyCard2Desc: 'Kami menawarkan pelbagai jenis produk, perisa dan saiz pembungkusan mengikut cita rasa, keperluan perniagaan serta majlis.',
+            whyCard3Title: 'Mudah & Cepat Disediakan',
+            whyCard3Desc: 'Produk kami direka untuk penyediaan yang mudah, membantu anda menjimatkan masa sambil menikmati hidangan yang lazat.',
+            whyCard4Title: 'Harga Berpatutan & Kompetitif',
+            whyCard4Desc: 'Kami komited menawarkan produk berkualiti pada harga yang berpatutan dan memberikan nilai terbaik buat pelanggan.',
+            whyCard5Title: 'Halalan Toyyiban',
+            whyCard5Desc: 'Produk kami diiktiraf Halal oleh JAKIM, mencerminkan komitmen kami terhadap kualiti, keselamatan dan pematuhan.',
+            whyCard6Title: 'Utamakan Pelanggan',
+            whyCard6Desc: 'Pelanggan adalah keutamaan kami. Kami menghargai maklum balas anda dan sentiasa berusaha meningkatkan produk dan perkhidmatan kami.',
             waLabel: 'Hubungi Kami / Pertanyaan',
             footerColQuick: 'Pautan Pantas',
             footHome: 'Utama',
