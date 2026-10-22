@@ -55,6 +55,8 @@ session_start();
             color: var(--text-dark);
             line-height: 1.6;
             transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         /* Top Bar */
@@ -67,6 +69,7 @@ session_start();
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 10px;
         }
 
         .top-bar-info {
@@ -126,7 +129,7 @@ session_start();
         }
 
         .brand-logo {
-            height: 50px;
+            height: 48px;
             width: auto;
             display: block;
             transition: transform 0.3s ease;
@@ -136,7 +139,18 @@ session_start();
             transform: scale(1.03);
         }
 
-        /* Dropdown Navigation Menu */
+        /* Mobile Hamburger Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Nav Links */
         .nav-links {
             display: flex;
             list-style: none;
@@ -154,7 +168,6 @@ session_start();
             font-size: 15px;
             font-weight: 600;
             text-transform: capitalize;
-            letter-spacing: 0.5px;
             padding: 10px 0;
             display: flex;
             align-items: center;
@@ -208,7 +221,7 @@ session_start();
         /* Hero Image Slider Container */
         .slider-section {
             position: relative;
-            width: 100%;
+            width: 90%;
             max-width: 1280px;
             margin: 20px auto 0 auto;
             height: 480px;
@@ -377,25 +390,14 @@ session_start();
             transform: translateY(0);
         }
 
-        /* Accessibility: Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            .reveal, .stagger-item {
-                transition: none !important;
-                opacity: 1 !important;
-                transform: none !important;
-            }
-            .wa-label {
-                animation: none !important;
-            }
-        }
-
-        /* Stats Bar */
+        /* STATS BAR: CLEAN, SEAMLESS, NO BOX, 4 IN A ROW ON MOBILE */
         .stats-bar {
             background-color: var(--warm-cream);
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
-            padding: 35px 5%;
+            padding: 35px 3%;
             margin-top: 40px;
+            width: 100%;
         }
 
         .stats-container {
@@ -403,23 +405,38 @@ session_start();
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 10px;
             text-align: center;
+            align-items: center;
+        }
+
+        .stat-card {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 5px 2px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .stat-card h3 {
             font-family: var(--font-headline);
-            font-size: 42px;
+            font-size: clamp(24px, 5.5vw, 48px);
             color: var(--deep-red);
             line-height: 1;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            white-space: nowrap;
         }
 
         .stat-card p {
-            font-size: 13px;
+            font-size: clamp(9px, 2.2vw, 13px);
             color: var(--text-dark);
             font-weight: 600;
             text-transform: uppercase;
+            line-height: 1.25;
+            word-break: break-word;
         }
 
         /* Certification Section */
@@ -454,44 +471,45 @@ session_start();
 
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            align-items: center;
-            justify-content: center;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            align-items: stretch;
         }
 
         .cert-card {
             background-color: var(--warm-cream);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 25px 20px;
+            padding: 22px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
 
         .cert-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
             border-color: var(--deep-red);
         }
 
         .cert-badge-img {
-            height: 80px;
+            height: 70px;
             width: auto;
+            max-width: 100%;
             object-fit: contain;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
             transition: transform 0.3s ease;
         }
 
         .cert-card:hover .cert-badge-img {
-            transform: scale(1.08);
+            transform: scale(1.06);
         }
 
         .cert-card h4 {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--text-dark);
         }
@@ -499,19 +517,22 @@ session_start();
         .cert-card p {
             font-size: 12px;
             color: var(--text-muted);
-            line-height: 1.4;
+            line-height: 1.35;
         }
 
-        /* Why Us Section */
+        /* ========================================================= */
+        /* WHY CHOOSE US: 3D CIRCULAR ROTATION ANIMATION             */
+        /* ========================================================= */
         .why-us-section {
             padding: 80px 5%;
             background-color: var(--warm-cream);
+            overflow: hidden;
         }
 
         .section-header {
             text-align: center;
             max-width: 700px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 40px auto;
         }
 
         .section-header h2 {
@@ -528,123 +549,197 @@ session_start();
             color: var(--text-muted);
         }
 
-        .why-us-grid {
-            max-width: 1280px;
+        /* 3D Scene Wrapper */
+        .why-3d-scene {
+            width: 100%;
+            max-width: 1000px;
+            height: 400px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .why-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 32px 28px;
-            border-radius: 12px;
-            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            perspective: 1000px;
             position: relative;
-        }
-
-        .why-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--deep-red);
-            box-shadow: 0 10px 25px rgba(122, 24, 32, 0.08);
-        }
-
-        .why-icon {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(122, 24, 32, 0.1);
-            color: var(--deep-red);
-            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
         }
 
-        .why-card:hover .why-icon {
-            transform: rotate(5deg) scale(1.1);
+        /* 3D Carousel Ring */
+        .why-3d-carousel {
+            width: 320px;
+            height: 320px;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .why-card-3d {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            left: 10px;
+            top: 10px;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            backface-visibility: visible;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .why-card-3d:hover {
+            border-color: var(--deep-red);
+            box-shadow: 0 16px 35px rgba(122, 24, 32, 0.15);
+        }
+
+        /* 3 Cards set at 0deg, 120deg, 240deg in 3D circle */
+        .why-card-3d:nth-child(1) { transform: rotateY(0deg) translateZ(280px); }
+        .why-card-3d:nth-child(2) { transform: rotateY(120deg) translateZ(280px); }
+        .why-card-3d:nth-child(3) { transform: rotateY(240deg) translateZ(280px); }
+
+        .why-icon-3d {
+            width: 58px;
+            height: 58px;
+            background-color: rgba(122, 24, 32, 0.1);
+            color: var(--deep-red);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 18px;
+            transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .why-card-3d:hover .why-icon-3d {
+            transform: rotate(12deg) scale(1.15);
             background-color: var(--deep-red);
             color: #FFFFFF;
         }
 
-        .why-card h3 {
+        .why-card-3d h3 {
             font-size: 20px;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .why-card p {
-            font-size: 14px;
+        .why-card-3d p {
+            font-size: 13px;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
-        /* Floating Action Controls */
+        /* 3D Nav Controls */
+        .why-3d-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .why-3d-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        .why-3d-btn:hover {
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            border-color: var(--deep-red);
+            transform: scale(1.08);
+        }
+
+        .why-3d-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot-3d {
+            width: 10px;
+            height: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot-3d.active {
+            background: var(--deep-red);
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        /* Floating Controls */
         .floating-container {
             position: fixed;
             bottom: 25px;
-            right: 25px;
+            right: 20px;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 14px;
+            gap: 12px;
             z-index: 1200;
         }
 
         .wa-floating-wrapper {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .wa-label {
             background-color: var(--card-bg);
             color: var(--text-dark);
             border: 1px solid var(--border-color);
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 25px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             white-space: nowrap;
-            transition: all 0.35s ease;
             animation: pulseGlow 3.5s infinite ease-in-out;
         }
 
         .floating-btn {
             position: relative;
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #FFFFFF;
-            font-size: 22px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            font-size: 20px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
             cursor: pointer;
             border: none;
             text-decoration: none;
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, box-shadow 0.35s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
         .floating-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 22px rgba(0,0,0,0.25);
         }
 
-        .btn-whatsapp {
-            background-color: #25D366;
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #20ba5a;
-        }
+        .btn-whatsapp { background-color: #25D366; }
+        .btn-whatsapp:hover { background-color: #20ba5a; }
 
         .wa-headset-badge {
             position: absolute;
@@ -652,10 +747,10 @@ session_start();
             right: -2px;
             background-color: var(--deep-red);
             color: #FFFFFF;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            font-size: 10px;
+            font-size: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -664,26 +759,28 @@ session_start();
 
         .btn-scroll {
             background-color: var(--deep-red);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .btn-scroll:hover {
-            background-color: var(--deep-red-hover);
-        }
-
-        .btn-scroll i {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        .btn-scroll.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
         @keyframes pulseGlow {
-            0%, 100% { transform: translateY(0); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-            50% { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
         }
 
-        /* Footer Section */
+        /* ========================================================= */
+        /* FOOTER DESIGN (CLEAN 2-COLUMN COMPACT LAYOUT ON MOBILE)   */
+        /* ========================================================= */
         footer {
             background-color: var(--warm-cream);
             color: var(--text-dark);
-            padding: 60px 5% 30px 5%;
+            padding: 50px 5% 25px 5%;
             border-top: 3px solid var(--deep-red);
         }
 
@@ -693,12 +790,12 @@ session_start();
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             gap: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
 
         .footer-logo {
             height: 48px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .company-name {
@@ -709,9 +806,9 @@ session_start();
         }
 
         .company-info {
-            font-size: 14px;
+            font-size: 13.5px;
             color: var(--text-muted);
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         .company-info p {
@@ -739,11 +836,11 @@ session_start();
         }
 
         .footer-col h5 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
             color: var(--deep-red);
             position: relative;
             padding-bottom: 6px;
@@ -764,13 +861,13 @@ session_start();
         }
 
         .footer-col ul li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .footer-col ul li a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13.5px;
             transition: color 0.3s ease, padding-left 0.3s ease;
             display: inline-block;
         }
@@ -780,85 +877,168 @@ session_start();
             padding-left: 4px;
         }
 
-        .social-links-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .social-links-list li {
-            margin-bottom: 10px;
+        .social-buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .social-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            width: 100%;
-            max-width: 220px;
             padding: 9px 14px;
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             color: var(--text-dark);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            width: 100%;
         }
 
-        .social-btn i {
-            font-size: 18px;
-            transition: transform 0.3s ease;
-        }
-
+        .social-btn i { font-size: 16px; }
         .social-btn.whatsapp i { color: #25D366; }
         .social-btn.tiktok i { color: #000000; }
         .social-btn.facebook i { color: #1877F2; }
 
+        body.dark-mode .social-btn.tiktok i { color: #FFFFFF; }
+
         .social-btn:hover {
             border-color: var(--deep-red);
             color: var(--deep-red);
-            transform: translateX(4px);
+            transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(122, 24, 32, 0.1);
-        }
-
-        .social-btn:hover i {
-            transform: scale(1.15);
         }
 
         .footer-bottom {
             max-width: 1280px;
             margin: 0 auto;
             border-top: 1px solid var(--border-color);
-            padding-top: 25px;
+            padding-top: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            font-size: 12.5px;
             color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
+        /* ========================================================= */
+        /* RESPONSIVE MEDIA QUERIES                                  */
+        /* ========================================================= */
         @media (max-width: 992px) {
-            .nav-links { display: none; }
-            .why-us-grid { grid-template-columns: 1fr 1fr; }
-            .stats-container { grid-template-columns: repeat(2, 1fr); gap: 25px; }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
-            .slider-section { height: 380px; }
+            .mobile-menu-btn { display: block; }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg);
+                border-bottom: 2px solid var(--deep-red);
+                padding: 20px 5%;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active { display: flex; }
+            .nav-item { width: 100%; }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                padding-left: 15px;
+                display: none;
+            }
+
+            .nav-item.active .dropdown-menu { display: block; }
+
+            .slider-section { height: 380px; width: 95%; }
             .slide-title { font-size: 42px; }
-            .cert-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        @media (max-width: 600px) {
-            .why-us-grid { grid-template-columns: 1fr; }
-            .stats-container { grid-template-columns: 1fr; }
+        @media (max-width: 768px) {
+            /* Stats Bar stays 4 in a row perfectly */
+            .stats-bar { padding: 22px 2%; }
+            .stats-container {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 4px;
+            }
+
+            /* Certifications 2x2 grid */
+            .cert-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .cert-card { padding: 16px 10px; }
+            .cert-badge-img { height: 55px; }
+
+            /* 3D Carousel Mobile Adjustments */
+            .why-3d-scene { height: 320px; }
+            .why-3d-carousel { width: 230px; height: 250px; }
+            .why-card-3d {
+                width: 220px;
+                height: 240px;
+                left: 5px;
+                top: 5px;
+                padding: 18px 14px;
+            }
+            .why-card-3d:nth-child(1) { transform: rotateY(0deg) translateZ(180px); }
+            .why-card-3d:nth-child(2) { transform: rotateY(120deg) translateZ(180px); }
+            .why-card-3d:nth-child(3) { transform: rotateY(240deg) translateZ(180px); }
+            .why-card-3d h3 { font-size: 16px; margin-bottom: 6px; }
+            .why-card-3d p { font-size: 11.5px; }
+            .why-icon-3d { width: 44px; height: 44px; font-size: 20px; margin-bottom: 12px; }
+
+            .section-header h2 { font-size: 38px; }
             .slider-section { height: 320px; }
-            .slide-content { padding: 0 25px; }
+            .slide-content { padding: 0 20px; }
             .slide-title { font-size: 32px; }
-            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
-            .cert-grid { grid-template-columns: 1fr; }
+
+            /* FOOTER MOBILE: GRID 2-KOLUM SEBELAH-MENYEBELAH (TAK PANJANG KE BAWAH) */
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px 15px;
+            }
+            .footer-col-main {
+                grid-column: 1 / -1; /* Maklumat syarikat rentas 2 kolum kat atas */
+                border-bottom: 1px dashed var(--border-color);
+                padding-bottom: 15px;
+            }
+            .footer-col h5 { font-size: 13.5px; margin-bottom: 10px; }
+            .footer-col ul li { margin-bottom: 6px; }
+            .footer-col ul li a { font-size: 12.5px; }
+            .social-buttons-container { gap: 6px; }
+            .social-btn { padding: 7px 10px; font-size: 11.5px; }
+
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                font-size: 11px;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                justify-content: center;
+                text-align: center;
+            }
             .wa-label { display: none; }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 4px;
+            }
         }
     </style>
 </head>
@@ -889,10 +1069,13 @@ session_start();
             </a>
         </div>
 
-        <ul class="nav-links">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
             <li class="nav-item">
-                <a href="index.html"><span id="Home">Home</span> <i style="font-size:10px;"></i></a>
-            
+                <a href="home.html"><span id="Home">Home</span></a>
             </li>
             <li class="nav-item">
                 <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
@@ -903,39 +1086,39 @@ session_start();
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="product.html"><span id="mProduct">Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <a href="product.html"><span id="mProduct">Products</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="meat-products" id="MealProducts">Meat Products</a></li>
-                    <li><a href="bakery-products" id="BakeryProducts">Bakery Products</a></li>
-                    <li><a href="products-catalogue" id="Catalogue">Products Catalogue</a></li>
+                    <li><a href="meat-products.html" id="MealProducts">Meat Products</a></li>
+                    <li><a href="bakery-products.html" id="BakeryProducts">Bakery Products</a></li>
+                    <li><a href="products-catalogue.html" id="Catalogue">Products Catalogue</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="distributor"><span id="Distributor">Get our product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <a href="distributor.html"><span id="Distributor">Get Our Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="find-distributor" id="FindDistributor">Find Our Distributor</a></li>
-                    <li><a href="become-distributor" id="BecomeDistributor">Become a Distributor</a></li>
+                    <li><a href="find-distributor.html" id="FindDistributor">Find Our Distributor</a></li>
+                    <li><a href="become-distributor.html" id="BecomeDistributor">Become a Distributor</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="media"><span id="mMedia">Media</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <a href="media.html"><span id="mMedia">Media</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="news-events" id="NewsEvents">News & Events</a></li>
-                    <li><a href="events-gallery" id="EventsGallery">Events Gallery</a></li>
+                    <li><a href="news-events.html" id="NewsEvents">News & Events</a></li>
+                    <li><a href="events-gallery.html" id="EventsGallery">Events Gallery</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="contact"><span id="mContact">Contact Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <a href="contact.html"><span id="mContact">Contact Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="general-enquiries" id="GeneralEnquiries">General Enquiries</a></li>
-                    <li><a href="sales-enquiries" id="SalesEnquiries">Sales Enquiries</a></li>
+                    <li><a href="general-enquiries.html" id="GeneralEnquiries">General Enquiries</a></li>
+                    <li><a href="sales-enquiries.html" id="SalesEnquiries">Sales Enquiries</a></li>
                 </ul>
             </li>
         </ul>
     </div>
 </header>
 
-<!-- Hero Slider Section (Dibuang kelas 'reveal' supaya sentiasa muncul serta-merta) -->
+<!-- Hero Slider Section -->
 <section class="slider-section" id="home">
     <div class="slider-wrapper" id="sliderWrapper">
         <div class="slide" style="background-image: url('uploads/products/banner1.jpg'), url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1350&q=80');">
@@ -944,7 +1127,7 @@ session_start();
                 <span class="slide-tag">PREMIUM QUALITY</span>
                 <h1 class="slide-title">MADE FOR GREAT MEALS.</h1>
                 <p class="slide-desc">High-quality, halal, and delicious frozen food products manufactured with care for families and business partners.</p>
-                <a href="product" class="btn-primary">Explore Products <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="product.html" class="btn-primary">Explore Products <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
@@ -954,7 +1137,7 @@ session_start();
                 <span class="slide-tag">100% HALALAN TOYYIBAN</span>
                 <h1 class="slide-title">AUTHENTIC TASTE & FLAVOUR</h1>
                 <p class="slide-desc">JAKIM Halal & MeSTI certified products ensuring high standards of safety, cleanliness, and unbeatable taste.</p>
-                <a href="about" class="btn-primary">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="company_overview.html" class="btn-primary">Learn More <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
@@ -964,7 +1147,7 @@ session_start();
                 <span class="slide-tag">TRUSTED SUPPLIER</span>
                 <h1 class="slide-title">RELIABLE B2B PARTNER</h1>
                 <p class="slide-desc">Supplying top-grade frozen meat, kebabs, and ready-to-prepare products across Malaysia.</p>
-                <a href="contact" class="btn-primary">Contact Us <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="contact.html" class="btn-primary">Contact Us <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -979,24 +1162,24 @@ session_start();
     </div>
 </section>
 
-<!-- Stats Bar -->
+<!-- Stats Bar (4 SEBARIS MELINTANG TANPA BOX) -->
 <section class="stats-bar reveal">
     <div class="stats-container">
         <div class="stat-card stagger-item">
-            <h3>20+</h3>
-            <p id="statExp">Years of Experience</p>
+            <h3 class="stat-number" data-target="20" data-suffix="+">0+</h3>
+            <p id="statExp">Years Experience</p>
         </div>
         <div class="stat-card stagger-item">
-            <h3>100+</h3>
+            <h3 class="stat-number" data-target="100" data-suffix="+">0+</h3>
             <p id="statVarieties">Product Varieties</p>
         </div>
         <div class="stat-card stagger-item">
-            <h3>100%</h3>
+            <h3 class="stat-number" data-target="100" data-suffix="%">0%</h3>
             <p id="statHalal">Halal & MeSTI Certified</p>
         </div>
         <div class="stat-card stagger-item">
             <h3>MALAYSIA</h3>
-            <p id="statDist">Nationwide Distribution</p>
+            <p id="statDist">Nationwide Delivery</p>
         </div>
     </div>
 </section>
@@ -1013,373 +1196,422 @@ session_start();
             <div class="cert-card stagger-item">
                 <img src="logo/halall.png" alt="JAKIM Halal Logo" class="cert-badge-img" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Halal_Malaysia_logo.svg/1200px-Halal_Malaysia_logo.svg.png';">
                 <h4>HALAL JAKIM</h4>
-                <p>Fully Halal certified by the Department of Islamic Development Malaysia (JAKIM).</p>
+                <p>Fully Halal certified by JAKIM Malaysia.</p>
             </div>
-
             <div class="cert-card stagger-item">
-                <img src="logo/mestii.png" alt="MeSTI KKM Logo" class="cert-badge-img" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/MeSTI_logo.svg/1200px-MeSTI_logo.svg.png';">
-                <h4>MeSTI (KKM)</h4>
-                <p>Food Safety Certification by the Ministry of Health Malaysia.</p>
+                <img src="logo/mesti.png" alt="MeSTI Certification" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=MeSTI';">
+                <h4>MeSTI CERTIFIED</h4>
+                <p>Complies with KKM food hygiene standards.</p>
             </div>
-
             <div class="cert-card stagger-item">
-                <img src="logo/buatan-malaysiaa.png" alt="Made In Malaysia Logo" class="cert-badge-img" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Buatan_Malaysia_logo.svg/1200px-Buatan_Malaysia_logo.svg.png';">
-                <h4>MADE IN MALAYSIA</h4>
-                <p>High quality locally manufactured products recognized by KPDN.</p>
+                <img src="logo/haccp.png" alt="HACCP Certified" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/7A1820/FFFFFF?text=HACCP';">
+                <h4>HACCP & ISO</h4>
+                <p>Hazard Analysis Critical Control Point certified.</p>
             </div>
-
             <div class="cert-card stagger-item">
-                <img src="logo/gmpp.png" alt="HACCP & GMP Logo" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=HACCP+%26+GMP';">
-                <h4>GMP</h4>
-                <p>Frozen processing control based on international hygiene standards.</p>
+                <img src="logo/vhm.png" alt="Veterinary Health Mark" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=VHM';">
+                <h4>VETERINARY MARK</h4>
+                <p>Approved premium meat processing facility.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Why Us Section -->
-<section class="why-us-section reveal" id="about">
+<!-- Why Choose Us Section (3D CIRCULAR ANIMATION ROTATION) -->
+<section class="why-us-section reveal">
     <div class="section-header">
-        <h2 id="whyHeading">WHY CHOOSE US?</h2>
-        <p id="whyDesc">Our commitment to excellence makes us the preferred choice for frozen food nationwide.</p>
+        <h2 id="whyHeading">WHY CHOOSE MELAWATI KEBAB?</h2>
+        <p id="whyDesc">We are committed to delivering excellence in every bite with strict quality standards and authentic taste.</p>
     </div>
 
-    <div class="why-us-grid">
-        <div class="why-card stagger-item">
-            <div class="why-icon"><i class="fa-solid fa-utensils"></i></div>
-            <h3>Great Taste & Premium Quality</h3>
-            <p>Our products are made with carefully selected, high-quality ingredients to deliver consistent taste and quality in every serving.</p>
-        </div>
+    <!-- 3D Circular Rotation Scene -->
+    <div class="why-3d-scene" id="why3dScene">
+        <div class="why-3d-carousel" id="why3dCarousel">
+            <div class="why-card-3d">
+                <div class="why-icon-3d">
+                    <i class="fa-solid fa-shield-halal"></i>
+                </div>
+                <h3 id="whyCard1Title">100% Halal Guaranteed</h3>
+                <p id="whyCard1Desc">All ingredients are strictly sourced and processed under JAKIM's Halal compliance rules for absolute peace of mind.</p>
+            </div>
 
-        <div class="why-card stagger-item">
-            <div class="why-icon"><i class="fa-solid fa-layer-group"></i></div>
-            <h3>Wide Variety of Choices</h3>
-            <p>We offer a diverse range of products, flavours and pack sizes to suit different preferences, business needs and occasions.</p>
-        </div>
+            <div class="why-card-3d">
+                <div class="why-icon-3d">
+                    <i class="fa-solid fa-drumstick-bite"></i>
+                </div>
+                <h3 id="whyCard2Title">Premium Ingredients</h3>
+                <p id="whyCard2Desc">We select choice cuts of meat and authentic natural spices to bring out unbeatable juiciness and rich flavour.</p>
+            </div>
 
-        <div class="why-card stagger-item">
-            <div class="why-icon"><i class="fa-solid fa-clock"></i></div>
-            <h3>Convenient & Easy to Prepare</h3>
-            <p>Our products are designed for convenient preparation, helping you save time while enjoying delicious meals with ease.</p>
-        </div>
-
-        <div class="why-card stagger-item">
-            <div class="why-icon"><i class="fa-solid fa-tags"></i></div>
-            <h3>Competitive & Affordable Pricing</h3>
-            <p>We are committed to offering quality products at competitive prices, providing excellent value for our customers.</p>
-        </div>
-
-        <div class="why-card stagger-item">
-            <div class="why-icon"><i class="fa-solid fa-certificate"></i></div>
-            <h3>Halalan Toyyiban</h3>
-            <p>Our products are Halal-certified by the Department of Islamic Development Malaysia (JAKIM), reflecting our commitment to quality, safety and compliance.</p>
-        </div>
-
-        <div class="why-card stagger-item">
-            <div class="why-icon"><i class="fa-solid fa-heart"></i></div>
-            <h3>Customer-Focused</h3>
-            <p>Our customers are at the heart of everything we do. We value your feedback and continuously strive to improve our products and services.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Footer Section -->
-<footer id="contact" class="reveal">
-    <div class="footer-grid">
-        <div>
-            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
-            <div class="company-name">Melawati Kebab Sdn Bhd <span style="font-size:13px; font-weight:normal; color:var(--text-muted);">(778900-M)</span></div>
-            <div class="company-info">
-                <p><i class="fa-solid fa-location-dot"></i> No 54-1F, Jalan 2/154D, Taman Desa Cheras,<br>56000 Kuala Lumpur, Malaysia</p>
-                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60391079708">+603 9107 9708</a></p>
-                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:melawatikebab1996@gmail.com">melawatikebab1996@gmail.com</a></p>
+            <div class="why-card-3d">
+                <div class="why-icon-3d">
+                    <i class="fa-solid fa-truck-ramp-box"></i>
+                </div>
+                <h3 id="whyCard3Title">Reliable Cold Chain</h3>
+                <p id="whyCard3Desc">Our robust nationwide distribution ensures frozen freshness from our factory straight to your kitchen or retail store.</p>
             </div>
         </div>
-
-        <div class="footer-col">
-            <h5>Navigation</h5>
-            <ul>
-                <li><a href="home">Home</a></li>
-                <li><a href="about">About Us</a></li>
-                <li><a href="product">Product</a></li>
-                <li><a href="distributor">Distributor</a></li>
-                <li><a href="media">Media</a></li>
-                <li><a href="contact">Contact Us</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h5>Follow Us</h5>
-            <ul class="social-links-list">
-                <li>
-                    <a href="https://api.whatsapp.com/send/?phone=60124247708&text=Hello%20Melawati%20Kebab,%20I%20have%20an%20enquiry" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.tiktok.com/@melawatikebabsince1996" target="_blank" rel="noopener noreferrer" class="social-btn tiktok">
-                        <i class="fa-brands fa-tiktok"></i> TikTok
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.facebook.com/MelawatiKebabSince1996/" target="_blank" rel="noopener noreferrer" class="social-btn facebook">
-                        <i class="fa-brands fa-facebook"></i> Facebook
-                    </a>
-                </li>
-            </ul>
-        </div>
     </div>
 
-    <div class="footer-bottom">
-        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd (778900-M). All Rights Reserved.</p>
+    <!-- 3D Controls -->
+    <div class="why-3d-controls">
+        <button class="why-3d-btn" id="whyPrev3d" title="Previous Feature"><i class="fa-solid fa-arrow-left"></i></button>
+        <div class="why-3d-dots" id="why3dDots">
+            <span class="dot-3d active" data-step="0"></span>
+            <span class="dot-3d" data-step="1"></span>
+            <span class="dot-3d" data-step="2"></span>
+        </div>
+        <button class="why-3d-btn" id="whyNext3d" title="Next Feature"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
-</footer>
+</section>
 
 <!-- Floating Action Controls -->
 <div class="floating-container">
     <div class="wa-floating-wrapper">
-        <span class="wa-label" id="waLabel">Have an enquiry? Chat with Us</span>
-        <a href="#" id="waFloatingBtn" target="_blank" rel="noopener noreferrer" class="floating-btn btn-whatsapp" title="WhatsApp Chat">
+        <span class="wa-label">Hubungi Kami / Inquiry</span>
+        <a href="https://wa.me/60123456789?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20produk" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
-            <span class="wa-headset-badge" title="Customer Support"><i class="fa-solid fa-headset"></i></span>
+            <span class="wa-headset-badge"><i class="fa-solid fa-headset"></i></span>
         </a>
     </div>
-
-    <button class="floating-btn btn-scroll" id="dynamicScrollBtn" onclick="handleDynamicScroll()" title="Scroll Navigation">
-        <i class="fa-solid fa-arrow-down" id="scrollIcon"></i>
+    <button class="floating-btn btn-scroll" id="scrollTopBtn" title="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
     </button>
 </div>
 
-<!-- JavaScript Controls -->
-<script>
-    // 1. Language Dictionaries & State Management
-    let currentLang = localStorage.getItem('preferredLang') || 'EN';
+<!-- Redesigned Footer Section (Compact 2-Column Grid on Mobile) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col footer-col-main">
+            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
+            <div class="company-name">MELAWATI KEBAB SDN BHD</div>
+            <div class="company-info">
+                <p><i class="fa-solid fa-location-dot"></i> No. 12 & 14, Jalan Industri 3, Taman Perindustrian Melawati, 53100 KL.</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60341000000">+60 3-4100 0000</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@melawatikebab.com">info@melawatikebab.com</a></p>
+            </div>
+        </div>
 
-    const langData = {
+        <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="company_overview.html">About Us</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="distributor.html">Distributor</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h5>Connect With Us</h5>
+            <div class="social-buttons-container">
+                <a href="https://wa.me/60123456789" class="social-btn whatsapp" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                </a>
+                <a href="https://tiktok.com" class="social-btn tiktok" target="_blank">
+                    <i class="fa-brands fa-tiktok"></i> TikTok
+                </a>
+                <a href="https://facebook.com" class="social-btn facebook" target="_blank">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd.</p>
+        <p>Halal & Quality Frozen Food Manufacturer</p>
+    </div>
+</footer>
+
+<!-- JavaScript Integration -->
+<script>
+    // 1. Mobile Navigation Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fa-solid fa-xmark';
+            } else {
+                icon.className = 'fa-solid fa-bars';
+            }
+        });
+    }
+
+    // Dropdown toggle for mobile
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            if (window.innerWidth <= 992 && item.querySelector('.dropdown-menu')) {
+                item.classList.toggle('active');
+            }
+        });
+    });
+
+    // 2. Day / Night Mode Toggle
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const icon = themeToggleBtn.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+            icon.className = 'fa-solid fa-sun';
+        } else {
+            icon.className = 'fa-solid fa-moon';
+        }
+    });
+
+    // 3. Banner Slider
+    const sliderWrapper = document.getElementById('sliderWrapper');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+    const totalSlides = dots.length;
+
+    function updateSlider(index) {
+        currentSlide = index;
+        sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === currentSlide);
+        });
+    }
+
+    if (nextBtn && prevBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider(currentSlide);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider(currentSlide);
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const idx = parseInt(e.target.getAttribute('data-index'));
+                updateSlider(idx);
+            });
+        });
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider(currentSlide);
+        }, 5000);
+    }
+
+    // 4. Animated Stats Counter
+    let hasAnimatedCounters = false;
+
+    function animateCounters() {
+        const counters = document.querySelectorAll('.stat-number');
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const suffix = counter.getAttribute('data-suffix') || '';
+            let count = 0;
+            const duration = 1800;
+            const stepTime = 20;
+            const steps = duration / stepTime;
+            const increment = target / steps;
+
+            const timer = setInterval(() => {
+                count += increment;
+                if (count >= target) {
+                    counter.innerText = target + suffix;
+                    clearInterval(timer);
+                } else {
+                    counter.innerText = Math.floor(count) + suffix;
+                }
+            }, stepTime);
+        });
+    }
+
+    // 5. WHY CHOOSE US - 3D CIRCULAR ROTATION LOGIC
+    const why3dCarousel = document.getElementById('why3dCarousel');
+    const whyPrev3d = document.getElementById('whyPrev3d');
+    const whyNext3d = document.getElementById('whyNext3d');
+    const why3dDots = document.querySelectorAll('.dot-3d');
+    let current3dStep = 0;
+    let autoRotate3dTimer;
+
+    function update3dCarousel(step) {
+        current3dStep = (step + 3) % 3;
+        const angle = current3dStep * -120;
+        why3dCarousel.style.transform = `rotateY(${angle}deg)`;
+
+        why3dDots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === current3dStep);
+        });
+    }
+
+    if (why3dCarousel) {
+        whyNext3d.addEventListener('click', () => {
+            update3dCarousel(current3dStep + 1);
+        });
+
+        whyPrev3d.addEventListener('click', () => {
+            update3dCarousel(current3dStep - 1);
+        });
+
+        why3dDots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const step = parseInt(e.target.getAttribute('data-step'));
+                update3dCarousel(step);
+            });
+        });
+
+        // Auto rotate 3D circular ring every 4 seconds
+        function start3dAutoRotate() {
+            autoRotate3dTimer = setInterval(() => {
+                update3dCarousel(current3dStep + 1);
+            }, 4000);
+        }
+
+        function stop3dAutoRotate() {
+            clearInterval(autoRotate3dTimer);
+        }
+
+        start3dAutoRotate();
+
+        // Pause 3D rotation when user hovers on scene
+        const why3dScene = document.getElementById('why3dScene');
+        if (why3dScene) {
+            why3dScene.addEventListener('mouseenter', stop3dAutoRotate);
+            why3dScene.addEventListener('mouseleave', start3dAutoRotate);
+        }
+    }
+
+    // 6. Scroll Reveal Intersection Observer
+    const observerOptions = { threshold: 0.1 };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+
+                if (entry.target.classList.contains('stats-bar') && !hasAnimatedCounters) {
+                    animateCounters();
+                    hasAnimatedCounters = true;
+                }
+
+                const staggers = entry.target.querySelectorAll('.stagger-item');
+                staggers.forEach((stagger, index) => {
+                    setTimeout(() => {
+                        stagger.classList.add('active');
+                    }, index * 100);
+                });
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 7. Scroll to Top Button
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 8. Multi-language Dictionary (EN & BM)
+    const translations = {
         EN: {
             topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
-            waLabel: 'Have an enquiry? Chat with Us',
-            waTooltip: 'Chat with Us on WhatsApp',
-            waMsg: 'Hello Melawati Kebab, I have an enquiry regarding your products/services.',
-            scrollBottomTooltip: 'Scroll to Bottom',
-            scrollTopTooltip: 'Scroll to Top',
-            mHome: 'Home',
-            mCompanyOverview: 'Company Overview',
-            mAbout: 'About Us',
-            mHistory: 'Our History',
-            mVisionMission: 'Vision & Mission',
-            mCertifications: 'Quality Assurance & Certifications',
-            mProduct: 'Product',
-            mMealProducts: 'Meal Products',
-            mBakeryProducts: 'Bakery Products',
-            mCatalogue: 'Products Catalogue',
-            mDistributor: 'Distributor',
-            mFindDistributor: 'Find Our Distributor',
-            mBecomeDistributor: 'Become a Distributor',
+            Home: 'Home',
+            About: 'About Us',
+            History: 'Our History',
+            VisionMission: 'Vision & Mission',
+            Certifications: 'Quality Assurance & Certifications',
+            mProduct: 'Products',
+            MealProducts: 'Meat Products',
+            BakeryProducts: 'Bakery Products',
+            Catalogue: 'Products Catalogue',
+            Distributor: 'Get Our Product',
+            FindDistributor: 'Find Our Distributor',
+            BecomeDistributor: 'Become a Distributor',
             mMedia: 'Media',
-            mNewsEvents: 'News & Events',
-            mEventsGallery: 'Events Gallery',
+            NewsEvents: 'News & Events',
+            EventsGallery: 'Events Gallery',
             mContact: 'Contact Us',
-            mGeneralEnquiries: 'General Enquiries',
-            mSalesEnquiries: 'Sales Enquiries',
-            statExp: 'Years of Experience',
+            GeneralEnquiries: 'General Enquiries',
+            SalesEnquiries: 'Sales Enquiries',
+            statExp: 'Years Experience',
             statVarieties: 'Product Varieties',
             statHalal: 'Halal & MeSTI Certified',
-            statDist: 'Nationwide Distribution',
+            statDist: 'Nationwide Delivery',
             certHeading: 'CERTIFICATIONS & QUALITY ASSURANCE',
             certDesc: 'Melawati Kebab Sdn Bhd products are recognized by Malaysian ministries and government departments to guarantee hygiene, purity, and superior quality.',
-            whyHeading: 'WHY CHOOSE US?',
-            whyDesc: 'Our commitment to excellence makes us the preferred choice for frozen food nationwide.'
+            whyHeading: 'WHY CHOOSE MELAWATI KEBAB?',
+            whyDesc: 'We are committed to delivering excellence in every bite with strict quality standards and authentic taste.',
+            whyCard1Title: '100% Halal Guaranteed',
+            whyCard1Desc: 'All ingredients are strictly sourced and processed under JAKIM\'s Halal compliance rules for absolute peace of mind.',
+            whyCard2Title: 'Premium Ingredients',
+            whyCard2Desc: 'We select choice cuts of meat and authentic natural spices to bring out unbeatable juiciness and rich flavour.',
+            whyCard3Title: 'Reliable Cold Chain',
+            whyCard3Desc: 'Our robust nationwide distribution ensures frozen freshness from our factory straight to your kitchen or retail store.'
         },
         BM: {
-            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Utama Kualiti',
-            waLabel: 'Ada Pertanyaan? Hubungi Kami',
-            waTooltip: 'Sembang dengan Kami di WhatsApp',
-            waMsg: 'Salam Melawati Kebab, saya ada pertanyaan berkenaan produk/perkhidmatan anda.',
-            scrollBottomTooltip: 'Tatal ke Bawah',
-            scrollTopTooltip: 'Tatal ke Atas',
-            mHome: 'Utama',
-            mCompanyOverview: 'Gambaran Keseluruhan Syarikat',
-            mAbout: 'Tentang Kami',
-            mHistory: 'Sejarah Kami',
-            mVisionMission: 'Visi & Misi',
-            mCertifications: 'Jaminan Kualiti & Persijilan',
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Kualiti Diutamakan',
+            Home: 'Utama',
+            About: 'Mengenai Kami',
+            History: 'Sejarah Kami',
+            VisionMission: 'Visi & Misi',
+            Certifications: 'Jaminan Kualiti & Sijil Halal',
             mProduct: 'Produk',
-            mMealProducts: 'Produk Makanan',
-            mBakeryProducts: 'Produk Bakeri',
-            mCatalogue: 'Katalog Produk',
-            mDistributor: 'Pengedar',
-            mFindDistributor: 'Cari Pengedar Kami',
-            mBecomeDistributor: 'Menjadi Pengedar',
+            MealProducts: 'Produk Daging',
+            BakeryProducts: 'Produk Biskut & Roti',
+            Catalogue: 'Katalog Produk',
+            Distributor: 'Dapatkan Produk',
+            FindDistributor: 'Cari Pengedar Kami',
+            BecomeDistributor: 'Jadi Pengedar',
             mMedia: 'Media',
-            mNewsEvents: 'Berita & Acara',
-            mEventsGallery: 'Galeri Acara',
+            NewsEvents: 'Berita & Acara',
+            EventsGallery: 'Galeri Acara',
             mContact: 'Hubungi Kami',
-            mGeneralEnquiries: 'Pertanyaan Umum',
-            mSalesEnquiries: 'Pertanyaan Jualan',
+            GeneralEnquiries: 'Pertanyaan Umum',
+            SalesEnquiries: 'Pertanyaan Jualan',
             statExp: 'Tahun Pengalaman',
             statVarieties: 'Kepelbagaian Produk',
-            statHalal: 'Dihalal & Diiktiraf MeSTI',
-            statDist: 'Pengedaran Seluruh Negara',
+            statHalal: 'Sijil Halal & MeSTI',
+            statDist: 'Penghantaran Seluruh Negara',
             certHeading: 'PERSIJILAN & JAMINAN KUALITI',
-            certDesc: 'Produk Melawati Kebab Sdn Bhd diiktiraf oleh kementerian dan jabatan kerajaan Malaysia bagi menjamin kebersihan, ketulenan, dan kualiti unggul.',
-            whyHeading: 'MENGAPA PILIH KAMI?',
-            whyDesc: 'Komitmen kami terhadap kecemerlangan menjadikan kami pilihan utama makanan sejuk beku di seluruh negara.'
+            certDesc: 'Produk Melawati Kebab Sdn Bhd diiktiraf oleh kementerian dan jabatan kerajaan Malaysia bagi menjamin kebersihan, kesucian dan kualiti tinggi.',
+            whyHeading: 'MENGAPA PILIH MELAWATI KEBAB?',
+            whyDesc: 'Kami komited menyampaikan kelazatan dalam setiap gigitan dengan standard kualiti yang ketat dan rasa asli.',
+            whyCard1Title: '100% Dijamin Halal',
+            whyCard1Desc: 'Semua bahan mentah diperolehi dan diproses mengikut pematuhan ketat Halal JAKIM untuk ketenangan jiwa anda.',
+            whyCard2Title: 'Bahan-bahan Premium',
+            whyCard2Desc: 'Kami memilih potongan daging terbaik dan rempah ratus asli bagi menghasilkan rasa yang juicy dan lazat.',
+            whyCard3Title: 'Rangkaian Logistik Sejuk Beku',
+            whyCard3Desc: 'Pengedaran yang cekap memastikan kesegaran produk dikekalkan dari kilang terus ke dapur atau kedai anda.'
         }
     };
 
     function switchLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('preferredLang', lang);
-
         document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
         document.getElementById('btnLangBM').classList.toggle('active', lang === 'BM');
 
-        const data = langData[lang];
+        const dict = translations[lang];
+        if (!dict) return;
 
-        document.getElementById('topAnnouncement').innerHTML = data.topAnnouncement;
-        document.getElementById('waLabel').innerText = data.waLabel;
-        document.getElementById('waFloatingBtn').setAttribute('title', data.waTooltip);
-
-        const waPhone = '60124247708';
-        const encodedMsg = encodeURIComponent(data.waMsg);
-        document.getElementById('waFloatingBtn').href = `https://api.whatsapp.com/send/?phone=${waPhone}&text=${encodedMsg}`;
-
-        for (let key in data) {
+        for (let key in dict) {
             const el = document.getElementById(key);
-            if (el && !key.startsWith('wa') && !key.startsWith('scroll') && !key.startsWith('top')) {
-                el.innerText = data[key];
+            if (el) {
+                el.innerHTML = dict[key];
             }
         }
-
-        updateScrollButton();
     }
-
-    // 2. Dynamic Scroll Button Control
-    let currentScrollMode = 'down';
-
-    function updateScrollButton() {
-        const scrollBtn = document.getElementById('dynamicScrollBtn');
-        const icon = document.getElementById('scrollIcon');
-        if(!scrollBtn || !icon) return;
-
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        const totalHeight = document.documentElement.scrollHeight;
-
-        const isAtTop = scrollTop < 120;
-
-        if (isAtTop) {
-            currentScrollMode = 'down';
-            icon.className = 'fa-solid fa-arrow-down';
-            scrollBtn.setAttribute('title', langData[currentLang].scrollBottomTooltip);
-        } else {
-            currentScrollMode = 'up';
-            icon.className = 'fa-solid fa-arrow-up';
-            scrollBtn.setAttribute('title', langData[currentLang].scrollTopTooltip);
-        }
-    }
-
-    function smoothScrollTo(targetPosition, duration = 1200) {
-        const startPosition = window.pageYOffset || document.documentElement.scrollTop;
-        const distance = targetPosition - startPosition;
-        let startTime = null;
-
-        function animation(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
-            
-            const ease = progress < 0.5 
-                ? 2 * progress * progress 
-                : -1 + (4 - 2 * progress) * progress;
-
-            window.scrollTo(0, startPosition + (distance * ease));
-
-            if (timeElapsed < duration) {
-                requestAnimationFrame(animation);
-            }
-        }
-        requestAnimationFrame(animation);
-    }
-
-    function handleDynamicScroll() {
-        if (currentScrollMode === 'down') {
-            smoothScrollTo(document.documentElement.scrollHeight, 1200);
-        } else {
-            smoothScrollTo(0, 1200);
-        }
-    }
-
-    window.addEventListener('scroll', updateScrollButton);
-
-    // 3. Theme Toggle
-    const themeToggleBtn = document.getElementById('themeToggleBtn');
-    themeToggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        themeToggleBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-    });
-
-    // 4. Reveal Elements Automatically on Load & Scroll
-    function triggerReveal() {
-        document.querySelectorAll('.reveal, .stagger-item').forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight * 0.95) {
-                el.classList.add('active');
-            }
-        });
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        switchLang(currentLang);
-        triggerReveal();
-    });
-    window.addEventListener('load', triggerReveal);
-    window.addEventListener('scroll', triggerReveal);
-
-    // 5. Image Slider
-    const wrapper = document.getElementById('sliderWrapper');
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    
-    let currentIndex = 0;
-    const slideCount = slides.length;
-    let autoSlideInterval;
-
-    function goToSlide(index) {
-        if (index < 0) index = slideCount - 1;
-        if (index >= slideCount) index = 0;
-        
-        currentIndex = index;
-        wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-        
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentIndex);
-        });
-    }
-
-    function nextSlide() { goToSlide(currentIndex + 1); }
-    function prevSlide() { goToSlide(currentIndex - 1); }
-
-    function startAutoSlide() { autoSlideInterval = setInterval(nextSlide, 6000); }
-    function stopAutoSlide() { clearInterval(autoSlideInterval); }
-
-    nextBtn.addEventListener('click', () => { nextSlide(); stopAutoSlide(); startAutoSlide(); });
-    prevBtn.addEventListener('click', () => { prevSlide(); stopAutoSlide(); startAutoSlide(); });
-
-    dots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
-            const index = parseInt(e.target.getAttribute('data-index'));
-            goToSlide(index);
-            stopAutoSlide();
-            startAutoSlide();
-        });
-    });
-
-    startAutoSlide();
 </script>
 
 </body>
