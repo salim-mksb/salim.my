@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +21,9 @@
             --warm-cream: #F9F6F0;
             --forest-green: #2E6B4F;
             --light-gray: #EAEAEA;
-            --border-color: #E0E0E0;
-            --text-dark: #222222;
-            --text-muted: #666666;
+            --border-color: #E2E8F0;
+            --text-dark: #1A202C;
+            --text-muted: #64748B;
             --white: #FFFFFF;
             --bg-main: #FFFFFF;
             --card-bg: #FFFFFF;
@@ -33,10 +36,10 @@
         body.dark-mode {
             --bg-main: #121212;
             --warm-cream: #1E1E1E;
-            --card-bg: #2A2A2A;
-            --text-dark: #F1F1F1;
-            --text-muted: #B0B0B0;
-            --border-color: #333333;
+            --card-bg: #262626;
+            --text-dark: #F1F5F9;
+            --text-muted: #94A3B8;
+            --border-color: #334155;
             --white: #1E1E1E;
         }
 
@@ -53,6 +56,7 @@
             line-height: 1.6;
             transition: background-color 0.4s ease, color 0.4s ease;
             overflow-x: hidden;
+            width: 100%;
         }
 
         /* Top Bar */
@@ -65,6 +69,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 10px;
         }
 
         .top-bar-info {
@@ -117,8 +122,14 @@
             align-items: center;
         }
 
+        .brand-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .brand-logo {
-            height: 50px;
+            height: 48px;
             width: auto;
             display: block;
             transition: transform 0.3s ease;
@@ -128,7 +139,18 @@
             transform: scale(1.03);
         }
 
-        /* Dropdown Navigation Menu */
+        /* Mobile Hamburger Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Dropdown Navigation Menu Desktop */
         .nav-links {
             display: flex;
             list-style: none;
@@ -214,8 +236,8 @@
 
         .btn-primary:hover {
             background-color: var(--deep-red-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(122, 24, 32, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(122, 24, 32, 0.35);
         }
 
         /* HERO SECTION */
@@ -224,9 +246,10 @@
             background: linear-gradient(135deg, rgba(122, 24, 32, 0.94) 0%, rgba(46, 107, 79, 0.88) 100%),
                         url('uploads/products/banner2.jpg') center/cover no-repeat;
             color: #FFFFFF;
-            padding: 100px 5% 80px 5%;
+            padding: 90px 5% 70px 5%;
             text-align: center;
             overflow: hidden;
+            margin-bottom: 20px;
         }
 
         .vm-hero-shapes {
@@ -258,48 +281,48 @@
         .vm-hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
         }
 
         .hero-badge {
             background-color: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
             color: #FFFFFF;
             padding: 6px 18px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .vm-hero h1 {
             font-family: var(--font-headline);
-            font-size: 68px;
+            font-size: 64px;
             letter-spacing: 1.5px;
             line-height: 1;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             text-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .vm-hero p {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 300;
             opacity: 0.95;
-            max-width: 680px;
+            max-width: 700px;
             margin: 0 auto;
             line-height: 1.6;
         }
 
-        /* 3D CARDS SECTION */
+        /* 3D INTERACTIVE CARDS SECTION */
         .cards-section {
-            padding: 80px 5%;
+            padding: 70px 5% 90px 5%;
             max-width: 1280px;
             margin: 0 auto;
             position: relative;
@@ -309,12 +332,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            gap: 45px;
             flex-wrap: wrap;
             position: relative;
         }
 
-        /* Connecting Decorative Bridge between Cards */
+        /* Connecting Decorative Bridge between Cards (Desktop Only) */
         .cards-connector {
             position: absolute;
             top: 50%;
@@ -339,14 +362,14 @@
             background-color: var(--card-bg);
             border: 2px solid var(--border-color);
             color: var(--deep-red);
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            font-size: 18px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
         }
 
         /* 3D Flip Card Container */
@@ -366,19 +389,14 @@
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
             cursor: pointer;
-            border-radius: 22px;
+            border-radius: 24px;
         }
 
-        /* Hover or Mobile Touch Flipped State */
+        /* Hover & Mobile Touch Flipped State */
         .flip-card-container:hover .flip-card-inner,
         .flip-card-container.flipped .flip-card-inner,
         .flip-card-container:focus .flip-card-inner {
             transform: rotateY(180deg);
-        }
-
-        .flip-card-container:focus-visible {
-            outline: 3px solid var(--deep-red);
-            border-radius: 24px;
         }
 
         /* Card Faces */
@@ -388,14 +406,14 @@
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: 22px;
+            border-radius: 24px;
             border: 1px solid var(--border-color);
-            padding: 40px 30px;
+            padding: 45px 32px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.06);
             transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
@@ -407,17 +425,17 @@
 
         .flip-card-container:hover .card-front {
             border-color: var(--deep-red);
-            box-shadow: 0 14px 35px rgba(122, 24, 32, 0.12);
+            box-shadow: 0 18px 40px rgba(122, 24, 32, 0.15);
         }
 
         .card-icon-box {
-            width: 85px;
-            height: 85px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 38px;
+            font-size: 40px;
             margin-bottom: 15px;
             transition: transform 0.4s ease, background-color 0.4s ease;
         }
@@ -438,7 +456,7 @@
 
         .card-front h2 {
             font-family: var(--font-headline);
-            font-size: 42px;
+            font-size: 46px;
             letter-spacing: 1px;
             line-height: 1;
             margin-bottom: 8px;
@@ -448,7 +466,7 @@
         .mission-title { color: var(--forest-green); }
 
         .card-front p {
-            font-size: 14px;
+            font-size: 14.5px;
             color: var(--text-muted);
             font-weight: 500;
         }
@@ -497,19 +515,19 @@
         }
 
         .card-back-icon {
-            font-size: 44px;
+            font-size: 46px;
             opacity: 0.9;
         }
 
         .card-back h3 {
             font-family: var(--font-headline);
-            font-size: 34px;
+            font-size: 36px;
             letter-spacing: 1px;
             line-height: 1;
         }
 
         .card-back-text {
-            font-size: 16px;
+            font-size: 15.5px;
             line-height: 1.7;
             font-weight: 300;
             opacity: 0.95;
@@ -517,181 +535,66 @@
         }
 
         .card-back-tag {
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             background: rgba(255, 255, 255, 0.2);
-            padding: 4px 14px;
+            padding: 5px 16px;
             border-radius: 15px;
             display: inline-block;
         }
 
-        /* SECTION: MOVING FORWARD TOGETHER */
-        .pillars-section {
-            padding: 70px 5%;
-            background-color: var(--warm-cream);
-            border-radius: 24px;
-            max-width: 1280px;
-            margin: 20px auto 60px auto;
-        }
-
-        .pillars-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-        }
-
-        .section-tag {
-            color: var(--forest-green);
-            font-weight: 700;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .section-title {
-            font-family: var(--font-headline);
-            font-size: 48px;
-            color: var(--deep-red);
-            line-height: 1;
-            margin-bottom: 12px;
-        }
-
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .pillar-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 30px 22px;
-            text-align: center;
-            transition: all 0.35s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        }
-
-        .pillar-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--deep-red);
-            box-shadow: 0 10px 25px rgba(122, 24, 32, 0.08);
-        }
-
-        .pillar-icon {
-            width: 55px;
-            height: 55px;
-            border-radius: 12px;
-            background-color: rgba(122, 24, 32, 0.08);
-            color: var(--deep-red);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin: 0 auto 18px auto;
-            transition: transform 0.3s ease;
-        }
-
-        .pillar-card:hover .pillar-icon {
-            transform: scale(1.1) rotate(5deg);
-            background-color: var(--deep-red);
-            color: #FFFFFF;
-        }
-
-        .pillar-card h4 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-
-        .pillar-card p {
-            font-size: 13.5px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Reveal Animation Styles */
-        .reveal {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-
-        .stagger-item.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Floating Action Controls */
+        /* Floating Controls */
         .floating-container {
             position: fixed;
             bottom: 25px;
-            right: 25px;
+            right: 20px;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 14px;
+            gap: 12px;
             z-index: 1200;
         }
 
         .wa-floating-wrapper {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .wa-label {
             background-color: var(--card-bg);
             color: var(--text-dark);
             border: 1px solid var(--border-color);
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 25px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             white-space: nowrap;
-            transition: all 0.35s ease;
             animation: pulseGlow 3.5s infinite ease-in-out;
         }
 
         .floating-btn {
             position: relative;
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #FFFFFF;
-            font-size: 22px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            font-size: 20px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
             cursor: pointer;
             border: none;
             text-decoration: none;
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease, box-shadow 0.35s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
         .floating-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 22px rgba(0,0,0,0.25);
         }
 
         .btn-whatsapp { background-color: #25D366; }
@@ -703,29 +606,38 @@
             right: -2px;
             background-color: var(--deep-red);
             color: #FFFFFF;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            font-size: 10px;
+            font-size: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid #FFFFFF;
         }
 
-        .btn-scroll { background-color: var(--deep-red); }
-        .btn-scroll:hover { background-color: var(--deep-red-hover); }
+        .btn-scroll {
+            background-color: var(--deep-red);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .btn-scroll.visible {
+            opacity: 1;
+            visibility: visible;
+        }
 
         @keyframes pulseGlow {
-            0%, 100% { transform: translateY(0); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-            50% { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
         }
 
         /* Footer Section */
         footer {
             background-color: var(--warm-cream);
             color: var(--text-dark);
-            padding: 60px 5% 30px 5%;
+            padding: 50px 5% 25px 5%;
             border-top: 3px solid var(--deep-red);
         }
 
@@ -735,12 +647,12 @@
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             gap: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
 
         .footer-logo {
             height: 48px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .company-name {
@@ -751,9 +663,9 @@
         }
 
         .company-info {
-            font-size: 14px;
+            font-size: 13.5px;
             color: var(--text-muted);
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         .company-info p {
@@ -779,11 +691,11 @@
         .company-info a:hover { color: var(--deep-red); }
 
         .footer-col h5 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
             color: var(--deep-red);
             position: relative;
             padding-bottom: 6px;
@@ -800,12 +712,12 @@
         }
 
         .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li { margin-bottom: 10px; }
 
         .footer-col ul li a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13.5px;
             transition: color 0.3s ease, padding-left 0.3s ease;
             display: inline-block;
         }
@@ -815,36 +727,39 @@
             padding-left: 4px;
         }
 
-        .social-links-list { list-style: none; padding: 0; }
-        .social-links-list li { margin-bottom: 10px; }
+        .social-buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
         .social-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            width: 100%;
-            max-width: 220px;
             padding: 9px 14px;
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             color: var(--text-dark);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            width: 100%;
         }
 
-        .social-btn i { font-size: 18px; }
+        .social-btn i { font-size: 16px; }
         .social-btn.whatsapp i { color: #25D366; }
         .social-btn.tiktok i { color: #000000; }
         .social-btn.facebook i { color: #1877F2; }
 
+        body.dark-mode .social-btn.tiktok i { color: #FFFFFF; }
+
         .social-btn:hover {
             border-color: var(--deep-red);
             color: var(--deep-red);
-            transform: translateX(4px);
+            transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(122, 24, 32, 0.1);
         }
 
@@ -852,39 +767,209 @@
             max-width: 1280px;
             margin: 0 auto;
             border-top: 1px solid var(--border-color);
-            padding-top: 25px;
+            padding-top: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            font-size: 12.5px;
             color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        /* Reduced Motion Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            .reveal, .stagger-item, .flip-card-inner {
-                transition: none !important;
-                opacity: 1 !important;
-                transform: none !important;
-            }
-            .floating-shape, .wa-label, .flip-hint-badge i { animation: none !important; }
-        }
+        /* ========================================================
+           RESPONSIVE CSS FIXES: MOBILE MENU & SIDE-BY-SIDE CARDS
+        ======================================================== */
 
-        /* Responsive Styles */
+        /* 1. MOBILE MENU HAMBURGER & SUBMENU FIX (MAX-WIDTH: 992PX) */
         @media (max-width: 992px) {
-            .nav-links { display: none; }
-            .cards-connector { display: none; }
-            .flip-card-container { max-width: 100%; height: 380px; }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
-            .vm-hero h1 { font-size: 52px; }
+            .mobile-menu-btn { 
+                display: block; 
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg);
+                border-bottom: 2px solid var(--deep-red);
+                padding: 15px 5%;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+
+            .nav-links.active { 
+                display: flex; 
+            }
+
+            .nav-item { 
+                width: 100%; 
+            }
+
+            .nav-item > a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 12px 0;
+                border-bottom: 1px solid var(--border-color);
+                font-size: 15px;
+            }
+
+            .nav-item > a i {
+                transition: transform 0.3s ease;
+            }
+
+            .nav-item.active > a i {
+                transform: rotate(180deg);
+                color: var(--deep-red);
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                padding: 5px 0 10px 12px;
+                display: none; /* Sembunyi lalai, papar bila nav-item active */
+                background-color: transparent;
+                border-left: 2px solid var(--deep-red);
+                margin-left: 10px;
+                margin-top: 5px;
+            }
+
+            .nav-item.active .dropdown-menu { 
+                display: block; 
+            }
+
+            .dropdown-menu li a {
+                padding: 8px 12px;
+                font-size: 13.5px;
+                color: var(--text-dark);
+            }
+
+            .vm-hero h1 { font-size: 48px; }
         }
 
-        @media (max-width: 600px) {
-            .footer-grid { grid-template-columns: 1fr; }
-            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+        /* 2. SIDE-BY-SIDE VISION & MISSION CARDS ON MOBILE (MAX-WIDTH: 768PX) */
+        @media (max-width: 768px) {
+            .cards-section {
+                padding: 35px 2% 50px 2%;
+            }
+
+            .cards-wrapper {
+                display: flex;
+                flex-direction: row; /* SUSUNAN SEBELAH-SEBELAH */
+                justify-content: center;
+                align-items: stretch;
+                gap: 10px; /* Jarak rapat supaya muat 2 kad */
+                width: 100%;
+            }
+
+            .cards-connector {
+                display: none; /* Sembunyikan penyambung di telefon */
+            }
+
+            .flip-card-container {
+                flex: 1;
+                min-width: 0; /* Membolehkan kad mengecil tanpa overflow */
+                max-width: 50%;
+                height: 320px; /* Saiz tinggi dikurangkan untuk mobile */
+            }
+
+            .card-front, .card-back {
+                padding: 18px 8px 12px 8px;
+                border-radius: 16px;
+            }
+
+            .card-icon-box {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+
+            .card-front h2 {
+                font-size: 22px;
+                margin-bottom: 4px;
+            }
+
+            .card-front p {
+                font-size: 10.5px;
+                line-height: 1.3;
+            }
+
+            .flip-hint-badge {
+                padding: 4px 8px;
+                font-size: 9px;
+                gap: 4px;
+                border-radius: 12px;
+            }
+
+            .card-back {
+                gap: 8px;
+            }
+
+            .card-back-icon {
+                font-size: 24px;
+            }
+
+            .card-back-tag {
+                font-size: 8px;
+                padding: 3px 8px;
+                border-radius: 10px;
+            }
+
+            .card-back h3 {
+                font-size: 17px;
+            }
+
+            .card-back-text {
+                font-size: 10.5px;
+                line-height: 1.38;
+            }
+
+            /* FOOTER MOBILE */
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px 15px;
+            }
+            .footer-col-main {
+                grid-column: 1 / -1;
+                border-bottom: 1px dashed var(--border-color);
+                padding-bottom: 15px;
+            }
+            .footer-col h5 { font-size: 13.5px; margin-bottom: 10px; }
+            .footer-col ul li { margin-bottom: 6px; }
+            .footer-col ul li a { font-size: 12.5px; }
+            .social-buttons-container { gap: 6px; }
+            .social-btn { padding: 7px 10px; font-size: 11.5px; }
+
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                font-size: 11px;
+                text-align: left;
+            }
+            .vm-hero h1 { font-size: 38px; }
+        }
+
+        /* PENYESUAIAN TAMBAHAN UNTUK SKRIN SANGAT KECIL (< 380PX) */
+        @media (max-width: 380px) {
+            .cards-wrapper { gap: 6px; }
+            .flip-card-container { height: 325px; }
+            .card-front h2 { font-size: 19px; }
+            .card-front p { font-size: 9.5px; }
+            .card-back h3 { font-size: 15px; }
+            .card-back-text { font-size: 9.5px; line-height: 1.35; }
+            .top-bar { justify-content: center; text-align: center; }
             .wa-label { display: none; }
-            .vm-hero h1 { font-size: 40px; }
-            .flip-card-container { height: 400px; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 4px; }
         }
     </style>
 </head>
@@ -910,15 +995,18 @@
 <header>
     <div class="navbar">
         <div class="brand-logo-container">
-            <a href="index.html">
-                <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
+            <a href="home.html">
+                <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="handleLogoError(this, 'MELAWATI KEBAB');">
             </a>
         </div>
 
-        <ul class="nav-links">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
             <li class="nav-item">
-                <a href="index.html"><span id="Home">Home</span> <i style="font-size:10px;"></i></a>
-            
+                <a href="home.html"><span id="Home">Home</span></a>
             </li>
             <li class="nav-item">
                 <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
@@ -926,11 +1014,10 @@
                     <li><a href="our_history.html" id="History">Our History</a></li>
                     <li><a href="vision_mission.html" id="VisionMission">Vision & Mission</a></li>
                     <li><a href="certifications.html" id="Certifications">Quality Assurance & Certifications</a></li>
-                    
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="product"><span id="mProduct">Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <a href="product.html"><span id="mProduct">Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
                 <ul class="dropdown-menu">
                     <li><a href="meat-products.html" id="MealProducts">Meat Products</a></li>
                     <li><a href="bakery-products.html" id="BakeryProducts">Bakery Products</a></li>
@@ -938,7 +1025,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="distributor.html"><span id="Distributor">Get our product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <a href="distributor.html"><span id="Distributor">Get Our Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
                 <ul class="dropdown-menu">
                     <li><a href="find-distributor.html" id="FindDistributor">Find Our Distributor</a></li>
                     <li><a href="become-distributor.html" id="BecomeDistributor">Become a Distributor</a></li>
@@ -976,7 +1063,7 @@
     </div>
 </section>
 
-<!-- INTERACTIVE 3D FLIP CARDS SECTION -->
+<!-- INTERACTIVE 3D FLIP CARDS SECTION (SEBELAH-SEBELAH DI MOBILE) -->
 <section class="cards-section">
     <div class="cards-wrapper">
         
@@ -988,7 +1075,7 @@
         </div>
 
         <!-- 3D VISION CARD -->
-        <div class="flip-card-container stagger-item" tabindex="0" aria-label="Vision Card - Click or hover to reveal" aria-expanded="false">
+        <div class="flip-card-container js-flip-card" tabindex="0" aria-label="Vision Card - Click or hover to reveal">
             <div class="flip-card-inner">
                 <!-- FRONT -->
                 <div class="card-front">
@@ -1000,23 +1087,21 @@
                         <p id="visFrontSub">Building a World-Class Halal Brand</p>
                     </div>
                     <div class="flip-hint-badge">
-                        <i class="fa-solid fa-rotate"></i> <span id="hintVis">Hover or tap to reveal</span>
+                        <i class="fa-solid fa-rotate"></i> <span id="hintVis">Hover / Tap</span>
                     </div>
                 </div>
                 <!-- BACK -->
                 <div class="card-back vision-back-bg">
                     <i class="fa-solid fa-earth-asia card-back-icon"></i>
-                    <span class="card-back-tag" id="visBackTag">FOUNDATION OF EXCELLENCE</span>
-                    <h3 id="visBackTitle">Our Vision Statement</h3>
-                    <p class="card-back-text" id="visBackStatement">
-                        To be Malaysia's premier and most trusted manufacturer of Halal frozen food and kebabs, expanding globally through uncompromising quality, innovation, and culinary excellence.
-                    </p>
+                    <span class="card-back-tag" id="visBackTag">EXCELLENCE</span>
+                    <h3 id="visBackTitle">Vision Statement</h3>
+                    <p class="card-back-text" id="visBackDesc">To become Malaysia's premier, globally recognized leader in Halal frozen food manufacturing, setting standards for quality and operational excellence.</p>
                 </div>
             </div>
         </div>
 
         <!-- 3D MISSION CARD -->
-        <div class="flip-card-container stagger-item" tabindex="0" aria-label="Mission Card - Click or hover to reveal" aria-expanded="false">
+        <div class="flip-card-container js-flip-card" tabindex="0" aria-label="Mission Card - Click or hover to reveal">
             <div class="flip-card-inner">
                 <!-- FRONT -->
                 <div class="card-front">
@@ -1025,20 +1110,18 @@
                             <i class="fa-solid fa-bullseye"></i>
                         </div>
                         <h2 class="mission-title" id="misFrontTitle">OUR MISSION</h2>
-                        <p id="misFrontSub">Delivering Excellence Everyday</p>
+                        <p id="misFrontSub">Delivering Quality & Authenticity</p>
                     </div>
                     <div class="flip-hint-badge">
-                        <i class="fa-solid fa-rotate"></i> <span id="hintMis">Hover or tap to reveal</span>
+                        <i class="fa-solid fa-rotate"></i> <span id="hintMis">Hover / Tap</span>
                     </div>
                 </div>
                 <!-- BACK -->
                 <div class="card-back mission-back-bg">
-                    <i class="fa-solid fa-rocket card-back-icon"></i>
-                    <span class="card-back-tag" id="misBackTag">COMMITMENT TO PURPOSE</span>
-                    <h3 id="misBackTitle">Our Mission Statement</h3>
-                    <p class="card-back-text" id="misBackStatement">
-                        To consistently produce delicious, hygienic, and convenient food products that enrich family meals and empower business partners while upholding strict Halalan Toyyiban standards.
-                    </p>
+                    <i class="fa-solid fa-utensils card-back-icon"></i>
+                    <span class="card-back-tag" id="misBackTag">COMMITMENT</span>
+                    <h3 id="misBackTitle">Mission Statement</h3>
+                    <p class="card-back-text" id="misBackDesc">To deliver safe, high-quality, and delicious Halal food products while continually innovating our manufacturing and building lasting trust with customers.</p>
                 </div>
             </div>
         </div>
@@ -1046,359 +1129,264 @@
     </div>
 </section>
 
-<!-- SECTION: MOVING FORWARD TOGETHER -->
-<section class="pillars-section reveal">
-    <div class="pillars-header">
-        <span class="section-tag" id="pillarTag">Core Values & Commitment</span>
-        <h2 class="section-title" id="pillarTitle">Pillars of Our Journey</h2>
-        <p style="font-size:15px; color:var(--text-muted);" id="pillarDesc">How our Vision and Mission guide our daily operations, product development, and partner relationships.</p>
+<!-- Floating Action Controls -->
+<div class="floating-container">
+    <div class="wa-floating-wrapper">
+        <span class="wa-label" id="waLabel">Inquiry / Contact Us</span>
+        <a href="https://wa.me/60123456789?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20visi%20dan%20misi" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="wa-headset-badge"><i class="fa-solid fa-headset"></i></span>
+        </a>
     </div>
+    <button class="floating-btn btn-scroll" id="scrollTopBtn" title="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+</div>
 
-    <div class="pillars-grid">
-        <div class="pillar-card stagger-item">
-            <div class="pillar-icon"><i class="fa-solid fa-certificate"></i></div>
-            <h4 id="p1Title">Halal Integrity</h4>
-            <p id="p1Desc">100% JAKIM Halal certified with strict adherence to Halalan Toyyiban principles in every ingredient and process.</p>
-        </div>
-
-        <div class="pillar-card stagger-item">
-            <div class="pillar-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <h4 id="p2Title">Uncompromising Quality</h4>
-            <p id="p2Desc">Premium raw ingredients processed in hygienic, state-of-the-art facilities certified under MeSTI KKM.</p>
-        </div>
-
-        <div class="pillar-card stagger-item">
-            <div class="pillar-icon"><i class="fa-solid fa-handshake"></i></div>
-            <h4 id="p3Title">Partner Trust</h4>
-            <p id="p3Desc">Empowering retail buyers and B2B commercial partners nationwide with reliable frozen supply lines.</p>
-        </div>
-
-        <div class="pillar-card stagger-item">
-            <div class="pillar-icon"><i class="fa-solid fa-lightbulb"></i></div>
-            <h4 id="p4Title">Continuous Innovation</h4>
-            <p id="p4Desc">Consistently refining recipes, packaging, and distribution to satisfy evolving modern consumer tastes.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Footer Section -->
-<footer id="contact">
+<!-- Redesigned Footer Section -->
+<footer>
     <div class="footer-grid">
-        <div>
-            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
-            <div class="company-name">Melawati Kebab Sdn Bhd <span style="font-size:13px; font-weight:normal; color:var(--text-muted);">(778900-M)</span></div>
+        <div class="footer-col footer-col-main">
+            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="handleLogoError(this, 'MELAWATI KEBAB');">
+            <div class="company-name">MELAWATI KEBAB SDN BHD</div>
             <div class="company-info">
-                <p><i class="fa-solid fa-location-dot"></i> No 54-1F, Jalan 2/154D, Taman Desa Cheras,<br>56000 Kuala Lumpur, Malaysia</p>
-                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60391079708">+603 9107 9708</a></p>
-                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:melawatikebab1996@gmail.com">melawatikebab1996@gmail.com</a></p>
+                <p><i class="fa-solid fa-location-dot"></i> No. 12 & 14, Jalan Industri 3, Taman Perindustrian Melawati, 53100 KL.</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60341000000">+60 3-4100 0000</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@melawatikebab.com">info@melawatikebab.com</a></p>
             </div>
         </div>
 
         <div class="footer-col">
-            <h5>Navigation</h5>
+            <h5 id="footerColQuick">Quick Links</h5>
             <ul>
-                <li><a href="index.html#home">Home</a></li>
-                <li><a href="company-overview.html">About Us</a></li>
-                <li><a href="index.html#product">Product</a></li>
-                <li><a href="index.html#distributor">Distributor</a></li>
-                <li><a href="index.html#media">Media</a></li>
-                <li><a href="index.html#contact">Contact Us</a></li>
+                <li><a href="home.html" id="footHome">Home</a></li>
+                <li><a href="company_overview.html" id="footAbout">About Us</a></li>
+                <li><a href="product.html" id="footProduct">Products</a></li>
+                <li><a href="distributor.html" id="footDist">Distributor</a></li>
+                <li><a href="contact.html" id="footContact">Contact Us</a></li>
             </ul>
         </div>
 
         <div class="footer-col">
-            <h5>Follow Us</h5>
-            <ul class="social-links-list">
-                <li>
-                    <a href="https://api.whatsapp.com/send/?phone=60124247708&text=Hello%20Melawati%20Kebab,%20I%20have%20an%20enquiry" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.tiktok.com/@melawatikebabsince1996" target="_blank" rel="noopener noreferrer" class="social-btn tiktok">
-                        <i class="fa-brands fa-tiktok"></i> TikTok
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.facebook.com/MelawatiKebabSince1996/" target="_blank" rel="noopener noreferrer" class="social-btn facebook">
-                        <i class="fa-brands fa-facebook"></i> Facebook
-                    </a>
-                </li>
-            </ul>
+            <h5 id="footerColConnect">Connect With Us</h5>
+            <div class="social-buttons-container">
+                <a href="https://wa.me/60123456789" class="social-btn whatsapp" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                </a>
+                <a href="https://www.tiktok.com/@melawatikebabsince1996?_r=1&_t=ZS-9Akrb5sFdQb" class="social-btn tiktok" target="_blank">
+                    <i class="fa-brands fa-tiktok"></i> TikTok
+                </a>
+                <a href="https://www.facebook.com/SalimFrozenFood" class="social-btn facebook" target="_blank">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+            </div>
         </div>
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; 2026 Melawati Kebab Sdn Bhd (778900-M). All Rights Reserved.</p>
+        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd. <span id="footRights">All Rights Reserved.</span></p>
+        <p id="footSub">Halal & Quality Frozen Food Manufacturer</p>
     </div>
 </footer>
 
-<!-- Floating Action Controls -->
-<div class="floating-container">
-    <div class="wa-floating-wrapper">
-        <span class="wa-label" id="waLabel">Have an enquiry? Chat with Us</span>
-        <a href="#" id="waFloatingBtn" target="_blank" rel="noopener noreferrer" class="floating-btn btn-whatsapp" title="WhatsApp Chat">
-            <i class="fa-brands fa-whatsapp"></i>
-            <span class="wa-headset-badge" title="Customer Support"><i class="fa-solid fa-headset"></i></span>
-        </a>
-    </div>
-
-    <button class="floating-btn btn-scroll" id="dynamicScrollBtn" onclick="handleDynamicScroll()" title="Scroll Navigation">
-        <i class="fa-solid fa-arrow-down" id="scrollIcon"></i>
-    </button>
-</div>
-
-<!-- JavaScript Controls & Bilingual Dictionary -->
+<!-- JavaScript Integration -->
 <script>
-    // 1. Language Dictionaries & Persistent State
-    let currentLang = localStorage.getItem('preferredLang') || 'EN';
+    // Penangan logo fail-safe
+    function handleLogoError(imgElement, brandTitle) {
+        const parentWrapper = imgElement.parentElement;
+        if (parentWrapper) {
+            parentWrapper.innerHTML = `<div style="font-family:var(--font-headline); font-size:20px; color:var(--deep-red); font-weight:700;">${brandTitle}</div>`;
+        }
+    }
 
-    const langData = {
+    // Toggle Flip Card On Touch / Click (Mobile & Desktop)
+    document.querySelectorAll('.js-flip-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('flipped');
+        });
+    });
+
+    // 1. Mobile Navigation Toggle & Submenu Fix
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fa-solid fa-xmark';
+            } else {
+                icon.className = 'fa-solid fa-bars';
+            }
+        });
+    }
+
+    // PEMBAIKAN SUBMENU MOBILE: Klik induk menu untuk buka/tutup anak menu
+    document.querySelectorAll('.nav-item').forEach(item => {
+        const parentLink = item.querySelector('a');
+        const dropdown = item.querySelector('.dropdown-menu');
+
+        if (dropdown && parentLink) {
+            parentLink.addEventListener('click', (e) => {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault(); // Elak navigasi terus supaya dropdown dibuka dahulu
+                    e.stopPropagation();
+
+                    // Tutup menu lain yang terbuka
+                    document.querySelectorAll('.nav-item').forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+
+                    // Buka / Tutup menu semasa
+                    item.classList.toggle('active');
+                }
+            });
+        }
+    });
+
+    // 2. Day / Night Mode Toggle
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggleBtn.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        });
+    }
+
+    // 3. Scroll to Top Button
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // 4. Multi-language Dictionary (EN & BM)
+    const translations = {
         EN: {
             topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
-            waLabel: 'Have an enquiry? Chat with Us',
-            waTooltip: 'Chat with Us on WhatsApp',
-            waMsg: 'Hello Melawati Kebab, I have an enquiry regarding your Vision and Mission.',
-            scrollBottomTooltip: 'Scroll to Bottom',
-            scrollTopTooltip: 'Scroll to Top',
-            // Nav Menu
-            mHome: 'Home',
-            mCompanyOverview: 'Company Overview',
-            mAbout: 'About Us',
-            mHistory: 'Our History',
-            mVisionMission: 'Vision & Mission',
-            mCertifications: 'Quality Assurance & Certifications',
+            Home: 'Home',
+            About: 'About Us',
+            History: 'Our History',
+            VisionMission: 'Vision & Mission',
+            Certifications: 'Quality Assurance & Certifications',
             mProduct: 'Product',
-            mMealProducts: 'Meal Products',
-            mBakeryProducts: 'Bakery Products',
-            mCatalogue: 'Products Catalogue',
-            mDistributor: 'Distributor',
-            mFindDistributor: 'Find Our Distributor',
-            mBecomeDistributor: 'Become a Distributor',
+            MealProducts: 'Meat Products',
+            BakeryProducts: 'Bakery Products',
+            Catalogue: 'Products Catalogue',
+            Distributor: 'Get Our Product',
+            FindDistributor: 'Find Our Distributor',
+            BecomeDistributor: 'Become a Distributor',
             mMedia: 'Media',
-            mNewsEvents: 'News & Events',
-            mEventsGallery: 'Events Gallery',
+            NewsEvents: 'News & Events',
+            EventsGallery: 'Events Gallery',
             mContact: 'Contact Us',
-            mGeneralEnquiries: 'General Enquiries',
-            mSalesEnquiries: 'Sales Enquiries',
-            // Hero
+            GeneralEnquiries: 'General Enquiries',
+            SalesEnquiries: 'Sales Enquiries',
             heroBadge: '<i class="fa-solid fa-compass"></i> Guiding Principles',
             heroTitle: 'Our Vision & Mission',
             heroDesc: 'Discover the core driving force behind Melawati Kebab Sdn Bhd — shaping the future of premium Halal frozen food through passion, innovation, and trust.',
-            // Vision Card
             visFrontTitle: 'OUR VISION',
             visFrontSub: 'Building a World-Class Halal Brand',
-            hintVis: 'Hover or tap to reveal',
-            visBackTag: 'FOUNDATION OF EXCELLENCE',
-            visBackTitle: 'Our Vision Statement',
-            visBackStatement: 'To be Malaysia\'s premier and most trusted manufacturer of Halal frozen food and kebabs, expanding globally through uncompromising quality, innovation, and culinary excellence.',
-            // Mission Card
+            hintVis: 'Hover / Tap',
+            visBackTag: 'EXCELLENCE',
+            visBackTitle: 'Vision Statement',
+            visBackDesc: 'To become Malaysia\'s premier, globally recognized leader in Halal frozen food manufacturing, setting standards for quality and operational excellence.',
             misFrontTitle: 'OUR MISSION',
-            misFrontSub: 'Delivering Excellence Everyday',
-            hintMis: 'Hover or tap to reveal',
-            misBackTag: 'COMMITMENT TO PURPOSE',
-            misBackTitle: 'Our Mission Statement',
-            misBackStatement: 'To consistently produce delicious, hygienic, and convenient food products that enrich family meals and empower business partners while upholding strict Halalan Toyyiban standards.',
-            // Pillars
-            pillarTag: 'Core Values & Commitment',
-            pillarTitle: 'Pillars of Our Journey',
-            pillarDesc: 'How our Vision and Mission guide our daily operations, product development, and partner relationships.',
-            p1Title: 'Halal Integrity',
-            p1Desc: '100% JAKIM Halal certified with strict adherence to Halalan Toyyiban principles in every ingredient and process.',
-            p2Title: 'Uncompromising Quality',
-            p2Desc: 'Premium raw ingredients processed in hygienic, state-of-the-art facilities certified under MeSTI KKM.',
-            p3Title: 'Partner Trust',
-            p3Desc: 'Empowering retail buyers and B2B commercial partners nationwide with reliable frozen supply lines.',
-            p4Title: 'Continuous Innovation',
-            p4Desc: 'Consistently refining recipes, packaging, and distribution to satisfy evolving modern consumer tastes.'
+            misFrontSub: 'Delivering Quality & Authenticity',
+            hintMis: 'Hover / Tap',
+            misBackTag: 'COMMITMENT',
+            misBackTitle: 'Mission Statement',
+            misBackDesc: 'To deliver safe, high-quality, and delicious Halal food products while continually innovating our manufacturing and building lasting trust with customers.',
+            waLabel: 'Inquiry / Contact Us',
+            footerColQuick: 'Quick Links',
+            footHome: 'Home',
+            footAbout: 'About Us',
+            footProduct: 'Products',
+            footDist: 'Distributor',
+            footContact: 'Contact Us',
+            footerColConnect: 'Connect With Us',
+            footRights: 'All Rights Reserved.',
+            footSub: 'Halal & Quality Frozen Food Manufacturer'
         },
         BM: {
-            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Utama Kualiti',
-            waLabel: 'Ada Pertanyaan? Hubungi Kami',
-            waTooltip: 'Sembang dengan Kami di WhatsApp',
-            waMsg: 'Salam Melawati Kebab, saya ada pertanyaan berkenaan Visi dan Misi anda.',
-            scrollBottomTooltip: 'Tatal ke Bawah',
-            scrollTopTooltip: 'Tatal ke Atas',
-            // Nav Menu
-            mHome: 'Utama',
-            mCompanyOverview: 'Gambaran Keseluruhan Syarikat',
-            mAbout: 'Tentang Kami',
-            mHistory: 'Sejarah Kami',
-            mVisionMission: 'Visi & Misi',
-            mCertifications: 'Jaminan Kualiti & Persijilan',
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Kualiti Utama',
+            Home: 'Utama',
+            About: 'Mengenai Kami',
+            History: 'Sejarah Kami',
+            VisionMission: 'Visi & Misi',
+            Certifications: 'Jaminan Kualiti & Persijilan',
             mProduct: 'Produk',
-            mMealProducts: 'Produk Makanan',
-            mBakeryProducts: 'Produk Bakeri',
-            mCatalogue: 'Katalog Produk',
-            mDistributor: 'Pengedar',
-            mFindDistributor: 'Cari Pengedar Kami',
-            mBecomeDistributor: 'Menjadi Pengedar',
+            MealProducts: 'Produk Daging',
+            BakeryProducts: 'Produk Biskut & Roti',
+            Catalogue: 'Katalog Produk',
+            Distributor: 'Dapatkan Produk Kami',
+            FindDistributor: 'Cari Pengedar Kami',
+            BecomeDistributor: 'Sertai Sebagai Pengedar',
             mMedia: 'Media',
-            mNewsEvents: 'Berita & Acara',
-            mEventsGallery: 'Galeri Acara',
+            NewsEvents: 'Berita & Acara',
+            EventsGallery: 'Galeri Acara',
             mContact: 'Hubungi Kami',
-            mGeneralEnquiries: 'Pertanyaan Umum',
-            mSalesEnquiries: 'Pertanyaan Jualan',
-            // Hero
+            GeneralEnquiries: 'Pertanyaan Umum',
+            SalesEnquiries: 'Pertanyaan Jualan',
             heroBadge: '<i class="fa-solid fa-compass"></i> Prinsip Panduan',
             heroTitle: 'Visi & Misi Kami',
-            heroDesc: 'Ketahui teras pendorong utama di sebalik Melawati Kebab Sdn Bhd — membentuk masa depan makanan sejuk beku Halal premium menerusi minat, inovasi, dan kepercayaan.',
-            // Vision Card
+            heroDesc: 'Ketahui daya penggerak utama di sebalik Melawati Kebab Sdn Bhd — membentuk masa depan makanan sejuk beku Halal premium melalui komitmen, inovasi, dan kepercayaan.',
             visFrontTitle: 'VISI KAMI',
-            visFrontSub: 'Membina Jenama Halal Berkelas Dunia',
-            hintVis: 'Sentuh untuk lihat',
-            visBackTag: 'ASAS KECEMERLANGAN',
-            visBackTitle: 'Penyataan Visi Kami',
-            visBackStatement: 'Menjadi pengeluar makanan sejuk beku Halal dan kebab utama serta paling dipercayai di Malaysia, berkembang ke peringkat global melalui kualiti tanpa kompromi, inovasi, dan kecemerlangan kulinari.',
-            // Mission Card
+            visFrontSub: 'Membina Jenama Halal Berprestij Dunia',
+            hintVis: 'Tuding / Tekan',
+            visBackTag: 'KECEMERLANGAN',
+            visBackTitle: 'Pernyataan Visi',
+            visBackDesc: 'Untuk menjadi peneraju pengeluaran makanan sejuk beku Halal utama di Malaysia yang diiktiraf di peringkat global, menetapkan piawaian kualiti dan operasi.',
             misFrontTitle: 'MISI KAMI',
-            misFrontSub: 'Menyampaikan Kecemerlangan Setiap Hari',
-            hintMis: 'Sentuh untuk lihat',
-            misBackTag: 'KOMITMEN TERHADAP TUJUAN',
-            misBackTitle: 'Penyataan Misi Kami',
-            misBackStatement: 'Secara konsisten mengeluarkan produk makanan yang lezat, bersih, dan mudah yang memuaskan hidangan keluarga serta memperkasakan rakan perniagaan sambil memelihara standard Halalan Toyyiban yang ketat.',
-            // Pillars
-            pillarTag: 'Nilai Teras & Komitmen',
-            pillarTitle: 'Tonggak Perjalanan Kami',
-            pillarDesc: 'Bagaimana Visi dan Misi memandu operasi harian, pembangunan produk, dan hubungan rakan kongsi kami.',
-            p1Title: 'Integriti Halal',
-            p1Desc: '100% diiktiraf Halal JAKIM dengan pematuhan ketat prinsip Halalan Toyyiban dalam setiap ramuan dan proses.',
-            p2Title: 'Kualiti Tanpa Kompromi',
-            p2Desc: 'Bahan mentah premium diproses dalam kemudahan bersih yang canggih di bawah persijilan MeSTI KKM.',
-            p3Title: 'Kepercayaan Rakan',
-            p3Desc: 'Memperkasakan pembeli runcit dan rakan komersial B2B di seluruh negara dengan rangkaian bekalan sejuk beku yang dipercayai.',
-            p4Title: 'Inovasi Berterusan',
-            p4Desc: 'Sentiasa mempermudakan resipi, pembungkusan, dan pengedaran untuk memenuhi citarasa pengguna moden.'
+            misFrontSub: 'Menyampaikan Kualiti & Keaslian',
+            hintMis: 'Tuding / Tekan',
+            misBackTag: 'KOMITMEN',
+            misBackTitle: 'Pernyataan Misi',
+            misBackDesc: 'Menyampaikan produk makanan Halal yang selamat, berkualiti tinggi, dan lazat sambil sentiasa mentransformasikan proses pembuatan serta membina kepercayaan berpanjangan.',
+            waLabel: 'Hubungi Kami / Pertanyaan',
+            footerColQuick: 'Pautan Pantas',
+            footHome: 'Utama',
+            footAbout: 'Mengenai Kami',
+            footProduct: 'Produk',
+            footDist: 'Pengedar',
+            footContact: 'Hubungi Kami',
+            footerColConnect: 'Hubungi Kami',
+            footRights: 'Hak Cipta Terpelihara.',
+            footSub: 'Pengeluar Makanan Sejuk Beku Halal & Berkualiti'
         }
     };
 
     function switchLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('preferredLang', lang);
-
         document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
         document.getElementById('btnLangBM').classList.toggle('active', lang === 'BM');
 
-        const data = langData[lang];
+        const dict = translations[lang];
+        if (!dict) return;
 
-        document.getElementById('topAnnouncement').innerHTML = data.topAnnouncement;
-        document.getElementById('waLabel').innerText = data.waLabel;
-        document.getElementById('waFloatingBtn').setAttribute('title', data.waTooltip);
-
-        const waPhone = '60124247708';
-        const encodedMsg = encodeURIComponent(data.waMsg);
-        document.getElementById('waFloatingBtn').href = `https://api.whatsapp.com/send/?phone=${waPhone}&text=${encodedMsg}`;
-
-        for (let key in data) {
+        for (let key in dict) {
             const el = document.getElementById(key);
-            if (el && !key.startsWith('wa') && !key.startsWith('scroll') && !key.startsWith('top')) {
-                if(key === 'heroBadge') {
-                    el.innerHTML = data[key];
-                } else {
-                    el.innerText = data[key];
-                }
+            if (el) {
+                el.innerHTML = dict[key];
             }
         }
-
-        updateScrollButton();
     }
-
-    // 2. Interactive 3D Card Touch & Keyboard Navigation
-    document.querySelectorAll('.flip-card-container').forEach(card => {
-        card.addEventListener('click', function() {
-            this.classList.toggle('flipped');
-            const isFlipped = this.classList.contains('flipped');
-            this.setAttribute('aria-expanded', isFlipped);
-        });
-
-        card.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                this.classList.toggle('flipped');
-                const isFlipped = this.classList.contains('flipped');
-                this.setAttribute('aria-expanded', isFlipped);
-            }
-        });
-    });
-
-    // 3. Single Dynamic Scroll Button Control (~1200ms duration)
-    let currentScrollMode = 'down';
-
-    function updateScrollButton() {
-        const scrollBtn = document.getElementById('dynamicScrollBtn');
-        const icon = document.getElementById('scrollIcon');
-        if(!scrollBtn || !icon) return;
-
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop < 120) {
-            currentScrollMode = 'down';
-            icon.className = 'fa-solid fa-arrow-down';
-            scrollBtn.setAttribute('title', langData[currentLang].scrollBottomTooltip);
-        } else {
-            currentScrollMode = 'up';
-            icon.className = 'fa-solid fa-arrow-up';
-            scrollBtn.setAttribute('title', langData[currentLang].scrollTopTooltip);
-        }
-    }
-
-    function smoothScrollTo(targetPosition, duration = 1200) {
-        const startPosition = window.pageYOffset || document.documentElement.scrollTop;
-        const distance = targetPosition - startPosition;
-        let startTime = null;
-
-        function animation(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
-            
-            const ease = progress < 0.5 
-                ? 2 * progress * progress 
-                : -1 + (4 - 2 * progress) * progress;
-
-            window.scrollTo(0, startPosition + (distance * ease));
-
-            if (timeElapsed < duration) {
-                requestAnimationFrame(animation);
-            }
-        }
-        requestAnimationFrame(animation);
-    }
-
-    function handleDynamicScroll() {
-        if (currentScrollMode === 'down') {
-            smoothScrollTo(document.documentElement.scrollHeight, 1200);
-        } else {
-            smoothScrollTo(0, 1200);
-        }
-    }
-
-    window.addEventListener('scroll', updateScrollButton);
-
-    // 4. Day / Night Mode Toggle
-    const themeToggleBtn = document.getElementById('themeToggleBtn');
-    themeToggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        themeToggleBtn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-    });
-
-    // 5. Reveal & Stagger Animation Trigger
-    function triggerReveal() {
-        document.querySelectorAll('.reveal, .stagger-item').forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight * 0.92) {
-                el.classList.add('active');
-            }
-        });
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        switchLang(currentLang);
-        triggerReveal();
-    });
-    window.addEventListener('load', triggerReveal);
-    window.addEventListener('scroll', triggerReveal);
 </script>
 
 </body>
