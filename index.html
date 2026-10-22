@@ -520,9 +520,7 @@ session_start();
             line-height: 1.35;
         }
 
-        /* ========================================================= */
-        /* WHY CHOOSE US: 3D CIRCULAR ROTATION ANIMATION             */
-        /* ========================================================= */
+        /* WHY CHOOSE US: 3D CIRCULAR ROTATION ANIMATION */
         .why-us-section {
             padding: 80px 5%;
             background-color: var(--warm-cream);
@@ -774,9 +772,7 @@ session_start();
             50% { transform: translateY(-3px); }
         }
 
-        /* ========================================================= */
-        /* FOOTER DESIGN (CLEAN 2-COLUMN COMPACT LAYOUT ON MOBILE)   */
-        /* ========================================================= */
+        /* FOOTER DESIGN (CLEAN 2-COLUMN COMPACT LAYOUT ON MOBILE) */
         footer {
             background-color: var(--warm-cream);
             color: var(--text-dark);
@@ -927,9 +923,7 @@ session_start();
             gap: 10px;
         }
 
-        /* ========================================================= */
-        /* RESPONSIVE MEDIA QUERIES                                  */
-        /* ========================================================= */
+        /* RESPONSIVE MEDIA QUERIES */
         @media (max-width: 992px) {
             .mobile-menu-btn { display: block; }
 
@@ -1004,13 +998,13 @@ session_start();
             .slide-content { padding: 0 20px; }
             .slide-title { font-size: 32px; }
 
-            /* FOOTER MOBILE: GRID 2-KOLUM SEBELAH-MENYEBELAH (TAK PANJANG KE BAWAH) */
+            /* FOOTER MOBILE: GRID 2-KOLUM SEBELAH-MENYEBELAH */
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 20px 15px;
             }
             .footer-col-main {
-                grid-column: 1 / -1; /* Maklumat syarikat rentas 2 kolum kat atas */
+                grid-column: 1 / -1;
                 border-bottom: 1px dashed var(--border-color);
                 padding-bottom: 15px;
             }
@@ -1124,30 +1118,30 @@ session_start();
         <div class="slide" style="background-image: url('uploads/products/banner1.jpg'), url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1350&q=80');">
             <div class="slide-overlay"></div>
             <div class="slide-content">
-                <span class="slide-tag">PREMIUM QUALITY</span>
-                <h1 class="slide-title">MADE FOR GREAT MEALS.</h1>
-                <p class="slide-desc">High-quality, halal, and delicious frozen food products manufactured with care for families and business partners.</p>
-                <a href="product.html" class="btn-primary">Explore Products <i class="fa-solid fa-arrow-right"></i></a>
+                <span class="slide-tag" id="slideTag1">PREMIUM QUALITY</span>
+                <h1 class="slide-title" id="slideTitle1">MADE FOR GREAT MEALS.</h1>
+                <p class="slide-desc" id="slideDesc1">High-quality, halal, and delicious frozen food products manufactured with care for families and business partners.</p>
+                <a href="product.html" class="btn-primary"><span id="slideBtn1">Explore Products</span> <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
         <div class="slide" style="background-image: url('uploads/products/banner2.jpg'), url('https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=1350&q=80');">
             <div class="slide-overlay"></div>
             <div class="slide-content">
-                <span class="slide-tag">100% HALALAN TOYYIBAN</span>
-                <h1 class="slide-title">AUTHENTIC TASTE & FLAVOUR</h1>
-                <p class="slide-desc">JAKIM Halal & MeSTI certified products ensuring high standards of safety, cleanliness, and unbeatable taste.</p>
-                <a href="company_overview.html" class="btn-primary">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                <span class="slide-tag" id="slideTag2">100% HALALAN TOYYIBAN</span>
+                <h1 class="slide-title" id="slideTitle2">AUTHENTIC TASTE & FLAVOUR</h1>
+                <p class="slide-desc" id="slideDesc2">JAKIM Halal & MeSTI certified products ensuring high standards of safety, cleanliness, and unbeatable taste.</p>
+                <a href="company_overview.html" class="btn-primary"><span id="slideBtn2">Learn More</span> <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
 
         <div class="slide" style="background-image: url('uploads/products/banner3.jpg'), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1350&q=80');">
             <div class="slide-overlay"></div>
             <div class="slide-content">
-                <span class="slide-tag">TRUSTED SUPPLIER</span>
-                <h1 class="slide-title">RELIABLE B2B PARTNER</h1>
-                <p class="slide-desc">Supplying top-grade frozen meat, kebabs, and ready-to-prepare products across Malaysia.</p>
-                <a href="contact.html" class="btn-primary">Contact Us <i class="fa-solid fa-arrow-right"></i></a>
+                <span class="slide-tag" id="slideTag3">TRUSTED SUPPLIER</span>
+                <h1 class="slide-title" id="slideTitle3">RELIABLE B2B PARTNER</h1>
+                <p class="slide-desc" id="slideDesc3">Supplying top-grade frozen meat, kebabs, and ready-to-prepare products across Malaysia.</p>
+                <a href="contact.html" class="btn-primary"><span id="slideBtn3">Contact Us</span> <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -1184,7 +1178,7 @@ session_start();
     </div>
 </section>
 
-<!-- Certification Section -->
+<!-- Certification Section (HALAL, MeSTI, GMP, BUATAN MALAYSIA) -->
 <section class="cert-section reveal" id="certifications">
     <div class="cert-container">
         <div class="cert-header">
@@ -1195,23 +1189,23 @@ session_start();
         <div class="cert-grid">
             <div class="cert-card stagger-item">
                 <img src="logo/halall.png" alt="JAKIM Halal Logo" class="cert-badge-img" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Halal_Malaysia_logo.svg/1200px-Halal_Malaysia_logo.svg.png';">
-                <h4>HALAL JAKIM</h4>
-                <p>Fully Halal certified by JAKIM Malaysia.</p>
+                <h4 id="cert1Title">HALAL JAKIM</h4>
+                <p id="cert1Desc">Fully Halal certified by JAKIM Malaysia.</p>
             </div>
             <div class="cert-card stagger-item">
-                <img src="logo/mesti.png" alt="MeSTI Certification" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=MeSTI';">
-                <h4>MeSTI CERTIFIED</h4>
-                <p>Complies with KKM food hygiene standards.</p>
+                <img src="logo/mestii.png" alt="MeSTI Certification" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=MeSTI';">
+                <h4 id="cert2Title">MeSTI CERTIFIED</h4>
+                <p id="cert2Desc">Complies with KKM food hygiene standards.</p>
             </div>
             <div class="cert-card stagger-item">
-                <img src="logo/haccp.png" alt="HACCP Certified" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/7A1820/FFFFFF?text=HACCP';">
-                <h4>HACCP & ISO</h4>
-                <p>Hazard Analysis Critical Control Point certified.</p>
+                <img src="logo/gmpp.png" alt="GMP Certified" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/7A1820/FFFFFF?text=GMP';">
+                <h4 id="cert3Title">GMP CERTIFIED</h4>
+                <p id="cert3Desc">Strict hygiene and quality control standards.</p>
             </div>
             <div class="cert-card stagger-item">
-                <img src="logo/vhm.png" alt="Veterinary Health Mark" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=VHM';">
-                <h4>VETERINARY MARK</h4>
-                <p>Approved premium meat processing facility.</p>
+                <img src="logo/buatan-malaysiaa.png" alt="Buatan Malaysia" class="cert-badge-img" onerror="this.src='https://via.placeholder.com/120x80/2E6B4F/FFFFFF?text=BUATAN+MALAYSIA';">
+                <h4 id="cert4Title">BUATAN MALAYSIA</h4>
+                <p id="cert4Desc">100% locally produced premium product.</p>
             </div>
         </div>
     </div>
@@ -1268,7 +1262,7 @@ session_start();
 <!-- Floating Action Controls -->
 <div class="floating-container">
     <div class="wa-floating-wrapper">
-        <span class="wa-label">Hubungi Kami / Inquiry</span>
+        <span class="wa-label" id="waLabel">Inquiry / Contact Us</span>
         <a href="https://wa.me/60123456789?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20produk" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
             <span class="wa-headset-badge"><i class="fa-solid fa-headset"></i></span>
@@ -1279,7 +1273,7 @@ session_start();
     </button>
 </div>
 
-<!-- Redesigned Footer Section (Compact 2-Column Grid on Mobile) -->
+<!-- Redesigned Footer Section -->
 <footer>
     <div class="footer-grid">
         <div class="footer-col footer-col-main">
@@ -1293,18 +1287,18 @@ session_start();
         </div>
 
         <div class="footer-col">
-            <h5>Quick Links</h5>
+            <h5 id="footerColQuick">Quick Links</h5>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="company_overview.html">About Us</a></li>
-                <li><a href="product.html">Products</a></li>
-                <li><a href="distributor.html">Distributor</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="index.html" id="footHome">Home</a></li>
+                <li><a href="company_overview.html" id="footAbout">About Us</a></li>
+                <li><a href="product.html" id="footProduct">Products</a></li>
+                <li><a href="distributor.html" id="footDist">Distributor</a></li>
+                <li><a href="contact.html" id="footContact">Contact Us</a></li>
             </ul>
         </div>
 
         <div class="footer-col">
-            <h5>Connect With Us</h5>
+            <h5 id="footerColConnect">Connect With Us</h5>
             <div class="social-buttons-container">
                 <a href="https://wa.me/60123456789" class="social-btn whatsapp" target="_blank">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
@@ -1320,8 +1314,8 @@ session_start();
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd.</p>
-        <p>Halal & Quality Frozen Food Manufacturer</p>
+        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd. <span id="footRights">All Rights Reserved.</span></p>
+        <p id="footSub">Halal & Quality Frozen Food Manufacturer</p>
     </div>
 </footer>
 
@@ -1464,7 +1458,6 @@ session_start();
             });
         });
 
-        // Auto rotate 3D circular ring every 4 seconds
         function start3dAutoRotate() {
             autoRotate3dTimer = setInterval(() => {
                 update3dCarousel(current3dStep + 1);
@@ -1477,7 +1470,6 @@ session_start();
 
         start3dAutoRotate();
 
-        // Pause 3D rotation when user hovers on scene
         const why3dScene = document.getElementById('why3dScene');
         if (why3dScene) {
             why3dScene.addEventListener('mouseenter', stop3dAutoRotate);
@@ -1524,7 +1516,7 @@ session_start();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 8. Multi-language Dictionary (EN & BM)
+    // 8. Multi-language Dictionary (EN & BM - TERJEMAHAN LENGKAP & KEMAS)
     const translations = {
         EN: {
             topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
@@ -1546,12 +1538,32 @@ session_start();
             mContact: 'Contact Us',
             GeneralEnquiries: 'General Enquiries',
             SalesEnquiries: 'Sales Enquiries',
+            slideTag1: 'PREMIUM QUALITY',
+            slideTitle1: 'MADE FOR GREAT MEALS.',
+            slideDesc1: 'High-quality, halal, and delicious frozen food products manufactured with care for families and business partners.',
+            slideBtn1: 'Explore Products',
+            slideTag2: '100% HALALAN TOYYIBAN',
+            slideTitle2: 'AUTHENTIC TASTE & FLAVOUR',
+            slideDesc2: 'JAKIM Halal & MeSTI certified products ensuring high standards of safety, cleanliness, and unbeatable taste.',
+            slideBtn2: 'Learn More',
+            slideTag3: 'TRUSTED SUPPLIER',
+            slideTitle3: 'RELIABLE B2B PARTNER',
+            slideDesc3: 'Supplying top-grade frozen meat, kebabs, and ready-to-prepare products across Malaysia.',
+            slideBtn3: 'Contact Us',
             statExp: 'Years Experience',
             statVarieties: 'Product Varieties',
             statHalal: 'Halal & MeSTI Certified',
             statDist: 'Nationwide Delivery',
             certHeading: 'CERTIFICATIONS & QUALITY ASSURANCE',
             certDesc: 'Melawati Kebab Sdn Bhd products are recognized by Malaysian ministries and government departments to guarantee hygiene, purity, and superior quality.',
+            cert1Title: 'HALAL JAKIM',
+            cert1Desc: 'Fully Halal certified by JAKIM Malaysia.',
+            cert2Title: 'MeSTI CERTIFIED',
+            cert2Desc: 'Complies with KKM food hygiene standards.',
+            cert3Title: 'GMP CERTIFIED',
+            cert3Desc: 'Strict hygiene and quality control standards.',
+            cert4Title: 'BUATAN MALAYSIA',
+            cert4Desc: '100% locally produced premium product.',
             whyHeading: 'WHY CHOOSE MELAWATI KEBAB?',
             whyDesc: 'We are committed to delivering excellence in every bite with strict quality standards and authentic taste.',
             whyCard1Title: '100% Halal Guaranteed',
@@ -1559,34 +1571,64 @@ session_start();
             whyCard2Title: 'Premium Ingredients',
             whyCard2Desc: 'We select choice cuts of meat and authentic natural spices to bring out unbeatable juiciness and rich flavour.',
             whyCard3Title: 'Reliable Cold Chain',
-            whyCard3Desc: 'Our robust nationwide distribution ensures frozen freshness from our factory straight to your kitchen or retail store.'
+            whyCard3Desc: 'Our robust nationwide distribution ensures frozen freshness from our factory straight to your kitchen or retail store.',
+            waLabel: 'Inquiry / Contact Us',
+            footerColQuick: 'Quick Links',
+            footHome: 'Home',
+            footAbout: 'About Us',
+            footProduct: 'Products',
+            footDist: 'Distributor',
+            footContact: 'Contact Us',
+            footerColConnect: 'Connect With Us',
+            footRights: 'All Rights Reserved.',
+            footSub: 'Halal & Quality Frozen Food Manufacturer'
         },
         BM: {
-            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Kualiti Diutamakan',
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Kualiti Utama',
             Home: 'Utama',
             About: 'Mengenai Kami',
             History: 'Sejarah Kami',
             VisionMission: 'Visi & Misi',
-            Certifications: 'Jaminan Kualiti & Sijil Halal',
+            Certifications: 'Jaminan Kualiti & Persijilan',
             mProduct: 'Produk',
             MealProducts: 'Produk Daging',
             BakeryProducts: 'Produk Biskut & Roti',
             Catalogue: 'Katalog Produk',
-            Distributor: 'Dapatkan Produk',
+            Distributor: 'Dapatkan Produk Kami',
             FindDistributor: 'Cari Pengedar Kami',
-            BecomeDistributor: 'Jadi Pengedar',
+            BecomeDistributor: 'Sertai Sebagai Pengedar',
             mMedia: 'Media',
             NewsEvents: 'Berita & Acara',
             EventsGallery: 'Galeri Acara',
             mContact: 'Hubungi Kami',
             GeneralEnquiries: 'Pertanyaan Umum',
             SalesEnquiries: 'Pertanyaan Jualan',
+            slideTag1: 'KUALITI PREMIUM',
+            slideTitle1: 'HIDANGAN LAZAT BERKUALITI.',
+            slideDesc1: 'Produk makanan sejuk beku yang berkualiti tinggi, halal, dan sedap dihasilkan dengan teliti untuk keluarga serta rakan perniagaan.',
+            slideBtn1: 'Terokai Produk',
+            slideTag2: '100% HALALAN TOYYIBAN',
+            slideTitle2: 'RASA KEBENARAN & ASLI',
+            slideDesc2: 'Produk berikrar Halal JAKIM & MeSTI menjamin standard keselamatan, kebersihan, dan kelazatan yang tiada tandingan.',
+            slideBtn2: 'Ketahui Lanjut',
+            slideTag3: 'PEMBEKAL TERPERCAYA',
+            slideTitle3: 'RAKAN B2B DIYAKINI',
+            slideDesc3: 'Membekalkan daging sejuk beku gred tinggi, kebab, dan produk sedia dimasak di seluruh Malaysia.',
+            slideBtn3: 'Hubungi Kami',
             statExp: 'Tahun Pengalaman',
             statVarieties: 'Kepelbagaian Produk',
-            statHalal: 'Sijil Halal & MeSTI',
+            statHalal: 'Diiktiraf Halal & MeSTI',
             statDist: 'Penghantaran Seluruh Negara',
             certHeading: 'PERSIJILAN & JAMINAN KUALITI',
             certDesc: 'Produk Melawati Kebab Sdn Bhd diiktiraf oleh kementerian dan jabatan kerajaan Malaysia bagi menjamin kebersihan, kesucian dan kualiti tinggi.',
+            cert1Title: 'HALAL JAKIM',
+            cert1Desc: 'Diiktiraf Halal sepenuhnya oleh JAKIM Malaysia.',
+            cert2Title: 'PERSIJILAN MeSTI',
+            cert2Desc: 'Mematuhi piawaian kebersihan makanan KKM.',
+            cert3Title: 'PERSIJILAN GMP',
+            cert3Desc: 'Jaminan kebersihan dan kawalan kualiti kilang.',
+            cert4Title: 'BUATAN MALAYSIA',
+            cert4Desc: 'Produk tempatan berkualiti tinggi buatan Malaysia.',
             whyHeading: 'MENGAPA PILIH MELAWATI KEBAB?',
             whyDesc: 'Kami komited menyampaikan kelazatan dalam setiap gigitan dengan standard kualiti yang ketat dan rasa asli.',
             whyCard1Title: '100% Dijamin Halal',
@@ -1594,7 +1636,17 @@ session_start();
             whyCard2Title: 'Bahan-bahan Premium',
             whyCard2Desc: 'Kami memilih potongan daging terbaik dan rempah ratus asli bagi menghasilkan rasa yang juicy dan lazat.',
             whyCard3Title: 'Rangkaian Logistik Sejuk Beku',
-            whyCard3Desc: 'Pengedaran yang cekap memastikan kesegaran produk dikekalkan dari kilang terus ke dapur atau kedai anda.'
+            whyCard3Desc: 'Pengedaran yang cekap memastikan kesegaran produk dikekalkan dari kilang terus ke dapur atau kedai anda.',
+            waLabel: 'Hubungi Kami / Pertanyaan',
+            footerColQuick: 'Pautan Pantas',
+            footHome: 'Utama',
+            footAbout: 'Mengenai Kami',
+            footProduct: 'Produk',
+            footDist: 'Pengedar',
+            footContact: 'Hubungi Kami',
+            footerColConnect: 'Hubungi Kami',
+            footRights: 'Hak Cipta Terpelihara.',
+            footSub: 'Pengeluar Makanan Sejuk Beku Halal & Berkualiti'
         }
     };
 
