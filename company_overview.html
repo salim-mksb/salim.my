@@ -256,7 +256,7 @@ session_start();
             box-shadow: 0 6px 18px rgba(122, 24, 32, 0.35);
         }
 
-        /* SECTION 1: Page Hero Banner (Segi empat tepat melebar pada mobile) */
+        /* SECTION 1: Page Hero Banner */
         .page-hero {
             position: relative;
             background: linear-gradient(135deg, rgba(122, 24, 32, 0.94) 0%, rgba(46, 107, 79, 0.88) 100%),
@@ -397,7 +397,7 @@ session_start();
             line-height: 1.4;
         }
 
-        /* SECTION 3: SALIM GROUP BRANDS (5 KAD SEBARIS & LOGO DI TENGAH) */
+        /* SECTION 3: SALIM GROUP BRANDS (DESKTOP: 5 SEBARIS | MOBILE: 3 ATAS, 2 BAWAH) */
         .bg-warm {
             background-color: var(--warm-cream);
             border-radius: 28px;
@@ -406,6 +406,7 @@ session_start();
             box-shadow: inset 0 0 30px rgba(0,0,0,0.02);
         }
 
+        /* GRID SEBARIS PADA LAPTOP/DESKTOP */
         .group-brands-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -418,7 +419,7 @@ session_start();
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 18px;
-            padding: 22px 14px;
+            padding: 24px 14px;
             text-align: center;
             box-shadow: 0 8px 20px rgba(0,0,0,0.04);
             transition: all 0.35s ease;
@@ -428,7 +429,7 @@ session_start();
             justify-content: center;
             position: relative;
             overflow: hidden;
-            min-height: 280px;
+            min-height: 270px;
             cursor: pointer;
         }
 
@@ -453,7 +454,7 @@ session_start();
         }
 
         .brand-badge {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 700;
             padding: 4px 10px;
             border-radius: 20px;
@@ -502,14 +503,14 @@ session_start();
         }
 
         .brand-logo-card h3 {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 0;
             line-height: 1.2;
         }
 
-        /* GLASSMORPHIC HOVER / TOUCH OVERLAY PANEL (Termasuk Social Media Logo Hanya Sewaktu Hover) */
+        /* GLASSMORPHIC HOVER / TOUCH OVERLAY PANEL (Ikon Media Sosial Hanya Dalam Hover) */
         .card-hover-overlay {
             position: absolute;
             top: 0;
@@ -520,7 +521,7 @@ session_start();
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             color: #FFFFFF;
-            padding: 20px 14px;
+            padding: 20px 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -556,7 +557,7 @@ session_start();
         .overlay-desc {
             font-size: 12px;
             color: rgba(255, 255, 255, 0.95);
-            line-height: 1.5;
+            line-height: 1.4;
             margin-bottom: 12px;
             font-weight: 400;
         }
@@ -570,13 +571,13 @@ session_start();
         }
 
         .overlay-social-btn {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 15px;
+            font-size: 14px;
             color: #FFFFFF;
             background: rgba(255, 255, 255, 0.18);
             border: 1px solid rgba(255, 255, 255, 0.35);
@@ -828,7 +829,7 @@ session_start();
             gap: 10px;
         }
 
-        /* RESPONSIVE MEDIA QUERIES FOR MOBILE */
+        /* RESPONSIVE MEDIA QUERIES FOR TABLET & MOBILE */
         @media (max-width: 992px) {
             .mobile-menu-btn { 
                 display: block; 
@@ -908,6 +909,7 @@ session_start();
             .two-col-grid { grid-template-columns: 1fr; gap: 35px; }
         }
 
+        /* SKRIN KECIL / TELEFON: 3 KAD ATAS, 2 KAD BAWAH DI TENGAH */
         @media (max-width: 768px) {
             /* Top Bar Mobile */
             .top-bar {
@@ -952,70 +954,73 @@ session_start();
                 line-height: 1.4;
             }
 
-            /* 5 Cards Sebaris Pada Skrin Kecil tanpa perlu slide */
+            /* FLEXBOX 3 ATAS, 2 BAWAH DI TENGAH UNTUK SKRIN KECIL */
             .bg-warm {
-                padding: 25px 2%;
+                padding: 25px 3%;
                 border-radius: 18px;
             }
 
             .group-brands-grid {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 4px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
             }
 
             .brand-logo-card {
-                padding: 10px 3px;
-                min-height: 170px;
-                border-radius: 10px;
+                width: calc((100% - 16px) / 3); /* 3 KAD SEBARIS DI ATAS, 2 DI BAWAH DITENGAHKAN */
+                padding: 12px 5px;
+                min-height: 180px;
+                border-radius: 12px;
             }
 
             .brand-badge {
-                font-size: 7px;
-                padding: 2px 4px;
-                margin-bottom: 4px;
+                font-size: 7.5px;
+                padding: 2px 5px;
+                margin-bottom: 6px;
+                white-space: nowrap;
             }
 
             .brand-logo-img-wrapper {
-                height: 48px;
-                padding: 2px;
-                margin-bottom: 4px;
+                height: 52px;
+                padding: 3px;
+                margin-bottom: 6px;
                 border-radius: 8px;
             }
 
             .brand-logo-img {
-                max-height: 38px;
+                max-height: 40px;
             }
 
             .brand-logo-card h3 {
-                font-size: 9.5px;
-                margin-bottom: 0;
+                font-size: 11px;
                 line-height: 1.15;
             }
 
             .card-hover-overlay {
-                padding: 8px 3px;
-                border-radius: 10px;
+                padding: 10px 4px;
+                border-radius: 12px;
             }
 
             .overlay-title {
-                font-size: 9.5px;
-                margin-bottom: 3px;
+                font-size: 11px;
+                margin-bottom: 4px;
                 padding-bottom: 2px;
             }
 
             .overlay-desc {
-                font-size: 7.5px;
-                line-height: 1.2;
-                margin-bottom: 5px;
+                font-size: 8.5px;
+                line-height: 1.25;
+                margin-bottom: 8px;
             }
 
             .overlay-social-btn {
-                width: 20px;
-                height: 20px;
-                font-size: 9px;
+                width: 24px;
+                height: 24px;
+                font-size: 11px;
             }
 
-            .section-title { font-size: 32px; }
+            .section-title { font-size: 30px; }
 
             /* FOOTER MOBILE */
             .footer-grid {
@@ -1094,7 +1099,6 @@ session_start();
                     <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
                 </div>
                 <ul class="dropdown-menu">
-                    <li><a href="company_overview.html" id="Overview">Company Overview</a></li>
                     <li><a href="our_history.html" id="History">Our History</a></li>
                     <li><a href="vision_mission.html" id="VisionMission">Vision & Mission</a></li>
                     <li><a href="certifications.html" id="Certifications">Quality Assurance & Certifications</a></li>
@@ -1179,26 +1183,24 @@ session_start();
     </div>
 </section>
 
-<!-- SECTION 3: OUR GROUP BUSINESSES & BRANDS (5 KAD SEBARIS & LOGO DI TENGAH) -->
+<!-- SECTION 3: OUR GROUP BUSINESSES & BRANDS -->
 <section class="section-padding bg-warm">
     <div style="max-width: 1280px; margin: 0 auto;">
         <div style="text-align: center; max-width: 750px; margin: 0 auto 25px auto;">
-            <span class="section-tag" id="groupTag">Salim Group Network</span>
             <h2 class="section-title" id="groupTitle">Our Group Businesses & Brands</h2>
-            <p class="text-body" id="groupDesc">Under the banner of Salim Group, our diverse portfolio delivers quality food products, manufacturing excellence, hospitality, and retail services across Malaysia.</p>
         </div>
 
         <div class="group-brands-grid">
             
             <!-- 1. Salim / Salim Frozen Food -->
             <div class="brand-logo-card">
-                <span class="brand-badge">Brands</span>
+                <span class="brand-badge" id="brand1Badge">Brands</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/salim.png" alt="Salim" class="brand-logo-img" onerror="handleLogoError(this, 'SALIM FROZEN FOOD');">
                 </div>
                 <h3 id="brand1Title">Salim</h3>
 
-                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
+                <!-- Hover / Touch Text Overlay Panel (Ikon Social Media Hanya Dalam Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Salim Frozen Food</div>
                     <p class="overlay-desc" id="brand1Desc">Parent group holding driving corporate strategy, operations, and nationwide frozen food supply.</p>
@@ -1215,13 +1217,13 @@ session_start();
 
             <!-- 2. Melawati Kebab (MKSB) -->
             <div class="brand-logo-card">
-                <span class="brand-badge">Manufacturing</span>
+                <span class="brand-badge" id="brand2Badge">Manufacturing</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/mksb.png" alt="Melawati Kebab (MKSB)" class="brand-logo-img" onerror="handleLogoError(this, 'MELAWATI KEBAB (MKSB)');">
                 </div>
                 <h3 id="brand2Title">Melawati Kebab</h3>
 
-                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
+                <!-- Hover / Touch Text Overlay Panel (Ikon Social Media Hanya Dalam Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Melawati Kebab</div>
                     <p class="overlay-desc" id="brand2Desc">Core manufacturing facility producing premium Halal kebab meat, burger patties, and bakery lines.</p>
@@ -1238,13 +1240,13 @@ session_start();
 
             <!-- 3. Pasaraya Salim -->
             <div class="brand-logo-card">
-                <span class="brand-badge">Supermarket</span>
+                <span class="brand-badge" id="brand5Badge">Supermarket</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/brand3.png" alt="Pasaraya Salim" class="brand-logo-img" onerror="handleLogoError(this, 'PASARAYA SALIM');">
                 </div>
                 <h3 id="brand5Title">Pasaraya Salim</h3>
 
-                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
+                <!-- Hover / Touch Text Overlay Panel (Ikon Social Media Hanya Dalam Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Pasaraya Salim</div>
                     <p class="overlay-desc" id="brand5Desc">Community supermarket chain offering fresh groceries, frozen halal goods, and household necessities.</p>
@@ -1261,13 +1263,13 @@ session_start();
 
             <!-- 4. Salim Bistro -->
             <div class="brand-logo-card">
-                <span class="brand-badge">Restaurant</span>
+                <span class="brand-badge" id="brand4Badge">Restaurant</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/brand5.png" alt="Salim Bistro" class="brand-logo-img" onerror="this.onerror=null; this.src='logo/brand4.png'; handleLogoError(this, 'SALIM BISTRO');">
                 </div>
                 <h3 id="brand4Title">Salim Bistro</h3>
 
-                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
+                <!-- Hover / Touch Text Overlay Panel (Ikon Social Media Hanya Dalam Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Salim Bistro</div>
                     <p class="overlay-desc" id="brand4Desc">Casual dining restaurant serving freshly grilled kebabs, pita wraps, local delights, and family meals.</p>
@@ -1282,18 +1284,18 @@ session_start();
                 </div>
             </div>
 
-            <!-- 5. Astana Salim -->
+            <!-- 5. Astana Salim (Wedding & Event Hall) -->
             <div class="brand-logo-card">
-                <span class="brand-badge">Catering</span>
+                <span class="brand-badge" id="brand3Badge">Wedding & Event Hall</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/brand4.png" alt="Astana Salim" class="brand-logo-img" onerror="this.onerror=null; this.src='logo/brand3.png'; handleLogoError(this, 'ASTANA SALIM');">
                 </div>
                 <h3 id="brand3Title">Astana Salim</h3>
 
-                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
+                <!-- Hover / Touch Text Overlay Panel (Ikon Social Media Hanya Dalam Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Astana Salim</div>
-                    <p class="overlay-desc" id="brand3Desc">Exclusive banquet halls, wedding venues, corporate event management, and full catering services.</p>
+                    <p class="overlay-desc" id="brand3Desc">Exclusive wedding venue, banquet halls, corporate event management, and full catering services.</p>
                     <div class="overlay-social-icons">
                         <a href="https://www.facebook.com/profile.php?id=61591911917981" target="_blank" class="overlay-social-btn fb" title="Facebook" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-facebook-f"></i>
@@ -1323,7 +1325,7 @@ session_start();
     </button>
 </div>
 
-<!-- Footer Section (Sama Persis Seperti index) -->
+<!-- Footer Section -->
 <footer>
     <div class="footer-grid">
         <div class="footer-col footer-col-main">
@@ -1494,17 +1496,20 @@ session_start();
             whoDesc4: 'Today, the Salim brand stands as one of Malaysia\'s most recognized and trusted names in the frozen food sector.',
             whoBtn: 'Get In Touch <i class="fa-solid fa-arrow-right"></i>',
             founderRemarks: 'Mr. Mohd Shafiee bin Salim with his partner, Mrs. Zawiyah binti Basiran',
-            groupTag: 'Salim Group Network',
             groupTitle: 'Our Group Businesses & Brands',
-            groupDesc: 'Under the banner of Salim Group, our diverse portfolio delivers quality food products, manufacturing excellence, hospitality, and retail services across Malaysia.',
+            brand1Badge: 'Brands',
             brand1Title: 'Salim',
             brand1Desc: 'Parent group holding driving corporate strategy, operations, and nationwide frozen food supply.',
+            brand2Badge: 'Manufacturing',
             brand2Title: 'Melawati Kebab',
             brand2Desc: 'Core manufacturing facility producing premium Halal kebab meat, burger patties, and bakery lines.',
+            brand3Badge: 'Wedding & Event Hall',
             brand3Title: 'Astana Salim',
-            brand3Desc: 'Exclusive banquet halls, wedding venues, corporate event management, and full catering services.',
+            brand3Desc: 'Exclusive wedding venue, banquet halls, corporate event management, and full catering services.',
+            brand4Badge: 'Restaurant',
             brand4Title: 'Salim Bistro',
             brand4Desc: 'Casual dining restaurant serving freshly grilled kebabs, pita wraps, local delights, and family meals.',
+            brand5Badge: 'Supermarket',
             brand5Title: 'Pasaraya Salim',
             brand5Desc: 'Community supermarket chain offering fresh groceries, frozen halal goods, and household necessities.',
             waLabel: 'Inquiry / Contact Us',
@@ -1550,17 +1555,20 @@ session_start();
             whoDesc4: 'Kini, jenama Salim berdiri sebagai salah satu nama yang paling dikenali dan dipercayai di Malaysia dalam sektor makanan sejuk beku.',
             whoBtn: 'Hubungi Kami <i class="fa-solid fa-arrow-right"></i>',
             founderRemarks: 'En. Mohd Shafiee bin Salim bersama pasangannya, Pn. Zawiyah binti Basiran',
-            groupTag: 'Rangkaian Kumpulan Salim',
             groupTitle: 'Perniagaan & Jenama Kumpulan Kami',
-            groupDesc: 'Di bawah naungan Kumpulan Salim, portfolio perniagaan kami menyampaikan produk makanan berkualiti, pembuatan cemerlang, perkhidmatan hospitaliti, dan peruncitan di seluruh Malaysia.',
+            brand1Badge: 'Jenama Utama',
             brand1Title: 'Salim',
             brand1Desc: 'Syarikat induk yang memacu strategi korporat, operasi pembuatan, dan bekalan makanan sejuk beku nasional.',
+            brand2Badge: 'Pembuatan',
             brand2Title: 'Melawati Kebab',
             brand2Desc: 'Pusat pembuatan utama daging kebab sejuk beku Halal, patty burger, dan produk bakeri.',
+            brand3Badge: 'Dewan Perkahwinan & Acara',
             brand3Title: 'Astana Salim',
-            brand3Desc: 'Dewan acara eksklusif, dewan perkahwinan, pengurusan majlis korporat, serta perkhidmatan katering lengkap.',
+            brand3Desc: 'Dewan perkahwinan eksklusif, dewan acara, pengurusan majlis korporat, serta perkhidmatan katering lengkap.',
+            brand4Badge: 'Restoran',
             brand4Title: 'Salim Bistro',
             brand4Desc: 'Restoran mesra keluarga yang menyajikan kebab panggang segar, pita wrap, makanan tempatan, dan hidangan lazat.',
+            brand5Badge: 'Pasar Raya',
             brand5Title: 'Pasaraya Salim',
             brand5Desc: 'Rangkaian pasar raya komuniti yang menawarkan barangan segar, makanan sejuk beku halal, dan barangan asas harian.',
             waLabel: 'Hubungi Kami / Pertanyaan',
