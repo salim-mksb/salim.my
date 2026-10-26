@@ -15,7 +15,7 @@ session_start();
 
     <style>
         :root {
-            /* Palette Terang */
+            /* Palette Warna Utama */
             --deep-red: #7A1820;
             --deep-red-hover: #5A1117;
             --warm-cream: #F9F6F0;
@@ -59,7 +59,7 @@ session_start();
             width: 100%;
         }
 
-        /* Top Bar */
+        /* Top Bar Responsive */
         .top-bar {
             background-color: var(--deep-red);
             color: #FFFFFF;
@@ -68,20 +68,22 @@ session_start();
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 10px;
         }
 
         .top-bar-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            text-align: left;
         }
 
         .top-bar-controls {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
+            flex-shrink: 0;
         }
 
         /* Language Switcher & Theme Toggle */
@@ -89,7 +91,7 @@ session_start();
             background: transparent;
             border: 1px solid rgba(255,255,255,0.4);
             color: #FFFFFF;
-            padding: 3px 10px;
+            padding: 3px 8px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
@@ -150,7 +152,7 @@ session_start();
             padding: 5px;
         }
 
-        /* Dropdown Navigation Menu Desktop */
+        /* Dropdown Navigation Menu */
         .nav-links {
             display: flex;
             list-style: none;
@@ -162,21 +164,35 @@ session_start();
             position: relative;
         }
 
-        .nav-item > a {
+        .nav-item-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-item-header > a {
             color: var(--text-dark);
             text-decoration: none;
             font-size: 15px;
             font-weight: 600;
             text-transform: capitalize;
-            letter-spacing: 0.5px;
             padding: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
             transition: color 0.3s ease;
         }
 
-        .nav-item > a:hover {
+        .nav-item-header > a:hover {
+            color: var(--deep-red);
+        }
+
+        .menu-arrow-icon {
+            font-size: 11px;
+            cursor: pointer;
+            padding: 10px 4px;
+            color: var(--text-dark);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-arrow-icon:hover {
             color: var(--deep-red);
         }
 
@@ -219,34 +235,13 @@ session_start();
             color: var(--deep-red);
         }
 
-        /* Buttons */
-        .btn-primary {
-            background-color: var(--deep-red);
-            color: #FFFFFF;
-            padding: 12px 28px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.35s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--deep-red-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(122, 24, 32, 0.35);
-        }
-
-        /* HERO SECTION */
+        /* HERO SECTION (SEGI EMPAT TEPAT MELEBAR PADA MOBILE) */
         .vm-hero {
             position: relative;
             background: linear-gradient(135deg, rgba(122, 24, 32, 0.94) 0%, rgba(46, 107, 79, 0.88) 100%),
                         url('uploads/products/banner2.jpg') center/cover no-repeat;
             color: #FFFFFF;
-            padding: 90px 5% 70px 5%;
+            padding: 85px 5% 65px 5%;
             text-align: center;
             overflow: hidden;
             margin-bottom: 20px;
@@ -304,7 +299,7 @@ session_start();
 
         .vm-hero h1 {
             font-family: var(--font-headline);
-            font-size: 64px;
+            font-size: 60px;
             letter-spacing: 1.5px;
             line-height: 1;
             margin-bottom: 15px;
@@ -320,10 +315,12 @@ session_start();
             line-height: 1.6;
         }
 
-        /* 3D INTERACTIVE CARDS SECTION */
+        /* ========================================================
+           AESTHETIC GLASSMORPHIC VISION & MISSION CARDS
+        ======================================================== */
         .cards-section {
-            padding: 70px 5% 90px 5%;
-            max-width: 1280px;
+            padding: 60px 5% 80px 5%;
+            max-width: 1200px;
             margin: 0 auto;
             position: relative;
         }
@@ -331,54 +328,19 @@ session_start();
         .cards-wrapper {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 45px;
-            flex-wrap: wrap;
+            align-items: stretch;
+            gap: 35px;
             position: relative;
         }
 
-        /* Connecting Decorative Bridge between Cards (Desktop Only) */
-        .cards-connector {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .connector-line {
-            width: 2px;
-            height: 60px;
-            background: linear-gradient(to bottom, var(--deep-red), var(--forest-green));
-            border-radius: 2px;
-        }
-
-        .connector-badge {
-            background-color: var(--card-bg);
-            border: 2px solid var(--border-color);
-            color: var(--deep-red);
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-        }
-
-        /* 3D Flip Card Container */
+        /* 3D Glassmorphic Flip Card Container */
         .flip-card-container {
             perspective: 1200px;
             width: 100%;
             max-width: 480px;
             height: 420px;
             outline: none;
+            position: relative;
         }
 
         .flip-card-inner {
@@ -389,84 +351,107 @@ session_start();
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
             cursor: pointer;
-            border-radius: 24px;
+            border-radius: 28px;
         }
 
-        /* Hover & Mobile Touch Flipped State */
         .flip-card-container:hover .flip-card-inner,
         .flip-card-container.flipped .flip-card-inner,
         .flip-card-container:focus .flip-card-inner {
             transform: rotateY(180deg);
         }
 
-        /* Card Faces */
+        /* Aesthetic Card Front & Back Base */
         .card-front, .card-back {
             position: absolute;
             width: 100%;
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: 24px;
-            border: 1px solid var(--border-color);
-            padding: 45px 32px;
+            border-radius: 28px;
+            padding: 38px 28px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
         }
 
-        /* FRONT FACE */
+        /* CARD FRONT AESTHETICS */
         .card-front {
-            background-color: var(--card-bg);
-            color: var(--text-dark);
+            background: var(--card-bg);
+            border: 1.5px solid var(--border-color);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
         }
 
-        .flip-card-container:hover .card-front {
+        /* Subtle Ambient Glow Effect on Card Hover */
+        .flip-card-container.vision-card-box:hover .card-front {
             border-color: var(--deep-red);
-            box-shadow: 0 18px 40px rgba(122, 24, 32, 0.15);
+            box-shadow: 0 20px 45px rgba(122, 24, 32, 0.18), inset 0 0 15px rgba(122, 24, 32, 0.03);
+        }
+
+        .flip-card-container.mission-card-box:hover .card-front {
+            border-color: var(--forest-green);
+            box-shadow: 0 20px 45px rgba(46, 107, 79, 0.18), inset 0 0 15px rgba(46, 107, 79, 0.03);
+        }
+
+        /* Decorative Aesthetic Background Ring */
+        .card-front::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(122, 24, 32, 0.05) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .card-icon-box {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            margin-bottom: 15px;
-            transition: transform 0.4s ease, background-color 0.4s ease;
+            font-size: 34px;
+            margin: 0 auto 16px auto;
+            transition: all 0.4s ease;
+            position: relative;
         }
 
         .vision-icon {
-            background-color: rgba(122, 24, 32, 0.08);
+            background: linear-gradient(135deg, rgba(122, 24, 32, 0.12) 0%, rgba(122, 24, 32, 0.03) 100%);
             color: var(--deep-red);
+            border: 1px solid rgba(122, 24, 32, 0.15);
+            box-shadow: 0 8px 20px rgba(122, 24, 32, 0.1);
         }
 
         .mission-icon {
-            background-color: rgba(46, 107, 79, 0.08);
+            background: linear-gradient(135deg, rgba(46, 107, 79, 0.12) 0%, rgba(46, 107, 79, 0.03) 100%);
             color: var(--forest-green);
+            border: 1px solid rgba(46, 107, 79, 0.15);
+            box-shadow: 0 8px 20px rgba(46, 107, 79, 0.1);
         }
 
         .flip-card-container:hover .card-icon-box {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.08) translateY(-4px);
         }
 
         .card-front h2 {
             font-family: var(--font-headline);
-            font-size: 46px;
-            letter-spacing: 1px;
+            font-size: 42px;
+            letter-spacing: 1.2px;
             line-height: 1;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .vision-title { color: var(--deep-red); }
         .mission-title { color: var(--forest-green); }
 
         .card-front p {
-            font-size: 14.5px;
+            font-size: 14px;
             color: var(--text-muted);
             font-weight: 500;
         }
@@ -483,6 +468,7 @@ session_start();
             font-size: 12px;
             font-weight: 600;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
 
         .flip-hint-badge i {
@@ -495,52 +481,57 @@ session_start();
             100% { transform: rotate(360deg); }
         }
 
-        /* BACK FACE */
+        /* CARD BACK AESTHETICS */
         .card-back {
             transform: rotateY(180deg);
             color: #FFFFFF;
             text-align: center;
             justify-content: center;
-            gap: 20px;
+            gap: 16px;
+            position: relative;
         }
 
         .vision-back-bg {
-            background: linear-gradient(135deg, #7A1820 0%, #4A0E13 100%);
-            border-color: #7A1820;
+            background: linear-gradient(135deg, #7A1820 0%, #3D0A0F 100%);
+            border: 1px solid #7A1820;
+            box-shadow: 0 20px 40px rgba(122, 24, 32, 0.3);
         }
 
         .mission-back-bg {
-            background: linear-gradient(135deg, #2E6B4F 0%, #1A4230 100%);
-            border-color: #2E6B4F;
+            background: linear-gradient(135deg, #2E6B4F 0%, #133324 100%);
+            border: 1px solid #2E6B4F;
+            box-shadow: 0 20px 40px rgba(46, 107, 79, 0.3);
         }
 
         .card-back-icon {
-            font-size: 46px;
-            opacity: 0.9;
+            font-size: 42px;
+            opacity: 0.85;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
         }
 
         .card-back h3 {
             font-family: var(--font-headline);
-            font-size: 36px;
+            font-size: 34px;
             letter-spacing: 1px;
             line-height: 1;
         }
 
         .card-back-text {
-            font-size: 15.5px;
-            line-height: 1.7;
+            font-size: 14.5px;
+            line-height: 1.65;
             font-weight: 300;
             opacity: 0.95;
-            max-width: 380px;
+            max-width: 360px;
         }
 
         .card-back-tag {
-            font-size: 11.5px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             background: rgba(255, 255, 255, 0.2);
-            padding: 5px 16px;
+            backdrop-filter: blur(5px);
+            padding: 4px 14px;
             border-radius: 15px;
             display: inline-block;
         }
@@ -777,11 +768,7 @@ session_start();
             gap: 10px;
         }
 
-        /* ========================================================
-           RESPONSIVE CSS FIXES: MOBILE MENU & SIDE-BY-SIDE CARDS
-        ======================================================== */
-
-        /* 1. MOBILE MENU HAMBURGER & SUBMENU FIX (MAX-WIDTH: 992PX) */
+        /* RESPONSIVE MEDIA QUERIES FOR TABLET & MOBILE */
         @media (max-width: 992px) {
             .mobile-menu-btn { 
                 display: block; 
@@ -810,20 +797,25 @@ session_start();
                 width: 100%; 
             }
 
-            .nav-item > a {
-                display: flex;
+            .nav-item-header {
                 justify-content: space-between;
-                align-items: center;
-                padding: 12px 0;
+                width: 100%;
                 border-bottom: 1px solid var(--border-color);
+                padding: 4px 0;
+            }
+
+            .nav-item-header > a {
+                padding: 10px 0;
                 font-size: 15px;
+                flex-grow: 1;
             }
 
-            .nav-item > a i {
-                transition: transform 0.3s ease;
+            .menu-arrow-icon {
+                padding: 12px 15px;
+                font-size: 14px;
             }
 
-            .nav-item.active > a i {
+            .nav-item.active .menu-arrow-icon {
                 transform: rotate(180deg);
                 color: var(--deep-red);
             }
@@ -836,7 +828,7 @@ session_start();
                 box-shadow: none;
                 border: none;
                 padding: 5px 0 10px 12px;
-                display: none; /* Sembunyi lalai, papar bila nav-item active */
+                display: none;
                 background-color: transparent;
                 border-left: 2px solid var(--deep-red);
                 margin-left: 10px;
@@ -852,56 +844,97 @@ session_start();
                 font-size: 13.5px;
                 color: var(--text-dark);
             }
-
-            .vm-hero h1 { font-size: 48px; }
         }
 
-        /* 2. SIDE-BY-SIDE VISION & MISSION CARDS ON MOBILE (MAX-WIDTH: 768PX) */
+        /* ========================================================
+           SKRIN KECIL / TELEFON: KAD SUSUN SEBELAH-SEBELAH (SIDE-BY-SIDE)
+        ======================================================== */
         @media (max-width: 768px) {
+            /* Top Bar Mobile */
+            .top-bar {
+                padding: 8px 3%;
+                font-size: 11px;
+            }
+
+            .top-bar-info {
+                font-size: 10px;
+                line-height: 1.2;
+                overflow: hidden;
+            }
+
+            .top-bar-controls {
+                gap: 6px;
+            }
+
+            .lang-switcher button, .theme-toggle-btn {
+                padding: 2px 6px;
+                font-size: 10px;
+            }
+
+            /* Hero Banner Segi Empat Tepat Melebar */
+            .vm-hero {
+                padding: 35px 4% 28px 4%;
+                margin-bottom: 20px;
+            }
+
+            .hero-badge {
+                font-size: 10px;
+                padding: 3px 10px;
+                margin-bottom: 8px;
+            }
+
+            .vm-hero h1 {
+                font-size: 28px;
+                margin-bottom: 8px;
+            }
+
+            .vm-hero p {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+
+            /* KAD VISION & MISSION SEBELAH-SEBELAH DI MOBILE */
             .cards-section {
-                padding: 35px 2% 50px 2%;
+                padding: 20px 2% 40px 2%;
             }
 
             .cards-wrapper {
                 display: flex;
-                flex-direction: row; /* SUSUNAN SEBELAH-SEBELAH */
+                flex-direction: row; /* SUSUN SEBELAH-SEBELAH */
                 justify-content: center;
                 align-items: stretch;
-                gap: 10px; /* Jarak rapat supaya muat 2 kad */
+                gap: 8px; /* Jarak rapat yang kemas */
                 width: 100%;
             }
 
-            .cards-connector {
-                display: none; /* Sembunyikan penyambung di telefon */
-            }
-
             .flip-card-container {
-                flex: 1;
-                min-width: 0; /* Membolehkan kad mengecil tanpa overflow */
+                flex: 1 1 0px; /* Membolehkan kad berkongsi ruang secara sama rata */
+                width: 50%;
                 max-width: 50%;
-                height: 320px; /* Saiz tinggi dikurangkan untuk mobile */
+                height: 290px; /* Ketinggian dikurangkan untuk skrin telefon */
             }
 
             .card-front, .card-back {
-                padding: 18px 8px 12px 8px;
-                border-radius: 16px;
+                padding: 16px 8px 12px 8px;
+                border-radius: 18px;
             }
 
             .card-icon-box {
-                width: 48px;
-                height: 48px;
+                width: 46px;
+                height: 46px;
                 font-size: 20px;
                 margin-bottom: 8px;
+                border-radius: 14px;
             }
 
             .card-front h2 {
-                font-size: 22px;
-                margin-bottom: 4px;
+                font-size: 20px;
+                margin-bottom: 2px;
             }
 
             .card-front p {
-                font-size: 10.5px;
-                line-height: 1.3;
+                font-size: 10px;
+                line-height: 1.2;
             }
 
             .flip-hint-badge {
@@ -913,25 +946,26 @@ session_start();
 
             .card-back {
                 gap: 8px;
+                padding: 14px 8px;
             }
 
             .card-back-icon {
-                font-size: 24px;
+                font-size: 22px;
             }
 
             .card-back-tag {
                 font-size: 8px;
-                padding: 3px 8px;
+                padding: 2px 8px;
                 border-radius: 10px;
             }
 
             .card-back h3 {
-                font-size: 17px;
+                font-size: 16px;
             }
 
             .card-back-text {
-                font-size: 10.5px;
-                line-height: 1.38;
+                font-size: 10px;
+                line-height: 1.35;
             }
 
             /* FOOTER MOBILE */
@@ -956,18 +990,14 @@ session_start();
                 font-size: 11px;
                 text-align: left;
             }
-            .vm-hero h1 { font-size: 38px; }
         }
 
-        /* PENYESUAIAN TAMBAHAN UNTUK SKRIN SANGAT KECIL (< 380PX) */
-        @media (max-width: 380px) {
-            .cards-wrapper { gap: 6px; }
-            .flip-card-container { height: 325px; }
-            .card-front h2 { font-size: 19px; }
-            .card-front p { font-size: 9.5px; }
-            .card-back h3 { font-size: 15px; }
-            .card-back-text { font-size: 9.5px; line-height: 1.35; }
-            .top-bar { justify-content: center; text-align: center; }
+        @media (max-width: 400px) {
+            .flip-card-container { height: 305px; }
+            .card-front h2 { font-size: 17px; }
+            .card-front p { font-size: 9px; }
+            .card-back h3 { font-size: 14px; }
+            .card-back-text { font-size: 9px; line-height: 1.3; }
             .wa-label { display: none; }
             .footer-bottom { flex-direction: column; text-align: center; gap: 4px; }
         }
@@ -978,7 +1008,7 @@ session_start();
 <!-- Top Announcement Bar -->
 <div class="top-bar">
     <div class="top-bar-info">
-        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First</span>
+        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer</span>
     </div>
     <div class="top-bar-controls">
         <div class="lang-switcher">
@@ -995,7 +1025,7 @@ session_start();
 <header>
     <div class="navbar">
         <div class="brand-logo-container">
-            <a href="home.html">
+            <a href="index.html">
                 <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="handleLogoError(this, 'MELAWATI KEBAB');">
             </a>
         </div>
@@ -1006,40 +1036,58 @@ session_start();
 
         <ul class="nav-links" id="navLinks">
             <li class="nav-item">
-                <a href="home.html"><span id="Home">Home</span></a>
+                <div class="nav-item-header">
+                    <a href="index.html"><span id="Home">Home</span></a>
+                </div>
             </li>
             <li class="nav-item">
-                <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="company_overview.html"><span id="About">About Us</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
+                    <li><a href="company_overview.html" id="Overview">Company Overview</a></li>
                     <li><a href="our_history.html" id="History">Our History</a></li>
                     <li><a href="vision_mission.html" id="VisionMission">Vision & Mission</a></li>
                     <li><a href="certifications.html" id="Certifications">Quality Assurance & Certifications</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="product.html"><span id="mProduct">Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="product.html"><span id="mProduct">Products</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
+                    <li><a href="products-catalogue.html" id="Catalogue">Products Catalogue</a></li>
                     <li><a href="meat-products.html" id="MealProducts">Meat Products</a></li>
                     <li><a href="bakery-products.html" id="BakeryProducts">Bakery Products</a></li>
-                    <li><a href="products-catalogue.html" id="Catalogue">Products Catalogue</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="distributor.html"><span id="Distributor">Get Our Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="distributor.html"><span id="Distributor">Get Our Product</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="find-distributor.html" id="FindDistributor">Find Our Distributor</a></li>
                     <li><a href="become-distributor.html" id="BecomeDistributor">Become a Distributor</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="media.html"><span id="mMedia">Media</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="media.html"><span id="mMedia">Media</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="news-events.html" id="NewsEvents">News & Events</a></li>
                     <li><a href="events-gallery.html" id="EventsGallery">Events Gallery</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="contact.html"><span id="mContact">Contact Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="contact.html"><span id="mContact">Contact Us</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="general-enquiries.html" id="GeneralEnquiries">General Enquiries</a></li>
                     <li><a href="sales-enquiries.html" id="SalesEnquiries">Sales Enquiries</a></li>
@@ -1049,7 +1097,7 @@ session_start();
     </div>
 </header>
 
-<!-- HERO SECTION -->
+<!-- HERO SECTION (SEGI EMPAT TEPAT MELEBAR PADA MOBILE) -->
 <section class="vm-hero">
     <div class="vm-hero-shapes">
         <div class="floating-shape shape-1"></div>
@@ -1063,19 +1111,12 @@ session_start();
     </div>
 </section>
 
-<!-- INTERACTIVE 3D FLIP CARDS SECTION (SEBELAH-SEBELAH DI MOBILE) -->
+<!-- INTERACTIVE AESTHETIC CARDS SECTION (SEBELAH-SEBELAH DI MOBILE) -->
 <section class="cards-section">
     <div class="cards-wrapper">
-        
-        <!-- Connecting Line & Badge for Desktop -->
-        <div class="cards-connector">
-            <div class="connector-line"></div>
-            <div class="connector-badge" title="Vision & Mission Synergized"><i class="fa-solid fa-handshake"></i></div>
-            <div class="connector-line"></div>
-        </div>
 
-        <!-- 3D VISION CARD -->
-        <div class="flip-card-container js-flip-card" tabindex="0" aria-label="Vision Card - Click or hover to reveal">
+        <!-- AESTHETIC VISION CARD -->
+        <div class="flip-card-container vision-card-box js-flip-card" tabindex="0" aria-label="Vision Card - Click or hover to reveal">
             <div class="flip-card-inner">
                 <!-- FRONT -->
                 <div class="card-front">
@@ -1100,8 +1141,8 @@ session_start();
             </div>
         </div>
 
-        <!-- 3D MISSION CARD -->
-        <div class="flip-card-container js-flip-card" tabindex="0" aria-label="Mission Card - Click or hover to reveal">
+        <!-- AESTHETIC MISSION CARD -->
+        <div class="flip-card-container mission-card-box js-flip-card" tabindex="0" aria-label="Mission Card - Click or hover to reveal">
             <div class="flip-card-inner">
                 <!-- FRONT -->
                 <div class="card-front">
@@ -1133,7 +1174,7 @@ session_start();
 <div class="floating-container">
     <div class="wa-floating-wrapper">
         <span class="wa-label" id="waLabel">Inquiry / Contact Us</span>
-        <a href="https://wa.me/60123456789?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20visi%20dan%20misi" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
+        <a href="https://wa.me/60391079708?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20visi%20dan%20misi" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
             <span class="wa-headset-badge"><i class="fa-solid fa-headset"></i></span>
         </a>
@@ -1143,23 +1184,23 @@ session_start();
     </button>
 </div>
 
-<!-- Redesigned Footer Section -->
+<!-- Footer Section (Sama Dengan Index) -->
 <footer>
     <div class="footer-grid">
         <div class="footer-col footer-col-main">
             <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="handleLogoError(this, 'MELAWATI KEBAB');">
-            <div class="company-name">MELAWATI KEBAB SDN BHD</div>
+            <div class="company-name">MELAWATI KEBAB SDN BHD (778900-M)</div>
             <div class="company-info">
-                <p><i class="fa-solid fa-location-dot"></i> No. 12 & 14, Jalan Industri 3, Taman Perindustrian Melawati, 53100 KL.</p>
-                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60341000000">+60 3-4100 0000</a></p>
-                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@melawatikebab.com">info@melawatikebab.com</a></p>
+                <p><i class="fa-solid fa-location-dot"></i> No 54-1F, Jalan 2/154D, Taman Desa Cheras, 56000 Kuala Lumpur, Malaysia</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60391079708">+603 9107 9708</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:melawatikebab1996@gmail.com">melawatikebab1996@gmail.com</a></p>
             </div>
         </div>
 
         <div class="footer-col">
             <h5 id="footerColQuick">Quick Links</h5>
             <ul>
-                <li><a href="home.html" id="footHome">Home</a></li>
+                <li><a href="index.html" id="footHome">Home</a></li>
                 <li><a href="company_overview.html" id="footAbout">About Us</a></li>
                 <li><a href="product.html" id="footProduct">Products</a></li>
                 <li><a href="distributor.html" id="footDist">Distributor</a></li>
@@ -1170,7 +1211,7 @@ session_start();
         <div class="footer-col">
             <h5 id="footerColConnect">Connect With Us</h5>
             <div class="social-buttons-container">
-                <a href="https://wa.me/60123456789" class="social-btn whatsapp" target="_blank">
+                <a href="https://wa.me/60391079708" class="social-btn whatsapp" target="_blank">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
                 </a>
                 <a href="https://www.tiktok.com/@melawatikebabsince1996?_r=1&_t=ZS-9Akrb5sFdQb" class="social-btn tiktok" target="_blank">
@@ -1184,14 +1225,13 @@ session_start();
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd. <span id="footRights">All Rights Reserved.</span></p>
+        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd (778900-M). <span id="footRights">All Rights Reserved.</span></p>
         <p id="footSub">Halal & Quality Frozen Food Manufacturer</p>
     </div>
 </footer>
 
 <!-- JavaScript Integration -->
 <script>
-    // Penangan logo fail-safe
     function handleLogoError(imgElement, brandTitle) {
         const parentWrapper = imgElement.parentElement;
         if (parentWrapper) {
@@ -1206,7 +1246,7 @@ session_start();
         });
     });
 
-    // 1. Mobile Navigation Toggle & Submenu Fix
+    // 1. Mobile Navigation & Arrow Dropdown Toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
 
@@ -1222,29 +1262,24 @@ session_start();
         });
     }
 
-    // PEMBAIKAN SUBMENU MOBILE: Klik induk menu untuk buka/tutup anak menu
-    document.querySelectorAll('.nav-item').forEach(item => {
-        const parentLink = item.querySelector('a');
-        const dropdown = item.querySelector('.dropdown-menu');
+    // Menu utama boleh tekan terus. Hanya ikon anak panah (chevron) yang akan toggle submenu pada telefon.
+    document.querySelectorAll('.menu-arrow-icon').forEach(arrow => {
+        arrow.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                e.stopPropagation();
 
-        if (dropdown && parentLink) {
-            parentLink.addEventListener('click', (e) => {
-                if (window.innerWidth <= 992) {
-                    e.preventDefault(); // Elak navigasi terus supaya dropdown dibuka dahulu
-                    e.stopPropagation();
+                const parentNav = arrow.closest('.nav-item');
+                
+                document.querySelectorAll('.nav-item').forEach(otherItem => {
+                    if (otherItem !== parentNav) {
+                        otherItem.classList.remove('active');
+                    }
+                });
 
-                    // Tutup menu lain yang terbuka
-                    document.querySelectorAll('.nav-item').forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
-
-                    // Buka / Tutup menu semasa
-                    item.classList.toggle('active');
-                }
-            });
-        }
+                parentNav.classList.toggle('active');
+            }
+        });
     });
 
     // 2. Day / Night Mode Toggle
@@ -1280,13 +1315,14 @@ session_start();
     // 4. Multi-language Dictionary (EN & BM)
     const translations = {
         EN: {
-            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer',
             Home: 'Home',
             About: 'About Us',
+            Overview: 'Company Overview',
             History: 'Our History',
             VisionMission: 'Vision & Mission',
             Certifications: 'Quality Assurance & Certifications',
-            mProduct: 'Product',
+            mProduct: 'Products',
             MealProducts: 'Meat Products',
             BakeryProducts: 'Bakery Products',
             Catalogue: 'Products Catalogue',
@@ -1326,9 +1362,10 @@ session_start();
             footSub: 'Halal & Quality Frozen Food Manufacturer'
         },
         BM: {
-            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Kualiti Utama',
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium',
             Home: 'Utama',
             About: 'Mengenai Kami',
+            Overview: 'Gambaran Syarikat',
             History: 'Sejarah Kami',
             VisionMission: 'Visi & Misi',
             Certifications: 'Jaminan Kualiti & Persijilan',
