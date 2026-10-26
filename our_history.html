@@ -59,7 +59,7 @@ session_start();
             width: 100%;
         }
 
-        /* Top Bar */
+        /* Top Bar Responsive */
         .top-bar {
             background-color: var(--deep-red);
             color: #FFFFFF;
@@ -68,20 +68,22 @@ session_start();
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 10px;
         }
 
         .top-bar-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            text-align: left;
         }
 
         .top-bar-controls {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
+            flex-shrink: 0;
         }
 
         /* Language Switcher & Theme Toggle */
@@ -89,7 +91,7 @@ session_start();
             background: transparent;
             border: 1px solid rgba(255,255,255,0.4);
             color: #FFFFFF;
-            padding: 3px 10px;
+            padding: 3px 8px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
@@ -162,21 +164,35 @@ session_start();
             position: relative;
         }
 
-        .nav-item > a {
+        .nav-item-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-item-header > a {
             color: var(--text-dark);
             text-decoration: none;
             font-size: 15px;
             font-weight: 600;
             text-transform: capitalize;
-            letter-spacing: 0.5px;
             padding: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
             transition: color 0.3s ease;
         }
 
-        .nav-item > a:hover {
+        .nav-item-header > a:hover {
+            color: var(--deep-red);
+        }
+
+        .menu-arrow-icon {
+            font-size: 11px;
+            cursor: pointer;
+            padding: 10px 4px;
+            color: var(--text-dark);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-arrow-icon:hover {
             color: var(--deep-red);
         }
 
@@ -219,13 +235,13 @@ session_start();
             color: var(--deep-red);
         }
 
-        /* HERO SECTION */
+        /* HERO SECTION (Segi empat tepat melebar pada mobile) */
         .history-hero {
             position: relative;
             background: linear-gradient(135deg, rgba(122, 24, 32, 0.94) 0%, rgba(20, 20, 20, 0.88) 100%),
                         url('history/company-history.jpg') center/cover no-repeat;
             color: #FFFFFF;
-            padding: 90px 5% 70px 5%;
+            padding: 85px 5% 65px 5%;
             text-align: center;
             overflow: hidden;
         }
@@ -255,7 +271,7 @@ session_start();
 
         .history-hero h1 {
             font-family: var(--font-headline);
-            font-size: 64px;
+            font-size: 60px;
             letter-spacing: 1.5px;
             line-height: 1;
             margin-bottom: 16px;
@@ -360,7 +376,6 @@ session_start();
             padding: 20px 0;
         }
 
-        /* Central Line Animation */
         .timeline-container::before {
             content: '';
             position: absolute;
@@ -405,7 +420,6 @@ session_start();
             transform: translateX(0);
         }
 
-        /* Node Circle Animation */
         .timeline-node {
             position: absolute;
             top: 32px;
@@ -419,24 +433,15 @@ session_start();
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .timeline-item.left .timeline-node {
-            right: -11px;
-        }
+        .timeline-item.left .timeline-node { right: -11px; }
+        .timeline-item.right .timeline-node { left: -11px; }
 
-        .timeline-item.right .timeline-node {
-            left: -11px;
-        }
-
-        .timeline-item.active .timeline-node {
-            transform: scale(1);
-        }
-
+        .timeline-item.active .timeline-node { transform: scale(1); }
         .timeline-item:hover .timeline-node {
             background-color: var(--deep-red);
             transform: scale(1.3);
         }
 
-        /* Milestone Card */
         .timeline-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -499,9 +504,7 @@ session_start();
             transition: transform 0.4s ease;
         }
 
-        .timeline-card:hover .milestone-img {
-            transform: scale(1.06);
-        }
+        .timeline-card:hover .milestone-img { transform: scale(1.06); }
 
         .expand-hint {
             display: inline-flex;
@@ -593,10 +596,7 @@ session_start();
             transition: transform 0.3s ease, background 0.3s ease;
         }
 
-        .floating-btn:hover {
-            transform: scale(1.1);
-        }
-
+        .floating-btn:hover { transform: scale(1.1); }
         .btn-whatsapp { background-color: #25D366; }
         .btn-whatsapp:hover { background-color: #20ba5a; }
 
@@ -777,7 +777,7 @@ session_start();
             gap: 10px;
         }
 
-        /* RESPONSIVE MEDIA QUERIES & MOBILE ACCORDION MENU */
+        /* RESPONSIVE MEDIA QUERIES FOR MOBILE */
         @media (max-width: 992px) {
             .mobile-menu-btn { 
                 display: block; 
@@ -806,20 +806,25 @@ session_start();
                 width: 100%; 
             }
 
-            .nav-item > a {
-                display: flex;
+            .nav-item-header {
                 justify-content: space-between;
-                align-items: center;
-                padding: 12px 0;
+                width: 100%;
                 border-bottom: 1px solid var(--border-color);
+                padding: 4px 0;
+            }
+
+            .nav-item-header > a {
+                padding: 10px 0;
                 font-size: 15px;
+                flex-grow: 1;
             }
 
-            .nav-item > a i {
-                transition: transform 0.3s ease;
+            .menu-arrow-icon {
+                padding: 12px 15px;
+                font-size: 14px;
             }
 
-            .nav-item.active > a i {
+            .nav-item.active .menu-arrow-icon {
                 transform: rotate(180deg);
                 color: var(--deep-red);
             }
@@ -855,12 +860,53 @@ session_start();
             .timeline-item.left, .timeline-item.right { left: 0; text-align: left; transform: translateY(30px); }
             .timeline-item.left.active, .timeline-item.right.active { transform: translateY(0); }
             .timeline-item.left .timeline-node, .timeline-item.right .timeline-node { left: 13px; right: auto; }
-
-            .history-hero h1 { font-size: 46px; }
         }
 
-        /* FOUNDERS SIDE-BY-SIDE MOBILE LAYOUT */
         @media (max-width: 768px) {
+            /* Top Bar Mobile */
+            .top-bar {
+                padding: 8px 3%;
+                font-size: 11px;
+            }
+
+            .top-bar-info {
+                font-size: 10px;
+                line-height: 1.2;
+                overflow: hidden;
+            }
+
+            .top-bar-controls {
+                gap: 6px;
+            }
+
+            .lang-switcher button, .theme-toggle-btn {
+                padding: 2px 6px;
+                font-size: 10px;
+            }
+
+            /* Hero Banner Segi Empat Tepat Melebar */
+            .history-hero {
+                padding: 35px 4% 28px 4%;
+                margin-bottom: 25px;
+            }
+
+            .hero-badge {
+                font-size: 10px;
+                padding: 3px 10px;
+                margin-bottom: 8px;
+            }
+
+            .history-hero h1 {
+                font-size: 28px;
+                margin-bottom: 8px;
+            }
+
+            .history-hero p {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+
+            /* FOUNDERS SPOTLIGHT (Gambar Diperbesarkan pada Skrin Kecil) */
             .spotlight-card {
                 padding: 15px 10px;
                 background-color: transparent;
@@ -868,10 +914,9 @@ session_start();
                 border: none;
             }
 
-            /* Teks & Gambar Duduk Sebelah-Menyebelah pada Skrin Kecil */
             .spotlight-grid {
-                grid-template-columns: 125px 1fr;
-                gap: 14px;
+                grid-template-columns: 160px 1fr; /* Lebar gambar dibesarkan */
+                gap: 16px;
                 align-items: start;
             }
 
@@ -881,7 +926,7 @@ session_start();
             }
 
             .spotlight-img {
-                height: 160px;
+                height: 210px; /* Tinggi gambar dibesarkan */
             }
 
             .section-title {
@@ -904,8 +949,6 @@ session_start();
                 font-size: 12px;
                 margin-top: 10px;
             }
-
-            .history-hero h1 { font-size: 36px; }
 
             /* FOOTER MOBILE 2-KOLUM */
             .footer-grid {
@@ -933,18 +976,14 @@ session_start();
 
         @media (max-width: 480px) {
             .spotlight-grid {
-                grid-template-columns: 105px 1fr;
-                gap: 10px;
+                grid-template-columns: 140px 1fr;
+                gap: 12px;
             }
             .spotlight-img {
-                height: 145px;
+                height: 185px;
             }
             .section-title {
                 font-size: 19px;
-            }
-            .top-bar {
-                justify-content: center;
-                text-align: center;
             }
             .wa-label { display: none; }
             .footer-bottom {
@@ -960,7 +999,7 @@ session_start();
 <!-- Top Announcement Bar -->
 <div class="top-bar">
     <div class="top-bar-info">
-        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First</span>
+        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer</span>
     </div>
     <div class="top-bar-controls">
         <div class="lang-switcher">
@@ -978,7 +1017,7 @@ session_start();
     <div class="navbar">
         <div class="brand-logo-container">
             <a href="index.html">
-                <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
+                <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="handleLogoError(this, 'MELAWATI KEBAB');">
             </a>
         </div>
 
@@ -988,19 +1027,27 @@ session_start();
 
         <ul class="nav-links" id="navLinks">
             <li class="nav-item">
-                <a href="index.html"><span id="Home">Home</span></a>
+                <div class="nav-item-header">
+                    <a href="index.html"><span id="Home">Home</span></a>
+                </div>
             </li>
             <li class="nav-item">
-                <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="company_overview.html"><span id="About">About Us</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
-                    <li><a href="company_overview.html" id="History">Company Overview</a></li>
+                    <li><a href="company_overview.html" id="Overview">Company Overview</a></li>
                     <li><a href="our_history.html" id="History">Our History</a></li>
                     <li><a href="vision_mission.html" id="VisionMission">Vision & Mission</a></li>
                     <li><a href="certifications.html" id="Certifications">Quality Assurance & Certifications</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="product.html"><span id="mProduct">Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="product.html"><span id="mProduct">Products</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="products-catalogue.html" id="Catalogue">Products Catalogue</a></li>
                     <li><a href="meat-products.html" id="MealProducts">Meat Products</a></li>
@@ -1008,21 +1055,30 @@ session_start();
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="distributor.html"><span id="Distributor">Get Our Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="distributor.html"><span id="Distributor">Get Our Product</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="find-distributor.html" id="FindDistributor">Find Our Distributor</a></li>
                     <li><a href="become-distributor.html" id="BecomeDistributor">Become a Distributor</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="media.html"><span id="mMedia">Media</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="media.html"><span id="mMedia">Media</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="news-events.html" id="NewsEvents">News & Events</a></li>
                     <li><a href="events-gallery.html" id="EventsGallery">Events Gallery</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="contact.html"><span id="mContact">Contact Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="contact.html"><span id="mContact">Contact Us</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="general-enquiries.html" id="GeneralEnquiries">General Enquiries</a></li>
                     <li><a href="sales-enquiries.html" id="SalesEnquiries">Sales Enquiries</a></li>
@@ -1178,7 +1234,7 @@ session_start();
 <div class="floating-container">
     <div class="wa-floating-wrapper">
         <span class="wa-label" id="waLabel">Inquiry / Contact Us</span>
-        <a href="https://wa.me/60123456789?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20sejarah%20syarikat" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
+        <a href="https://wa.me/60391079708?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20sejarah%20syarikat" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
             <span class="wa-headset-badge"><i class="fa-solid fa-headset"></i></span>
         </a>
@@ -1188,16 +1244,16 @@ session_start();
     </button>
 </div>
 
-<!-- Footer Section -->
+<!-- Footer Section (Kemaskini Alamat & Maklumat Syarikat) -->
 <footer>
     <div class="footer-grid">
         <div class="footer-col footer-col-main">
-            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="this.src='https://via.placeholder.com/180x50/7A1820/FFFFFF?text=MELAWATI+KEBAB';">
-            <div class="company-name">MELAWATI KEBAB SDN BHD</div>
+            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="handleLogoError(this, 'MELAWATI KEBAB');">
+            <div class="company-name">MELAWATI KEBAB SDN BHD (778900-M)</div>
             <div class="company-info">
-                <p><i class="fa-solid fa-location-dot"></i> No. 12 & 14, Jalan Industri 3, Taman Perindustrian Melawati, 53100 KL.</p>
-                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60341000000">+60 3-4100 0000</a></p>
-                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@melawatikebab.com">info@melawatikebab.com</a></p>
+                <p><i class="fa-solid fa-location-dot"></i> No 54-1F, Jalan 2/154D, Taman Desa Cheras, 56000 Kuala Lumpur, Malaysia</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60391079708">+603 9107 9708</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:melawatikebab1996@gmail.com">melawatikebab1996@gmail.com</a></p>
             </div>
         </div>
 
@@ -1215,10 +1271,10 @@ session_start();
         <div class="footer-col">
             <h5 id="footerColConnect">Connect With Us</h5>
             <div class="social-buttons-container">
-                <a href="https://wa.me/60123456789" class="social-btn whatsapp" target="_blank">
+                <a href="https://wa.me/60391079708" class="social-btn whatsapp" target="_blank">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
                 </a>
-                <a href="https://www.tiktok.com/@melawatikebabsince1996" class="social-btn tiktok" target="_blank">
+                <a href="https://www.tiktok.com/@melawatikebabsince1996?_r=1&_t=ZS-9Akrb5sFdQb" class="social-btn tiktok" target="_blank">
                     <i class="fa-brands fa-tiktok"></i> TikTok
                 </a>
                 <a href="https://www.facebook.com/SalimFrozenFood" class="social-btn facebook" target="_blank">
@@ -1229,14 +1285,21 @@ session_start();
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd. <span id="footRights">All Rights Reserved.</span></p>
+        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd (778900-M). <span id="footRights">All Rights Reserved.</span></p>
         <p id="footSub">Halal & Quality Frozen Food Manufacturer</p>
     </div>
 </footer>
 
 <!-- JavaScript Integration -->
 <script>
-    // 1. Mobile Navigation Toggle & Accordion Logic
+    function handleLogoError(imgElement, brandTitle) {
+        const parentWrapper = imgElement.parentElement;
+        if (parentWrapper) {
+            parentWrapper.innerHTML = `<div style="font-family:var(--font-headline); font-size:18px; color:var(--deep-red); font-weight:700;">${brandTitle}</div>`;
+        }
+    }
+
+    // 1. Mobile Navigation & Submenu Accordion Arrow Logic
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
 
@@ -1252,27 +1315,24 @@ session_start();
         });
     }
 
-    // Toggle Submenu Mobile Accordion
-    document.querySelectorAll('.nav-item').forEach(item => {
-        const parentLink = item.querySelector('a');
-        const dropdown = item.querySelector('.dropdown-menu');
+    // Menu utama boleh tekan terus. Hanya ikon anak panah (chevron) yang akan toggle submenu pada telefon.
+    document.querySelectorAll('.menu-arrow-icon').forEach(arrow => {
+        arrow.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                e.stopPropagation();
 
-        if (dropdown && parentLink) {
-            parentLink.addEventListener('click', (e) => {
-                if (window.innerWidth <= 992) {
-                    e.preventDefault();
-                    e.stopPropagation();
+                const parentNav = arrow.closest('.nav-item');
+                
+                document.querySelectorAll('.nav-item').forEach(otherItem => {
+                    if (otherItem !== parentNav) {
+                        otherItem.classList.remove('active');
+                    }
+                });
 
-                    document.querySelectorAll('.nav-item').forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
-
-                    item.classList.toggle('active');
-                }
-            });
-        }
+                parentNav.classList.toggle('active');
+            }
+        });
     });
 
     // 2. Day / Night Mode Toggle
@@ -1328,13 +1388,14 @@ session_start();
     // 6. Multi-language Dictionary (EN & BM)
     const translations = {
         EN: {
-            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer',
             Home: 'Home',
             About: 'About Us',
+            Overview: 'Company Overview',
             History: 'Our History',
             VisionMission: 'Vision & Mission',
             Certifications: 'Quality Assurance & Certifications',
-            mProduct: 'Product',
+            mProduct: 'Products',
             MealProducts: 'Meat Products',
             BakeryProducts: 'Bakery Products',
             Catalogue: 'Products Catalogue',
@@ -1390,9 +1451,10 @@ session_start();
             footSub: 'Halal & Quality Frozen Food Manufacturer'
         },
         BM: {
-            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Kualiti Utama',
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium',
             Home: 'Utama',
             About: 'Mengenai Kami',
+            Overview: 'Gambaran Syarikat',
             History: 'Sejarah Kami',
             VisionMission: 'Visi & Misi',
             Certifications: 'Jaminan Kualiti & Persijilan',
