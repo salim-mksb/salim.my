@@ -59,7 +59,7 @@ session_start();
             width: 100%;
         }
 
-        /* Top Bar */
+        /* Top Bar Responsive */
         .top-bar {
             background-color: var(--deep-red);
             color: #FFFFFF;
@@ -68,20 +68,22 @@ session_start();
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 10px;
         }
 
         .top-bar-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            text-align: left;
         }
 
         .top-bar-controls {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
+            flex-shrink: 0;
         }
 
         /* Language Switcher & Theme Toggle */
@@ -89,7 +91,7 @@ session_start();
             background: transparent;
             border: 1px solid rgba(255,255,255,0.4);
             color: #FFFFFF;
-            padding: 3px 10px;
+            padding: 3px 8px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
@@ -162,21 +164,35 @@ session_start();
             position: relative;
         }
 
-        .nav-item > a {
+        .nav-item-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-item-header > a {
             color: var(--text-dark);
             text-decoration: none;
             font-size: 15px;
             font-weight: 600;
             text-transform: capitalize;
-            letter-spacing: 0.5px;
             padding: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 6px;
             transition: color 0.3s ease;
         }
 
-        .nav-item > a:hover {
+        .nav-item-header > a:hover {
+            color: var(--deep-red);
+        }
+
+        .menu-arrow-icon {
+            font-size: 11px;
+            cursor: pointer;
+            padding: 10px 4px;
+            color: var(--text-dark);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-arrow-icon:hover {
             color: var(--deep-red);
         }
 
@@ -240,7 +256,7 @@ session_start();
             box-shadow: 0 6px 18px rgba(122, 24, 32, 0.35);
         }
 
-        /* SECTION 1: Page Hero Banner */
+        /* SECTION 1: Page Hero Banner (Segi empat tepat melebar pada mobile) */
         .page-hero {
             position: relative;
             background: linear-gradient(135deg, rgba(122, 24, 32, 0.94) 0%, rgba(46, 107, 79, 0.88) 100%),
@@ -287,7 +303,7 @@ session_start();
             line-height: 1.6;
         }
 
-        /* SECTION 2: How We Started (Text beside Founders) */
+        /* SECTION 2: How We Started */
         .section-padding {
             padding: 60px 5%;
             max-width: 1280px;
@@ -381,7 +397,7 @@ session_start();
             line-height: 1.4;
         }
 
-        /* SECTION 3: SALIM GROUP BRANDS (3D TILTING + HOVER OVERLAY EFFECT) */
+        /* SECTION 3: SALIM GROUP BRANDS (5 KAD SEBARIS & LOGO DI TENGAH) */
         .bg-warm {
             background-color: var(--warm-cream);
             border-radius: 28px;
@@ -390,43 +406,30 @@ session_start();
             box-shadow: inset 0 0 30px rgba(0,0,0,0.02);
         }
 
-        .swipe-hint {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 13px;
-            color: var(--deep-red);
-            font-weight: 600;
-            margin-bottom: 18px;
-            animation: pulseGlow 2.5s infinite ease-in-out;
-        }
-
         .group-brands-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
+            gap: 18px;
             margin-top: 25px;
-            perspective: 1200px;
         }
 
         /* BRAND CARD BASE */
         .brand-logo-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 22px;
-            padding: 26px 18px;
+            border-radius: 18px;
+            padding: 22px 14px;
             text-align: center;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            transition: all 0.35s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             position: relative;
             overflow: hidden;
-            min-height: 380px;
-            transform-style: preserve-3d;
+            min-height: 280px;
+            cursor: pointer;
         }
 
         /* ANIMATED TOP NEON BAR */
@@ -436,7 +439,7 @@ session_start();
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--deep-red), var(--forest-green), var(--deep-red));
             background-size: 200% 100%;
             transition: all 0.5s ease;
@@ -444,45 +447,43 @@ session_start();
         }
 
         .brand-logo-card:hover {
-            box-shadow: 0 25px 50px -10px rgba(122, 24, 32, 0.25);
+            box-shadow: 0 15px 35px rgba(122, 24, 32, 0.18);
             border-color: var(--deep-red);
+            transform: translateY(-4px);
         }
 
         .brand-badge {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
             background-color: rgba(122, 24, 32, 0.08);
             color: var(--deep-red);
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.5px;
             margin-bottom: 12px;
             display: inline-block;
-            transform: translateZ(15px);
-            transition: all 0.35s ease;
         }
 
+        /* LOGO TEPAT DI TENGAH MUKA DEPAN KAD */
         .brand-logo-img-wrapper {
-            height: 100px;
+            height: 85px;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 14px;
-            padding: 12px;
+            margin: 0 auto 12px auto;
+            padding: 8px;
             background-color: var(--warm-cream);
-            border-radius: 16px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
-            transform: translateZ(25px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .brand-logo-img {
-            max-height: 75px;
+            max-height: 65px;
             max-width: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.08));
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
         }
 
         .fallback-logo-box {
@@ -492,45 +493,23 @@ session_start();
             align-items: center;
             justify-content: center;
             font-family: var(--font-headline);
-            font-size: 19px;
+            font-size: 15px;
             color: var(--deep-red);
-            letter-spacing: 0.8px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
             font-weight: 700;
             text-align: center;
         }
 
         .brand-logo-card h3 {
-            font-size: 17px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 10px;
-            line-height: 1.25;
-            transform: translateZ(20px);
+            margin-bottom: 0;
+            line-height: 1.2;
         }
 
-        .overlay-hint-btn {
-            font-size: 11.5px;
-            font-weight: 600;
-            color: var(--deep-red);
-            background-color: var(--warm-cream);
-            padding: 6px 14px;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: auto;
-            transform: translateZ(15px);
-            transition: all 0.3s ease;
-        }
-
-        .brand-logo-card:hover .overlay-hint-btn {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        /* GLASSMORPHIC HOVER OVERLAY PANEL */
+        /* GLASSMORPHIC HOVER / TOUCH OVERLAY PANEL (Termasuk Social Media Logo Hanya Sewaktu Hover) */
         .card-hover-overlay {
             position: absolute;
             top: 0;
@@ -538,24 +517,25 @@ session_start();
             width: 100%;
             height: 100%;
             background: linear-gradient(145deg, rgba(122, 24, 32, 0.96) 0%, rgba(26, 32, 44, 0.96) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             color: #FFFFFF;
-            padding: 24px 18px;
+            padding: 20px 14px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            border-radius: 22px;
+            border-radius: 18px;
             opacity: 0;
             visibility: hidden;
             transform: translateY(100%);
-            transition: transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.45s ease, visibility 0.45s ease;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease, visibility 0.4s ease;
             z-index: 10;
         }
 
-        .brand-logo-card:hover .card-hover-overlay {
+        .brand-logo-card:hover .card-hover-overlay,
+        .brand-logo-card.active-overlay .card-hover-overlay {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
@@ -563,63 +543,57 @@ session_start();
 
         .overlay-title {
             font-family: var(--font-headline);
-            font-size: 22px;
-            letter-spacing: 1px;
+            font-size: 18px;
+            letter-spacing: 0.8px;
             color: #FFFFFF;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
             padding-bottom: 4px;
             width: 100%;
         }
 
         .overlay-desc {
-            font-size: 12.5px;
-            color: rgba(255, 255, 255, 0.92);
-            line-height: 1.55;
-            margin-bottom: 18px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.5;
+            margin-bottom: 12px;
             font-weight: 400;
         }
 
-        .brand-social-links {
+        /* LOGO MEDIA SOSIAL HANYA DIPAPARKAN DALAM OVERLAY (SEWAKTU HOVER) */
+        .overlay-social-icons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
             align-items: center;
-            width: 100%;
-            margin-top: auto;
         }
 
-        .social-icon-btn {
-            width: 42px;
-            height: 42px;
+        .overlay-social-btn {
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 15px;
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #FFFFFF;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
         }
 
-        .social-icon-btn.fb:hover {
+        .overlay-social-btn.fb:hover {
             background-color: #1877F2;
-            color: #FFFFFF;
             border-color: #1877F2;
-            transform: translateY(-4px) scale(1.15) rotate(-6deg);
-            box-shadow: 0 8px 20px rgba(24, 119, 242, 0.5);
+            transform: scale(1.1);
         }
 
-        .social-icon-btn.tiktok:hover {
+        .overlay-social-btn.tiktok:hover {
             background-color: #000000;
-            color: #FFFFFF;
             border-color: #000000;
-            transform: translateY(-4px) scale(1.15) rotate(6deg);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            transform: scale(1.1);
         }
 
         /* Floating Controls */
@@ -854,12 +828,7 @@ session_start();
             gap: 10px;
         }
 
-        /* RESPONSIVE MEDIA QUERIES & MOBILE CAROUSEL */
-        @media (max-width: 1200px) {
-            .group-brands-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        }
-
-        /* PEMBAIKAN MENU HAMBURGER & SUBMENU MOBILE (MAX-WIDTH: 992PX) */
+        /* RESPONSIVE MEDIA QUERIES FOR MOBILE */
         @media (max-width: 992px) {
             .mobile-menu-btn { 
                 display: block; 
@@ -888,20 +857,25 @@ session_start();
                 width: 100%; 
             }
 
-            .nav-item > a {
-                display: flex;
+            .nav-item-header {
                 justify-content: space-between;
-                align-items: center;
-                padding: 12px 0;
+                width: 100%;
                 border-bottom: 1px solid var(--border-color);
+                padding: 4px 0;
+            }
+
+            .nav-item-header > a {
+                padding: 10px 0;
                 font-size: 15px;
+                flex-grow: 1;
             }
 
-            .nav-item > a i {
-                transition: transform 0.3s ease;
+            .menu-arrow-icon {
+                padding: 12px 15px;
+                font-size: 14px;
             }
 
-            .nav-item.active > a i {
+            .nav-item.active .menu-arrow-icon {
                 transform: rotate(180deg);
                 color: var(--deep-red);
             }
@@ -914,7 +888,7 @@ session_start();
                 box-shadow: none;
                 border: none;
                 padding: 5px 0 10px 12px;
-                display: none; /* Sembunyi secara lalai, dipapar bila .nav-item ada class .active */
+                display: none;
                 background-color: transparent;
                 border-left: 2px solid var(--deep-red);
                 margin-left: 10px;
@@ -932,35 +906,116 @@ session_start();
             }
 
             .two-col-grid { grid-template-columns: 1fr; gap: 35px; }
-            .page-hero h1 { font-size: 48px; }
         }
 
-        /* MOBILE HORIZONTAL CAROUSEL SWIPE */
         @media (max-width: 768px) {
-            .swipe-hint { display: flex; }
+            /* Top Bar Mobile */
+            .top-bar {
+                padding: 8px 3%;
+                font-size: 11px;
+            }
+
+            .top-bar-info {
+                font-size: 10px;
+                line-height: 1.2;
+                overflow: hidden;
+            }
+
+            .top-bar-controls {
+                gap: 6px;
+            }
+
+            .lang-switcher button, .theme-toggle-btn {
+                padding: 2px 6px;
+                font-size: 10px;
+            }
+
+            /* Page Hero Segi Empat Tepat Melebar */
+            .page-hero {
+                padding: 35px 4% 28px 4%;
+                margin-bottom: 25px;
+            }
+
+            .page-hero-tag {
+                font-size: 10px;
+                padding: 3px 10px;
+                margin-bottom: 8px;
+            }
+
+            .page-hero h1 {
+                font-size: 28px;
+                margin-bottom: 8px;
+            }
+
+            .page-hero p {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+
+            /* 5 Cards Sebaris Pada Skrin Kecil tanpa perlu slide */
+            .bg-warm {
+                padding: 25px 2%;
+                border-radius: 18px;
+            }
 
             .group-brands-grid {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                gap: 16px;
-                padding: 15px 5px 25px 5px;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 4px;
             }
-
-            .group-brands-grid::-webkit-scrollbar { display: none; }
 
             .brand-logo-card {
-                flex: 0 0 82%;
-                max-width: 310px;
-                scroll-snap-align: center;
-                min-height: 380px;
-                transform: none !important;
+                padding: 10px 3px;
+                min-height: 170px;
+                border-radius: 10px;
             }
 
-            .page-hero h1 { font-size: 38px; }
-            .section-title { font-size: 36px; }
+            .brand-badge {
+                font-size: 7px;
+                padding: 2px 4px;
+                margin-bottom: 4px;
+            }
+
+            .brand-logo-img-wrapper {
+                height: 48px;
+                padding: 2px;
+                margin-bottom: 4px;
+                border-radius: 8px;
+            }
+
+            .brand-logo-img {
+                max-height: 38px;
+            }
+
+            .brand-logo-card h3 {
+                font-size: 9.5px;
+                margin-bottom: 0;
+                line-height: 1.15;
+            }
+
+            .card-hover-overlay {
+                padding: 8px 3px;
+                border-radius: 10px;
+            }
+
+            .overlay-title {
+                font-size: 9.5px;
+                margin-bottom: 3px;
+                padding-bottom: 2px;
+            }
+
+            .overlay-desc {
+                font-size: 7.5px;
+                line-height: 1.2;
+                margin-bottom: 5px;
+            }
+
+            .overlay-social-btn {
+                width: 20px;
+                height: 20px;
+                font-size: 9px;
+            }
+
+            .section-title { font-size: 32px; }
 
             /* FOOTER MOBILE */
             .footer-grid {
@@ -987,11 +1042,6 @@ session_start();
         }
 
         @media (max-width: 480px) {
-            .top-bar {
-                justify-content: center;
-                text-align: center;
-            }
-            .brand-logo-card { flex: 0 0 88%; }
             .wa-label { display: none; }
             .footer-bottom {
                 flex-direction: column;
@@ -1006,7 +1056,7 @@ session_start();
 <!-- Top Announcement Bar -->
 <div class="top-bar">
     <div class="top-bar-info">
-        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First</span>
+        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer</span>
     </div>
     <div class="top-bar-controls">
         <div class="lang-switcher">
@@ -1034,40 +1084,58 @@ session_start();
 
         <ul class="nav-links" id="navLinks">
             <li class="nav-item">
-                <a href="index.html"><span id="Home">Home</span></a>
+                <div class="nav-item-header">
+                    <a href="index.html"><span id="Home">Home</span></a>
+                </div>
             </li>
             <li class="nav-item">
-                <a href="company_overview.html"><span id="About">About Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="company_overview.html"><span id="About">About Us</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
+                    <li><a href="company_overview.html" id="Overview">Company Overview</a></li>
                     <li><a href="our_history.html" id="History">Our History</a></li>
                     <li><a href="vision_mission.html" id="VisionMission">Vision & Mission</a></li>
                     <li><a href="certifications.html" id="Certifications">Quality Assurance & Certifications</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="product.html"><span id="mProduct">Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="product.html"><span id="mProduct">Products</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
+                    <li><a href="products-catalogue.html" id="Catalogue">Products Catalogue</a></li>
                     <li><a href="meat-products.html" id="MealProducts">Meat Products</a></li>
                     <li><a href="bakery-products.html" id="BakeryProducts">Bakery Products</a></li>
-                    <li><a href="products-catalogue.html" id="Catalogue">Products Catalogue</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="distributor.html"><span id="Distributor">Get Our Product</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="distributor.html"><span id="Distributor">Get Our Product</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="find-distributor.html" id="FindDistributor">Find Our Distributor</a></li>
                     <li><a href="become-distributor.html" id="BecomeDistributor">Become a Distributor</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="media.html"><span id="mMedia">Media</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="media.html"><span id="mMedia">Media</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="news-events.html" id="NewsEvents">News & Events</a></li>
                     <li><a href="events-gallery.html" id="EventsGallery">Events Gallery</a></li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="contact.html"><span id="mContact">Contact Us</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i></a>
+                <div class="nav-item-header">
+                    <a href="contact.html"><span id="mContact">Contact Us</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
                 <ul class="dropdown-menu">
                     <li><a href="general-enquiries.html" id="GeneralEnquiries">General Enquiries</a></li>
                     <li><a href="sales-enquiries.html" id="SalesEnquiries">Sales Enquiries</a></li>
@@ -1111,7 +1179,7 @@ session_start();
     </div>
 </section>
 
-<!-- SECTION 3: OUR GROUP BUSINESSES & BRANDS (3D + HOVER OVERLAY EFFECT) -->
+<!-- SECTION 3: OUR GROUP BUSINESSES & BRANDS (5 KAD SEBARIS & LOGO DI TENGAH) -->
 <section class="section-padding bg-warm">
     <div style="max-width: 1280px; margin: 0 auto;">
         <div style="text-align: center; max-width: 750px; margin: 0 auto 25px auto;">
@@ -1120,30 +1188,25 @@ session_start();
             <p class="text-body" id="groupDesc">Under the banner of Salim Group, our diverse portfolio delivers quality food products, manufacturing excellence, hospitality, and retail services across Malaysia.</p>
         </div>
 
-        <div class="swipe-hint" id="swipeHint">
-            <i class="fa-solid fa-arrow-left-long"></i> Swipe to view all brands <i class="fa-solid fa-arrow-right-long"></i>
-        </div>
-
         <div class="group-brands-grid">
             
             <!-- 1. Salim / Salim Frozen Food -->
-            <div class="brand-logo-card js-tilt-card">
+            <div class="brand-logo-card">
                 <span class="brand-badge">Brands</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/salim.png" alt="Salim" class="brand-logo-img" onerror="handleLogoError(this, 'SALIM FROZEN FOOD');">
                 </div>
                 <h3 id="brand1Title">Salim</h3>
-                <span class="overlay-hint-btn"><i class="fa-solid fa-circle-info"></i> Hover for Details</span>
 
-                <!-- GLASSMORPHIC HOVER OVERLAY PANEL -->
+                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Salim Frozen Food</div>
                     <p class="overlay-desc" id="brand1Desc">Parent group holding driving corporate strategy, operations, and nationwide frozen food supply.</p>
-                    <div class="brand-social-links">
-                        <a href="https://www.facebook.com/SalimFrozenFood" target="_blank" class="social-icon-btn fb" title="Facebook">
+                    <div class="overlay-social-icons">
+                        <a href="https://www.facebook.com/SalimFrozenFood" target="_blank" class="overlay-social-btn fb" title="Facebook" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@melawatikebabsince1996?_r=1&_t=ZS-9Akrb5sFdQb" target="_blank" class="social-icon-btn tiktok" title="TikTok">
+                        <a href="https://www.tiktok.com/@melawatikebabsince1996?_r=1&_t=ZS-9Akrb5sFdQb" target="_blank" class="overlay-social-btn tiktok" title="TikTok" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-tiktok"></i>
                         </a>
                     </div>
@@ -1151,47 +1214,45 @@ session_start();
             </div>
 
             <!-- 2. Melawati Kebab (MKSB) -->
-            <div class="brand-logo-card js-tilt-card">
-                <span class="brand-badge">Manufacturing Hub</span>
+            <div class="brand-logo-card">
+                <span class="brand-badge">Manufacturing</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/mksb.png" alt="Melawati Kebab (MKSB)" class="brand-logo-img" onerror="handleLogoError(this, 'MELAWATI KEBAB (MKSB)');">
                 </div>
                 <h3 id="brand2Title">Melawati Kebab</h3>
-                <span class="overlay-hint-btn"><i class="fa-solid fa-circle-info"></i> Hover for Details</span>
 
-                <!-- GLASSMORPHIC HOVER OVERLAY PANEL -->
+                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Melawati Kebab</div>
                     <p class="overlay-desc" id="brand2Desc">Core manufacturing facility producing premium Halal kebab meat, burger patties, and bakery lines.</p>
-                    <div class="brand-social-links">
-                        <a href="https://www.facebook.com/SalimFrozenFood" target="_blank" class="social-icon-btn fb" title="Facebook">
+                    <div class="overlay-social-icons">
+                        <a href="https://www.facebook.com/SalimFrozenFood" target="_blank" class="overlay-social-btn fb" title="Facebook" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@melawatikebabsince1996?_r=1&_t=ZS-9Akrb5sFdQb" target="_blank" class="social-icon-btn tiktok" title="TikTok">
+                        <a href="https://www.tiktok.com/@melawatikebabsince1996?_r=1&_t=ZS-9Akrb5sFdQb" target="_blank" class="overlay-social-btn tiktok" title="TikTok" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-tiktok"></i>
                         </a>
                     </div>
                 </div>
             </div>
 
-             <!-- 5. Pasaraya Salim -->
-            <div class="brand-logo-card js-tilt-card">
+            <!-- 3. Pasaraya Salim -->
+            <div class="brand-logo-card">
                 <span class="brand-badge">Supermarket</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/brand3.png" alt="Pasaraya Salim" class="brand-logo-img" onerror="handleLogoError(this, 'PASARAYA SALIM');">
                 </div>
                 <h3 id="brand5Title">Pasaraya Salim</h3>
-                <span class="overlay-hint-btn"><i class="fa-solid fa-circle-info"></i> Hover for Details</span>
 
-                <!-- GLASSMORPHIC HOVER OVERLAY PANEL -->
+                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Pasaraya Salim</div>
                     <p class="overlay-desc" id="brand5Desc">Community supermarket chain offering fresh groceries, frozen halal goods, and household necessities.</p>
-                    <div class="brand-social-links">
-                        <a href="https://www.facebook.com/pasarayasalim" target="_blank" class="social-icon-btn fb" title="Facebook">
+                    <div class="overlay-social-icons">
+                        <a href="https://www.facebook.com/pasarayasalim" target="_blank" class="overlay-social-btn fb" title="Facebook" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@pasarayasalim?_r=1&_t=ZS-9Akrg00bT3E" target="_blank" class="social-icon-btn tiktok" title="TikTok">
+                        <a href="https://www.tiktok.com/@pasarayasalim?_r=1&_t=ZS-9Akrg00bT3E" target="_blank" class="overlay-social-btn tiktok" title="TikTok" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-tiktok"></i>
                         </a>
                     </div>
@@ -1199,47 +1260,45 @@ session_start();
             </div>
 
             <!-- 4. Salim Bistro -->
-            <div class="brand-logo-card js-tilt-card">
-                <span class="brand-badge">Restaurant & Dining</span>
+            <div class="brand-logo-card">
+                <span class="brand-badge">Restaurant</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/brand5.png" alt="Salim Bistro" class="brand-logo-img" onerror="this.onerror=null; this.src='logo/brand4.png'; handleLogoError(this, 'SALIM BISTRO');">
                 </div>
                 <h3 id="brand4Title">Salim Bistro</h3>
-                <span class="overlay-hint-btn"><i class="fa-solid fa-circle-info"></i> Hover for Details</span>
 
-                <!-- GLASSMORPHIC HOVER OVERLAY PANEL -->
+                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Salim Bistro</div>
                     <p class="overlay-desc" id="brand4Desc">Casual dining restaurant serving freshly grilled kebabs, pita wraps, local delights, and family meals.</p>
-                    <div class="brand-social-links">
-                        <a href="https://www.facebook.com/salimbistro.my" target="_blank" class="social-icon-btn fb" title="Facebook">
+                    <div class="overlay-social-icons">
+                        <a href="https://www.facebook.com/salimbistro.my" target="_blank" class="overlay-social-btn fb" title="Facebook" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@salimbistro.my?_r=1&_t=ZS-9AkrdZRnvXS" target="_blank" class="social-icon-btn tiktok" title="TikTok">
+                        <a href="https://www.tiktok.com/@salimbistro.my?_r=1&_t=ZS-9AkrdZRnvXS" target="_blank" class="overlay-social-btn tiktok" title="TikTok" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-tiktok"></i>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. Astana Salim -->
-            <div class="brand-logo-card js-tilt-card">
-                <span class="brand-badge">Event Space & Catering</span>
+            <!-- 5. Astana Salim -->
+            <div class="brand-logo-card">
+                <span class="brand-badge">Catering</span>
                 <div class="brand-logo-img-wrapper">
                     <img src="logo/brand4.png" alt="Astana Salim" class="brand-logo-img" onerror="this.onerror=null; this.src='logo/brand3.png'; handleLogoError(this, 'ASTANA SALIM');">
                 </div>
                 <h3 id="brand3Title">Astana Salim</h3>
-                <span class="overlay-hint-btn"><i class="fa-solid fa-circle-info"></i> Hover for Details</span>
 
-                <!-- GLASSMORPHIC HOVER OVERLAY PANEL -->
+                <!-- Hover / Touch Text Overlay Panel (Logo Social Media Hanya Sewaktu Hover) -->
                 <div class="card-hover-overlay">
                     <div class="overlay-title">Astana Salim</div>
                     <p class="overlay-desc" id="brand3Desc">Exclusive banquet halls, wedding venues, corporate event management, and full catering services.</p>
-                    <div class="brand-social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61591911917981" target="_blank" class="social-icon-btn fb" title="Facebook">
+                    <div class="overlay-social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61591911917981" target="_blank" class="overlay-social-btn fb" title="Facebook" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@astanasalim.my?_r=1&_t=ZS-9AkqtbK4qKi" target="_blank" class="social-icon-btn tiktok" title="TikTok">
+                        <a href="https://www.tiktok.com/@astanasalim.my?_r=1&_t=ZS-9AkqtbK4qKi" target="_blank" class="overlay-social-btn tiktok" title="TikTok" onclick="event.stopPropagation();">
                             <i class="fa-brands fa-tiktok"></i>
                         </a>
                     </div>
@@ -1254,7 +1313,7 @@ session_start();
 <div class="floating-container">
     <div class="wa-floating-wrapper">
         <span class="wa-label" id="waLabel">Inquiry / Contact Us</span>
-        <a href="https://wa.me/60123456789?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20syarikat" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
+        <a href="https://wa.me/60391079708?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20syarikat" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
             <span class="wa-headset-badge"><i class="fa-solid fa-headset"></i></span>
         </a>
@@ -1264,23 +1323,23 @@ session_start();
     </button>
 </div>
 
-<!-- Redesigned Footer Section -->
+<!-- Footer Section (Sama Persis Seperti index) -->
 <footer>
     <div class="footer-grid">
         <div class="footer-col footer-col-main">
             <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="handleLogoError(this, 'MELAWATI KEBAB');">
-            <div class="company-name">MELAWATI KEBAB SDN BHD</div>
+            <div class="company-name">MELAWATI KEBAB SDN BHD (778900-M)</div>
             <div class="company-info">
-                <p><i class="fa-solid fa-location-dot"></i> No. 12 & 14, Jalan Industri 3, Taman Perindustrian Melawati, 53100 KL.</p>
-                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60341000000">+60 3-4100 0000</a></p>
-                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@melawatikebab.com">info@melawatikebab.com</a></p>
+                <p><i class="fa-solid fa-location-dot"></i> No 54-1F, Jalan 2/154D, Taman Desa Cheras, 56000 Kuala Lumpur, Malaysia</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60391079708">+603 9107 9708</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:melawatikebab1996@gmail.com">melawatikebab1996@gmail.com</a></p>
             </div>
         </div>
 
         <div class="footer-col">
             <h5 id="footerColQuick">Quick Links</h5>
             <ul>
-                <li><a href="home.html" id="footHome">Home</a></li>
+                <li><a href="index.html" id="footHome">Home</a></li>
                 <li><a href="company_overview.html" id="footAbout">About Us</a></li>
                 <li><a href="product.html" id="footProduct">Products</a></li>
                 <li><a href="distributor.html" id="footDist">Distributor</a></li>
@@ -1291,7 +1350,7 @@ session_start();
         <div class="footer-col">
             <h5 id="footerColConnect">Connect With Us</h5>
             <div class="social-buttons-container">
-                <a href="https://wa.me/60123456789" class="social-btn whatsapp" target="_blank">
+                <a href="https://wa.me/60391079708" class="social-btn whatsapp" target="_blank">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
                 </a>
                 <a href="https://www.tiktok.com/@melawatikebabsince1996?_r=1&_t=ZS-9Akrb5sFdQb" class="social-btn tiktok" target="_blank">
@@ -1305,14 +1364,13 @@ session_start();
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd. <span id="footRights">All Rights Reserved.</span></p>
+        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd (778900-M). <span id="footRights">All Rights Reserved.</span></p>
         <p id="footSub">Halal & Quality Frozen Food Manufacturer</p>
     </div>
 </footer>
 
 <!-- JavaScript Integration -->
 <script>
-    // Penangan logo fail-safe jika gambar tempatan tiada
     function handleLogoError(imgElement, brandTitle) {
         const parentWrapper = imgElement.parentElement;
         if (parentWrapper) {
@@ -1320,30 +1378,7 @@ session_start();
         }
     }
 
-    // 3D TILT EFFECT UNTUK KAD PERNIAGAAN (MOUSE TRACKING EFFECT)
-    if (window.innerWidth > 768) {
-        const tiltCards = document.querySelectorAll('.js-tilt-card');
-        tiltCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -10;
-                const rotateY = ((x - centerX) / centerX) * 10;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-            });
-        });
-    }
-
-    // 1. Mobile Navigation Toggle & Submenu Accordion Logic
+    // 1. Mobile Navigation & Arrow Dropdown Toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
 
@@ -1359,29 +1394,40 @@ session_start();
         });
     }
 
-    // PEMBAIKAN SUBMENU MOBILE: Klik menu induk untuk toggle paparan anak menu
-    document.querySelectorAll('.nav-item').forEach(item => {
-        const parentLink = item.querySelector('a');
-        const dropdown = item.querySelector('.dropdown-menu');
+    // Menu utama boleh tekan terus. Hanya ikon anak panah (chevron) yang akan toggle submenu pada telefon.
+    document.querySelectorAll('.menu-arrow-icon').forEach(arrow => {
+        arrow.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                e.stopPropagation();
 
-        if (dropdown && parentLink) {
-            parentLink.addEventListener('click', (e) => {
-                if (window.innerWidth <= 992) {
-                    e.preventDefault(); // Elak navigasi serta-merta
-                    e.stopPropagation();
+                const parentNav = arrow.closest('.nav-item');
+                
+                document.querySelectorAll('.nav-item').forEach(otherItem => {
+                    if (otherItem !== parentNav) {
+                        otherItem.classList.remove('active');
+                    }
+                });
 
-                    // Tutup submenu lain yang sedang terbuka
-                    document.querySelectorAll('.nav-item').forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
+                parentNav.classList.toggle('active');
+            }
+        });
+    });
 
-                    // Buka / Tutup menu semasa
-                    item.classList.toggle('active');
-                }
-            });
-        }
+    // Toggle Overlay Kad apabila Ditekan / Ditouch (Mobile & Touch Device)
+    document.querySelectorAll('.brand-logo-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isCurrentlyActive = card.classList.contains('active-overlay');
+            document.querySelectorAll('.brand-logo-card').forEach(c => c.classList.remove('active-overlay'));
+            if (!isCurrentlyActive) {
+                card.classList.add('active-overlay');
+            }
+        });
+    });
+
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.brand-logo-card').forEach(c => c.classList.remove('active-overlay'));
     });
 
     // 2. Day / Night Mode Toggle
@@ -1417,13 +1463,14 @@ session_start();
     // 4. Multi-language Dictionary (EN & BM)
     const translations = {
         EN: {
-            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer - Quality First',
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer',
             Home: 'Home',
             About: 'About Us',
+            Overview: 'Company Overview',
             History: 'Our History',
             VisionMission: 'Vision & Mission',
             Certifications: 'Quality Assurance & Certifications',
-            mProduct: 'Product',
+            mProduct: 'Products',
             MealProducts: 'Meat Products',
             BakeryProducts: 'Bakery Products',
             Catalogue: 'Products Catalogue',
@@ -1450,10 +1497,9 @@ session_start();
             groupTag: 'Salim Group Network',
             groupTitle: 'Our Group Businesses & Brands',
             groupDesc: 'Under the banner of Salim Group, our diverse portfolio delivers quality food products, manufacturing excellence, hospitality, and retail services across Malaysia.',
-            swipeHint: '<i class="fa-solid fa-arrow-left-long"></i> Swipe to view all brands <i class="fa-solid fa-arrow-right-long"></i>',
-            brand1Title: 'Salim / Salim Frozen Food',
+            brand1Title: 'Salim',
             brand1Desc: 'Parent group holding driving corporate strategy, operations, and nationwide frozen food supply.',
-            brand2Title: 'Melawati Kebab (MKSB)',
+            brand2Title: 'Melawati Kebab',
             brand2Desc: 'Core manufacturing facility producing premium Halal kebab meat, burger patties, and bakery lines.',
             brand3Title: 'Astana Salim',
             brand3Desc: 'Exclusive banquet halls, wedding venues, corporate event management, and full catering services.',
@@ -1473,9 +1519,10 @@ session_start();
             footSub: 'Halal & Quality Frozen Food Manufacturer'
         },
         BM: {
-            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium - Kualiti Utama',
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium',
             Home: 'Utama',
             About: 'Mengenai Kami',
+            Overview: 'Gambaran Syarikat',
             History: 'Sejarah Kami',
             VisionMission: 'Visi & Misi',
             Certifications: 'Jaminan Kualiti & Persijilan',
@@ -1506,10 +1553,9 @@ session_start();
             groupTag: 'Rangkaian Kumpulan Salim',
             groupTitle: 'Perniagaan & Jenama Kumpulan Kami',
             groupDesc: 'Di bawah naungan Kumpulan Salim, portfolio perniagaan kami menyampaikan produk makanan berkualiti, pembuatan cemerlang, perkhidmatan hospitaliti, dan peruncitan di seluruh Malaysia.',
-            swipeHint: '<i class="fa-solid fa-arrow-left-long"></i> Lirik ke tepi untuk lihat semua jenama <i class="fa-solid fa-arrow-right-long"></i>',
-            brand1Title: 'Salim / Salim Frozen Food',
+            brand1Title: 'Salim',
             brand1Desc: 'Syarikat induk yang memacu strategi korporat, operasi pembuatan, dan bekalan makanan sejuk beku nasional.',
-            brand2Title: 'Melawati Kebab (MKSB)',
+            brand2Title: 'Melawati Kebab',
             brand2Desc: 'Pusat pembuatan utama daging kebab sejuk beku Halal, patty burger, dan produk bakeri.',
             brand3Title: 'Astana Salim',
             brand3Desc: 'Dewan acara eksklusif, dewan perkahwinan, pengurusan majlis korporat, serta perkhidmatan katering lengkap.',
