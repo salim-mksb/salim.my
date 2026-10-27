@@ -1,0 +1,1845 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Enquiries | Melawati Kebab Sdn Bhd</title>
+
+    <!-- Google Fonts: Bebas Neue & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        :root {
+            /* Palet Warna Utama */
+            --deep-red: #7A1820;
+            --deep-red-hover: #5A1117;
+            --warm-cream: #F9F6F0;
+            --forest-green: #2E6B4F;
+            --light-gray: #EAEAEA;
+            --border-color: #E0E0E0;
+            --text-dark: #222222;
+            --text-muted: #666666;
+            --white: #FFFFFF;
+            --bg-main: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --whatsapp-green: #25D366;
+            --whatsapp-hover: #1EBE57;
+            
+            --font-headline: 'Bebas Neue', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Mode Gelap (Night Mode) */
+        body.dark-mode {
+            --bg-main: #121212;
+            --warm-cream: #1E1E1E;
+            --card-bg: #2A2A2A;
+            --text-dark: #F1F1F1;
+            --text-muted: #B0B0B0;
+            --border-color: #333333;
+            --white: #1E1E1E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-body);
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Top Bar Responsive */
+        .top-bar {
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            font-size: 13px;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 10px;
+        }
+
+        .top-bar-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .top-bar-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .lang-switcher button, .theme-toggle-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #FFFFFF;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-switcher button.active, .lang-switcher button:hover, .theme-toggle-btn:hover {
+            background-color: #FFFFFF;
+            color: var(--deep-red);
+        }
+
+        /* Navigation Header */
+        header {
+            background-color: var(--bg-main);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 2px solid var(--deep-red);
+            padding: 15px 5%;
+            transition: background-color 0.4s ease;
+        }
+
+        .navbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            height: 48px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.03);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-item-header > a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: capitalize;
+            padding: 10px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item-header > a:hover {
+            color: var(--deep-red);
+        }
+
+        .menu-arrow-icon {
+            font-size: 11px;
+            cursor: pointer;
+            padding: 10px 4px;
+            color: var(--text-dark);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-arrow-icon:hover {
+            color: var(--deep-red);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            list-style: none;
+            min-width: 230px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1100;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 9px 20px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--warm-cream);
+            color: var(--deep-red);
+        }
+
+        /* HERO SECTION */
+        .simple-hero {
+            padding: 55px 5% 35px 5%;
+            text-align: center;
+            background: radial-gradient(circle at 50% 30%, rgba(122, 24, 32, 0.05) 0%, transparent 70%);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .simple-hero-inner {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .simple-hero h1 {
+            font-family: var(--font-headline);
+            font-size: clamp(40px, 6vw, 62px);
+            color: var(--deep-red);
+            line-height: 0.95;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .simple-hero p {
+            font-size: clamp(14px, 1.8vw, 16.5px);
+            color: var(--text-muted);
+            font-weight: 400;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        /* =========================================================
+           SALES TEAM SECTION (1 MANAGER TOP, 3 SALESMEN BOTTOM)
+           ========================================================= */
+        .sales-team-container {
+            max-width: 1280px;
+            margin: 0 auto 50px auto;
+            padding: 0 5%;
+        }
+
+        /* MANAGER CARD (ALI RAZAK ATAS) */
+        .manager-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+
+        .sales-card.manager-card {
+            max-width: 480px;
+            width: 100%;
+            background-color: var(--card-bg);
+            border: 2px solid var(--deep-red);
+            border-radius: 20px;
+            padding: 24px 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(122, 24, 32, 0.1);
+            position: relative;
+            transition: all 0.35s ease;
+        }
+
+        .sales-card.manager-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 35px rgba(122, 24, 32, 0.18);
+        }
+
+        .manager-badge {
+            position: absolute;
+            top: -14px;
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 16px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(122, 24, 32, 0.3);
+        }
+
+        /* SALESMEN ROW (3 SEBARIS) */
+        .salesmen-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .sales-card {
+            background-color: var(--card-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 18px;
+            padding: 22px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+            transition: all 0.35s ease;
+            animation: fadeInUp 0.7s ease-out;
+        }
+
+        .sales-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--deep-red);
+            box-shadow: 0 12px 28px rgba(122, 24, 32, 0.12);
+        }
+
+        .sales-avatar-wrapper {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--deep-red);
+            box-shadow: 0 6px 15px rgba(122, 24, 32, 0.2);
+            margin-bottom: 14px;
+            background-color: var(--warm-cream);
+            flex-shrink: 0;
+        }
+
+        .sales-avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .sales-name {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .sales-phone {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .sales-zone-tag {
+            background-color: var(--warm-cream);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 8px 12px;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .zone-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--deep-red);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .zone-states {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .sales-actions {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .btn-sales-action {
+            flex: 1;
+            padding: 9px 12px;
+            border-radius: 25px;
+            font-size: 12.5px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-wa-sales {
+            background-color: var(--whatsapp-green);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+        }
+
+        .btn-wa-sales:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+        }
+
+        .btn-call-sales {
+            background-color: var(--warm-cream);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-call-sales:hover {
+            border-color: var(--deep-red);
+            color: var(--deep-red);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================================
+           ACTION TRIGGER BUTTON FOR EMAIL INQUIRY & SUPERMARKETS
+           ========================================================= */
+        .main-action-section {
+            max-width: 1280px;
+            margin: 0 auto 50px auto;
+            padding: 0 5%;
+        }
+
+        .action-layout-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        /* Call to Action Box */
+        .cta-email-box {
+            background-color: var(--warm-cream);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            padding: 35px 28px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+        }
+
+        .cta-icon-head {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(122, 24, 32, 0.1);
+            color: var(--deep-red);
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .cta-email-box h3 {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            color: var(--deep-red);
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .cta-email-box p {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        .btn-trigger-modal {
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 18px rgba(122, 24, 32, 0.25);
+            transition: all 0.35s ease;
+        }
+
+        .btn-trigger-modal:hover {
+            background-color: var(--deep-red-hover);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(122, 24, 32, 0.35);
+        }
+
+        /* Supermarkets Grid */
+        .supermarket-card-wrapper {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            padding: 30px 24px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+        }
+
+        .supermarket-head-title {
+            font-family: var(--font-headline);
+            font-size: 30px;
+            color: var(--deep-red);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .supermarket-head-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .supermarket-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .supermarket-item {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .supermarket-item:hover {
+            border-color: var(--deep-red);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+        }
+
+        .supermarket-logo-img {
+            max-width: 85%;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .supermarket-item span {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        /* POP-UP MODAL FORM (HANTAR KE EMAIL) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content-box {
+            background-color: var(--card-bg);
+            border-radius: 22px;
+            max-width: 520px;
+            width: 100%;
+            padding: 35px 30px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            transform: scale(0.85);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-content-box {
+            transform: scale(1);
+        }
+
+        .btn-close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(122, 24, 32, 0.08);
+            border: none;
+            color: var(--text-dark);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close-modal:hover {
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+        }
+
+        .modal-header-title {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            color: var(--deep-red);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .modal-header-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+        }
+
+        .modal-form-group {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .modal-form-group label {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px 14px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 13.5px;
+            color: var(--text-dark);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal-input:focus {
+            border-color: var(--deep-red);
+            box-shadow: 0 0 0 3px rgba(122, 24, 32, 0.12);
+        }
+
+        textarea.modal-input {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .btn-send-email {
+            width: 100%;
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-size: 14.5px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(122, 24, 32, 0.2);
+        }
+
+        .btn-send-email:hover {
+            background-color: var(--deep-red-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(122, 24, 32, 0.3);
+        }
+
+        /* MAP SECTION (WIDE RECTANGLE ON MOBILE) */
+        .map-section-wrapper {
+            max-width: 1280px;
+            margin: 0 auto 60px auto;
+            padding: 0 5%;
+        }
+
+        .map-card-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+            transition: border-color 0.3s ease;
+        }
+
+        .map-card-box:hover {
+            border-color: var(--deep-red);
+        }
+
+        .map-card-box iframe {
+            width: 100%;
+            height: 360px;
+            border: none;
+            display: block;
+        }
+
+        /* Floating Controls */
+        .floating-container {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            z-index: 1200;
+        }
+
+        .wa-floating-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wa-label {
+            background-color: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            animation: pulseGlow 3.5s infinite ease-in-out;
+        }
+
+        .floating-btn {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 20px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-whatsapp { background-color: #25D366; }
+        .btn-whatsapp:hover { background-color: #20ba5a; }
+
+        .wa-headset-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: var(--deep-red);
+            color: #FFFFFF;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #FFFFFF;
+        }
+
+        .btn-scroll {
+            background-color: var(--deep-red);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .btn-scroll.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* KEYFRAMES ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* Footer Section (Diselaraskan Sepenuhnya Seperti Index) */
+        footer {
+            background-color: var(--warm-cream);
+            color: var(--text-dark);
+            padding: 50px 5% 25px 5%;
+            border-top: 3px solid var(--deep-red);
+        }
+
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 35px;
+        }
+
+        .footer-logo {
+            height: 48px;
+            margin-bottom: 12px;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--deep-red);
+            margin-bottom: 10px;
+        }
+
+        .company-info {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .company-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .company-info i {
+            color: var(--deep-red);
+            margin-top: 4px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .company-info a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .company-info a:hover { color: var(--deep-red); }
+
+        .footer-col h5 {
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 14px;
+            color: var(--deep-red);
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .footer-col h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--forest-green);
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13.5px;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--deep-red);
+            padding-left: 4px;
+        }
+
+        .social-buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 14px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .social-btn i { font-size: 16px; }
+        .social-btn.whatsapp i { color: #25D366; }
+        .social-btn.tiktok i { color: #000000; }
+        .social-btn.facebook i { color: #1877F2; }
+
+        body.dark-mode .social-btn.tiktok i { color: #FFFFFF; }
+
+        .social-btn:hover {
+            border-color: var(--deep-red);
+            color: var(--deep-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(122, 24, 32, 0.1);
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12.5px;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* =========================================================
+           RESPONSIVE MEDIA QUERIES FOR TABLET & MOBILE
+           ========================================================= */
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg);
+                border-bottom: 2px solid var(--deep-red);
+                padding: 15px 5%;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+
+            .nav-links.active { display: flex; }
+            .nav-item { width: 100%; }
+
+            .nav-item-header {
+                justify-content: space-between;
+                width: 100%;
+                border-bottom: 1px solid var(--border-color);
+                padding: 4px 0;
+            }
+
+            .nav-item-header > a {
+                padding: 10px 0;
+                font-size: 15px;
+                flex-grow: 1;
+            }
+
+            .menu-arrow-icon {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .nav-item.active .menu-arrow-icon {
+                transform: rotate(180deg);
+                color: var(--deep-red);
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                padding: 5px 0 10px 12px;
+                display: none;
+                background-color: transparent;
+                border-left: 2px solid var(--deep-red);
+                margin-left: 10px;
+                margin-top: 5px;
+            }
+
+            .nav-item.active .dropdown-menu { display: block; }
+
+            .dropdown-menu li a {
+                padding: 8px 12px;
+                font-size: 13.5px;
+                color: var(--text-dark);
+            }
+
+            .action-layout-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 6px 3%;
+                font-size: 10.5px;
+            }
+
+            .top-bar-info span { 
+                font-size: 10px; 
+            }
+
+            .lang-switcher button, .theme-toggle-btn {
+                padding: 2px 5px;
+                font-size: 10px;
+            }
+
+            .simple-hero {
+                padding: 40px 4% 25px 4%;
+            }
+
+            /* 3 SALESMEN SEBARIS PADA MOBILE (3-IN-A-ROW) */
+            .salesmen-row {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .sales-card {
+                padding: 12px 6px;
+                border-radius: 12px;
+            }
+
+            .sales-card.manager-card {
+                padding: 16px 12px;
+                border-radius: 14px;
+            }
+
+            .sales-avatar-wrapper {
+                width: 54px;
+                height: 54px;
+                border-width: 2px;
+                margin-bottom: 8px;
+            }
+
+            .sales-name {
+                font-size: 12px;
+                line-height: 1.2;
+            }
+
+            .sales-phone {
+                font-size: 9.5px;
+                margin-bottom: 6px;
+            }
+
+            .sales-zone-tag {
+                padding: 5px 4px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            .zone-title {
+                font-size: 10px;
+            }
+
+            .zone-states {
+                font-size: 8.5px;
+                line-height: 1.2;
+            }
+
+            .sales-actions {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .btn-sales-action {
+                padding: 6px 4px;
+                font-size: 9px;
+                border-radius: 15px;
+            }
+
+            .cta-email-box {
+                padding: 24px 16px;
+            }
+
+            .supermarket-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .supermarket-item {
+                padding: 8px 4px;
+            }
+
+            .supermarket-logo-img {
+                height: 28px;
+            }
+
+            .supermarket-item span {
+                font-size: 9px;
+            }
+
+            /* MAP SEGI EMPAT TEPAT MELINTANG (WIDE RECTANGLE) */
+            .map-card-box iframe {
+                height: 200px;
+            }
+
+            /* FOOTER MOBILE */
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px 15px;
+            }
+
+            .footer-col-main {
+                grid-column: 1 / -1;
+                border-bottom: 1px dashed var(--border-color);
+                padding-bottom: 15px;
+            }
+
+            .footer-col h5 { font-size: 13.5px; margin-bottom: 10px; }
+            .footer-col ul li { margin-bottom: 6px; }
+            .footer-col ul li a { font-size: 12.5px; }
+            .social-buttons-container { gap: 6px; }
+            .social-btn { padding: 7px 10px; font-size: 11.5px; }
+
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                font-size: 11px;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .wa-label { display: none; }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Announcement Bar (Text kiri, Switches kanan) -->
+<div class="top-bar">
+    <div class="top-bar-info">
+        <span id="topAnnouncement"><i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer</span>
+    </div>
+    <div class="top-bar-controls">
+        <div class="lang-switcher">
+            <button id="btnLangEN" class="active" onclick="switchLang('EN')">EN</button> | 
+            <button id="btnLangBM" onclick="switchLang('BM')">BM</button>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Day/Night Mode">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Navigation Header -->
+<header>
+    <div class="navbar">
+        <div class="brand-logo-container">
+            <a href="index.html">
+                <img src="logo/salim.png" alt="Melawati Kebab Logo" class="brand-logo" onerror="handleLogoError(this, 'MELAWATI KEBAB');">
+            </a>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li class="nav-item">
+                <div class="nav-item-header">
+                    <a href="index.html"><span id="Home">Home</span></a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item-header">
+                    <a href="company_overview.html"><span id="About">About Us</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a href="company_overview.html" id="Overview">Company Overview</a></li>
+                    <li><a href="our_history.html" id="History">Our History</a></li>
+                    <li><a href="vision_mission.html" id="VisionMission">Vision & Mission</a></li>
+                    <li><a href="certifications.html" id="Certifications">Quality Assurance & Certifications</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item-header">
+                    <a href="product.html"><span id="mProduct">Products</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a href="products-catalogue.html" id="Catalogue">Products Catalogue</a></li>
+                    <li><a href="meat-products.html" id="MealProducts">Meat Products</a></li>
+                    <li><a href="bakery-products.html" id="BakeryProducts">Bakery Products</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item-header">
+                    <a href="distributor.html"><span id="Distributor">Get Our Product</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a href="find-distributor.html" id="FindDistributor">Find Our Distributor</a></li>
+                    <li><a href="become-distributor.html" id="BecomeDistributor">Become a Distributor</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item-header">
+                    <a href="media.html"><span id="mMedia">Media</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a href="news-events.html" id="NewsEvents">News & Events</a></li>
+                    <li><a href="events-gallery.html" id="EventsGallery">Events Gallery</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item-header">
+                    <a href="contact.html"><span id="mContact">Contact Us</span></a>
+                    <i class="fa-solid fa-chevron-down menu-arrow-icon"></i>
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a href="sales-enquiries.html" id="SalesEnquiries">Sales Enquiries</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<!-- HERO SECTION SIMPLE & CLEAN -->
+<section class="simple-hero">
+    <div class="simple-hero-inner">
+        <h1 id="heroTitle">Contact Our Sales Team</h1>
+        <p id="heroSubtitle">Connect directly with our sales managers and regional representatives for bulk orders, distribution, and commercial deals.</p>
+    </div>
+</section>
+
+<!-- SALES TEAM SECTION (ALI RAZAK ATAS, 3 PEGAWAI SEBARIS DI BAWAH) -->
+<section class="sales-team-container">
+
+    <!-- TOP CARD: SALES MANAGER (ALI RAZAK) -->
+    <div class="manager-row">
+        <div class="sales-card manager-card">
+            <span class="manager-badge" id="lblManagerBadge">Sales Manager</span>
+            <div class="sales-avatar-wrapper">
+                <img src="productpic/ali.png" alt="Ali Razak" class="sales-avatar-img" onerror="this.src='https://via.placeholder.com/100?text=Ali+Razak';">
+            </div>
+            <div class="sales-name">Ali Razak</div>
+            <div class="sales-phone">+6012 515 7708</div>
+            <div class="sales-zone-tag">
+                <div class="zone-title" id="lblZoneCentral">Zon Tengah (Central Zone)</div>
+                <div class="zone-states">Kuala Lumpur &bull; Selangor</div>
+            </div>
+            <div class="sales-actions">
+                <a href="https://wa.me/60125157708?text=Hello%20Mr.%20Ali,%20I%20would%20like%20to%20inquire%20about%20Central%20zone%20sales." target="_blank" class="btn-sales-action btn-wa-sales">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="tel:+60125157708" class="btn-sales-action btn-call-sales">
+                    <i class="fa-solid fa-phone"></i> Call
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM ROW: 3 SALESMEN SEBARIS -->
+    <div class="salesmen-row">
+        
+        <!-- Salesperson 1: Rashdan -->
+        <div class="sales-card">
+            <div class="sales-avatar-wrapper">
+                <img src="productpic/rashdan.png" alt="Rashdan" class="sales-avatar-img" onerror="this.src='https://via.placeholder.com/100?text=Rashdan';">
+            </div>
+            <div class="sales-name">Rashdan</div>
+            <div class="sales-phone">+6012 309 7708</div>
+            <div class="sales-zone-tag">
+                <div class="zone-title" id="lblZoneEast">Zon Pantai Timur</div>
+                <div class="zone-states">Pahang &bull; Terengganu &bull; Kelantan</div>
+            </div>
+            <div class="sales-actions">
+                <a href="https://wa.me/60123097708?text=Hello%20Mr.%20Rashdan,%20I%20would%20like%20to%20inquire%20about%20East%20Coast%20sales." target="_blank" class="btn-sales-action btn-wa-sales">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="tel:+60123097708" class="btn-sales-action btn-call-sales">
+                    <i class="fa-solid fa-phone"></i> Call
+                </a>
+            </div>
+        </div>
+
+        <!-- Salesperson 2: Faizal -->
+        <div class="sales-card">
+            <div class="sales-avatar-wrapper">
+                <img src="productpic/faizal.png" alt="Faizal" class="sales-avatar-img" onerror="this.src='https://via.placeholder.com/100?text=Faizal';">
+            </div>
+            <div class="sales-name">Faizal</div>
+            <div class="sales-phone">+6012 516 7708</div>
+            <div class="sales-zone-tag">
+                <div class="zone-title" id="lblZoneNorth">Zon Utara</div>
+                <div class="zone-states">Kedah &bull; Perak &bull; Perlis &bull; Penang</div>
+            </div>
+            <div class="sales-actions">
+                <a href="https://wa.me/60125167708?text=Hello%20Mr.%20Faizal,%20I%20would%20like%20to%20inquire%20about%20Northern%20zone%20sales." target="_blank" class="btn-sales-action btn-wa-sales">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="tel:+60125167708" class="btn-sales-action btn-call-sales">
+                    <i class="fa-solid fa-phone"></i> Call
+                </a>
+            </div>
+        </div>
+
+        <!-- Salesperson 3: Kamil -->
+        <div class="sales-card">
+            <div class="sales-avatar-wrapper">
+                <img src="productpic/kamil.png" alt="Kamil" class="sales-avatar-img" onerror="this.src='https://via.placeholder.com/100?text=Kamil';">
+            </div>
+            <div class="sales-name">Kamil</div>
+            <div class="sales-phone">+6012 659 7708</div>
+            <div class="sales-zone-tag">
+                <div class="zone-title" id="lblZoneSouth">Zon Selatan</div>
+                <div class="zone-states">Melaka &bull; Johor &bull; N. Sembilan</div>
+            </div>
+            <div class="sales-actions">
+                <a href="https://wa.me/60126597708?text=Hello%20Mr.%20Kamil,%20I%20would%20like%20to%20inquire%20about%20Southern%20zone%20sales." target="_blank" class="btn-sales-action btn-wa-sales">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="tel:+60126597708" class="btn-sales-action btn-call-sales">
+                    <i class="fa-solid fa-phone"></i> Call
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- MAIN ACTION SECTION: POP-UP INQUIRY TRIGGER & SUPERMARKET AVAILABILITY -->
+<section class="main-action-section">
+    <div class="action-layout-grid">
+        
+        <!-- Left: Call to Action Card -->
+        <div class="cta-email-box">
+            <div class="cta-icon-head">
+                <i class="fa-solid fa-paper-plane"></i>
+            </div>
+            <h3 id="ctaTitle">Send A Bulk Sales Enquiry</h3>
+            <p id="ctaSub">Need a official quotation or custom order request? Click below to send an email directly to our HQ sales team.</p>
+            <button class="btn-trigger-modal" onclick="openContactModal()">
+                <i class="fa-solid fa-envelope-open-text"></i> <span id="btnTriggerText">Send Sales Enquiry</span>
+            </button>
+        </div>
+
+        <!-- Right: Selected Supermarkets Availability -->
+        <div class="supermarket-card-wrapper">
+            <h3 class="supermarket-head-title" id="supTitle">Also Available At Supermarkets</h3>
+            <p class="supermarket-head-sub" id="supSub">Find Salim & Melawati Kebab products at leading retail chains nationwide.</p>
+
+            <div class="supermarket-grid">
+                <div class="supermarket-item">
+                    <img src="supermarkets/pasarayatf.jpg" alt="TF Value-Mart" class="supermarket-logo-img" onerror="this.style.display='none';">
+                    <span>TF Value-Mart</span>
+                </div>
+                <div class="supermarket-item">
+                    <img src="supermarkets/sri-ternak.jpg" alt="Sri Ternak" class="supermarket-logo-img" onerror="this.style.display='none';">
+                    <span>Sri Ternak</span>
+                </div>
+                <div class="supermarket-item">
+                    <img src="supermarkets/pasaraya-target.jpg" alt="Target" class="supermarket-logo-img" onerror="this.style.display='none';">
+                    <span>Target</span>
+                </div>
+                <div class="supermarket-item">
+                    <img src="supermarkets/cs-brother.png" alt="CS Brother" class="supermarket-logo-img" onerror="this.style.display='none';">
+                    <span>CS Brother</span>
+                </div>
+                <div class="supermarket-item">
+                    <img src="supermarkets/st-rosyam.png" alt="ST Rosyam" class="supermarket-logo-img" onerror="this.style.display='none';">
+                    <span>ST Rosyam</span>
+                </div>
+                <div class="supermarket-item">
+                    <img src="supermarkets/SUPER-SEVEN-LOGO.jpg" alt="Super Seven" class="supermarket-logo-img" onerror="this.style.display='none';">
+                    <span>Super Seven</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- POP-UP MODAL FORM (HANTAR KE EMAIL MELAWATIKEBAB1996@GMAIL.COM) -->
+<div class="modal-overlay" id="contactModal">
+    <div class="modal-content-box">
+        <button class="btn-close-modal" onclick="closeContactModal()"><i class="fa-solid fa-xmark"></i></button>
+        
+        <h3 class="modal-header-title" id="modalTitle">Sales Enquiry Form</h3>
+        <p class="modal-header-sub" id="modalSub">Fill in your information below to send an email directly to our sales department.</p>
+
+        <form id="emailSalesForm" onsubmit="sendSalesEmail(event)">
+            <div class="modal-form-group">
+                <label for="modalName" id="lblMName">Company / Your Name *</label>
+                <input type="text" id="modalName" class="modal-input" placeholder="e.g. Syarikat ABC / Ahmad" required>
+            </div>
+
+            <div class="modal-form-group">
+                <label for="modalEmail" id="lblMEmail">Email Address *</label>
+                <input type="email" id="modalEmail" class="modal-input" placeholder="e.g. name@example.com" required>
+            </div>
+
+            <div class="modal-form-group">
+                <label for="modalPhone" id="lblMPhone">Phone Number *</label>
+                <input type="tel" id="modalPhone" class="modal-input" placeholder="e.g. +60123456789" required>
+            </div>
+
+            <div class="modal-form-group">
+                <label for="modalSubject" id="lblMSubject">Subject / Zone *</label>
+                <input type="text" id="modalSubject" class="modal-input" placeholder="e.g. Bulk Order Request / Central Zone Inquiry" required>
+            </div>
+
+            <div class="modal-form-group">
+                <label for="modalMessage" id="lblMMessage">Details of Request *</label>
+                <textarea id="modalMessage" class="modal-input" placeholder="Please specify product types, quantities, or delivery location..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-send-email" id="btnSendEmailSubmit">
+                <i class="fa-solid fa-paper-plane"></i> <span id="btnModalSubmitText">Send Sales Email</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- MAP SECTION (WIDE RECTANGLE ON MOBILE) -->
+<section class="map-section-wrapper">
+    <div class="map-card-box">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.072232386906!2d101.74100000000001!3d3.0750000000000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc356700000001%3A0x1!2sTaman%20Desa%20Cheras!5e0!3m2!1sen!2smy!4v1680000000000!5m2!1sen!2smy" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</section>
+
+<!-- Floating Action Controls -->
+<div class="floating-container">
+    <div class="wa-floating-wrapper">
+        <span class="wa-label" id="waLabel">Sales Inquiry / WhatsApp</span>
+        <a href="https://wa.me/60125157708?text=Hello%20Melawati%20Kebab,%20saya%20ingin%20bertanya%20mengenai%20jualan%20produk" target="_blank" class="floating-btn btn-whatsapp" title="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="wa-headset-badge"><i class="fa-solid fa-headset"></i></span>
+        </a>
+    </div>
+    <button class="floating-btn btn-scroll" id="scrollTopBtn" title="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+</div>
+
+<!-- Footer Section (Sama Seperti Index Dengan Nombor Syarikat 778900-M) -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col footer-col-main">
+            <img src="logo/salim.png" alt="Melawati Kebab Logo" class="footer-logo" onerror="handleLogoError(this, 'MELAWATI KEBAB');">
+            <div class="company-name">MELAWATI KEBAB SDN BHD (778900-M)</div>
+            <div class="company-info">
+                <p><i class="fa-solid fa-location-dot"></i> No 54-1F, Jalan 2/154D, Taman Desa Cheras, 56000 Kuala Lumpur, Malaysia</p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+60391079708">+603 9107 9708</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:melawatikebab1996@gmail.com">melawatikebab1996@gmail.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h5 id="footerColQuick">Quick Links</h5>
+            <ul>
+                <li><a href="index.html" id="footHome">Home</a></li>
+                <li><a href="company_overview.html" id="footAbout">About Us</a></li>
+                <li><a href="product.html" id="footProduct">Products</a></li>
+                <li><a href="distributor.html" id="footDist">Distributor</a></li>
+                <li><a href="contact.html" id="footContact">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h5 id="footerColConnect">Connect With Us</h5>
+            <div class="social-buttons-container">
+                <a href="https://wa.me/60391079708" class="social-btn whatsapp" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                </a>
+                <a href="https://www.tiktok.com/@melawatikebabsince1996?_r=1&_t=ZS-9Akrb5sFdQb" class="social-btn tiktok" target="_blank">
+                    <i class="fa-brands fa-tiktok"></i> TikTok
+                </a>
+                <a href="https://www.facebook.com/SalimFrozenFood" class="social-btn facebook" target="_blank">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; <?php echo date("Y"); ?> Melawati Kebab Sdn Bhd (778900-M). <span id="footRights">All Rights Reserved.</span></p>
+        <p id="footSub">Halal & Quality Frozen Food Manufacturer</p>
+    </div>
+</footer>
+
+<!-- JavaScript Integration -->
+<script>
+    function handleLogoError(imgElement, brandTitle) {
+        const parentWrapper = imgElement.parentElement;
+        if (parentWrapper) {
+            parentWrapper.innerHTML = `<div style="font-family:var(--font-headline); font-size:20px; color:var(--deep-red); font-weight:700;">${brandTitle}</div>`;
+        }
+    }
+
+    // 1. Mobile Navigation & Arrow Dropdown Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fa-solid fa-xmark';
+            } else {
+                icon.className = 'fa-solid fa-bars';
+            }
+        });
+    }
+
+    // Menu utama boleh tekan terus. Hanya ikon anak panah (chevron) yang akan toggle submenu pada telefon.
+    document.querySelectorAll('.menu-arrow-icon').forEach(arrow => {
+        arrow.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const parentNav = arrow.closest('.nav-item');
+                
+                document.querySelectorAll('.nav-item').forEach(otherItem => {
+                    if (otherItem !== parentNav) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+
+                parentNav.classList.toggle('active');
+            }
+        });
+    });
+
+    // 2. MODAL POP-UP LOGIC
+    const contactModal = document.getElementById('contactModal');
+
+    function openContactModal() {
+        if (contactModal) {
+            contactModal.classList.add('active');
+        }
+    }
+
+    function closeContactModal() {
+        if (contactModal) {
+            contactModal.classList.remove('active');
+        }
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target === contactModal) {
+            closeContactModal();
+        }
+    });
+
+    // 3. SEND SALES ENQUIRY TO EMAIL FUNCTION (mailto:)
+    function sendSalesEmail(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('modalName').value.trim();
+        const email = document.getElementById('modalEmail').value.trim();
+        const phone = document.getElementById('modalPhone').value.trim();
+        const subject = document.getElementById('modalSubject').value.trim();
+        const message = document.getElementById('modalMessage').value.trim();
+
+        const mailSubject = encodeURIComponent(`[Sales Enquiry] ${subject}`);
+        const mailBody = encodeURIComponent(
+            `NAMA / SYARIKAT: ${name}\n` +
+            `EMEL PENGIRIM: ${email}\n` +
+            `NO. TELEFON: ${phone}\n\n` +
+            `BUTIRAN PERTANYAAN JUALAN:\n${message}`
+        );
+
+        // Hantar terus ke melawatikebab1996@gmail.com
+        window.location.href = `mailto:melawatikebab1996@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+
+        closeContactModal();
+    }
+
+    // 4. Day / Night Mode Toggle
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggleBtn.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        });
+    }
+
+    // 5. Scroll to Top Button
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // 6. Multi-language Dictionary (EN & BM)
+    const translations = {
+        EN: {
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Premium Halal Frozen Food Supplier & Manufacturer',
+            Home: 'Home',
+            About: 'About Us',
+            Overview: 'Company Overview',
+            History: 'Our History',
+            VisionMission: 'Vision & Mission',
+            Certifications: 'Quality Assurance & Certifications',
+            mProduct: 'Products',
+            MealProducts: 'Meat Products',
+            BakeryProducts: 'Bakery Products',
+            Catalogue: 'Products Catalogue',
+            Distributor: 'Get Our Product',
+            FindDistributor: 'Find Our Distributor',
+            BecomeDistributor: 'Become a Distributor',
+            mMedia: 'Media',
+            NewsEvents: 'News & Events',
+            EventsGallery: 'Events Gallery',
+            mContact: 'Contact Us',
+            GeneralEnquiries: 'General Enquiries',
+            SalesEnquiries: 'Sales Enquiries',
+
+            heroTitle: 'Contact Our Sales Team',
+            heroSubtitle: 'Connect directly with our sales managers and regional representatives for bulk orders, distribution, and commercial deals.',
+
+            lblManagerBadge: 'Sales Manager',
+            lblZoneCentral: 'Central Zone (Zon Tengah)',
+            lblZoneEast: 'East Coast Zone (Zon Pantai Timur)',
+            lblZoneNorth: 'Northern Zone (Zon Utara)',
+            lblZoneSouth: 'Southern Zone (Zon Selatan)',
+
+            ctaTitle: 'Send A Bulk Sales Enquiry',
+            ctaSub: 'Need a official quotation or custom order request? Click below to send an email directly to our HQ sales team.',
+            btnTriggerText: 'Send Sales Enquiry',
+
+            supTitle: 'Also Available At Supermarkets',
+            supSub: 'Find Salim & Melawati Kebab products at leading retail chains nationwide.',
+
+            modalTitle: 'Sales Enquiry Form',
+            modalSub: 'Fill in your information below to send an email directly to our sales department.',
+            lblMName: 'Company / Your Name *',
+            lblMEmail: 'Email Address *',
+            lblMPhone: 'Phone Number *',
+            lblMSubject: 'Subject / Zone *',
+            lblMMessage: 'Details of Request *',
+            btnModalSubmitText: 'Send Sales Email',
+
+            waLabel: 'Sales Inquiry / WhatsApp',
+            footerColQuick: 'Quick Links',
+            footHome: 'Home',
+            footAbout: 'About Us',
+            footProduct: 'Products',
+            footDist: 'Distributor',
+            footContact: 'Contact Us',
+            footerColConnect: 'Connect With Us',
+            footRights: 'All Rights Reserved.',
+            footSub: 'Halal & Quality Frozen Food Manufacturer'
+        },
+        BM: {
+            topAnnouncement: '<i class="fa-solid fa-truck-fast"></i> Pembekal & Pengeluar Makanan Sejuk Beku Halal Premium',
+            Home: 'Utama',
+            About: 'Mengenai Kami',
+            Overview: 'Gambaran Syarikat',
+            History: 'Sejarah Kami',
+            VisionMission: 'Visi & Misi',
+            Certifications: 'Jaminan Kualiti & Persijilan',
+            mProduct: 'Produk',
+            MealProducts: 'Produk Daging',
+            BakeryProducts: 'Produk Biskut & Roti',
+            Catalogue: 'Katalog Produk',
+            Distributor: 'Dapatkan Produk Kami',
+            FindDistributor: 'Cari Pengedar Kami',
+            BecomeDistributor: 'Sertai Sebagai Pengedar',
+            mMedia: 'Media',
+            NewsEvents: 'Berita & Acara',
+            EventsGallery: 'Galeri Acara',
+            mContact: 'Hubungi Kami',
+            GeneralEnquiries: 'Pertanyaan Umum',
+            SalesEnquiries: 'Pertanyaan Jualan',
+
+            heroTitle: 'Hubungi Pasukan Jualan Kami',
+            heroSubtitle: 'Berhubung terus dengan pengurus jualan dan wakil zon kami untuk pesanan pukal, pengedaran, dan sebut harga perniagaan.',
+
+            lblManagerBadge: 'Pengurus Jualan',
+            lblZoneCentral: 'Zon Tengah',
+            lblZoneEast: 'Zon Pantai Timur',
+            lblZoneNorth: 'Zon Utara',
+            lblZoneSouth: 'Zon Selatan',
+
+            ctaTitle: 'Hantar Pertanyaan Jualan Pukal',
+            ctaSub: 'Perlukan sebut harga rasmi atau pesanan khas? Klik di bawah untuk menghantar emel terus kepada pasukan jualan HQ kami.',
+            btnTriggerText: 'Hantar Pertanyaan Jualan',
+
+            supTitle: 'Turut Boleh Didapati Di Pasar Raya',
+            supSub: 'Cari produk Salim & Melawati Kebab di rangkaian pasar raya utama di seluruh negara.',
+
+            modalTitle: 'Borang Pertanyaan Jualan',
+            modalSub: 'Isi maklumat anda di bawah untuk menghantar emel terus ke jabatan jualan kami.',
+            lblMName: 'Syarikat / Nama Anda *',
+            lblMEmail: 'Alamat Emel *',
+            lblMPhone: 'Nombor Telefon *',
+            lblMSubject: 'Subjek / Zon *',
+            lblMMessage: 'Butiran Permohonan *',
+            btnModalSubmitText: 'Hantar Emel Jualan',
+
+            waLabel: 'Pertanyaan Jualan / WhatsApp',
+            footerColQuick: 'Pautan Pantas',
+            footHome: 'Utama',
+            footAbout: 'Mengenai Kami',
+            footProduct: 'Produk',
+            footDist: 'Pengedar',
+            footContact: 'Hubungi Kami',
+            footerColConnect: 'Hubungi Kami',
+            footRights: 'Hak Cipta Terpelihara.',
+            footSub: 'Pengeluar Makanan Sejuk Beku Halal & Berkualiti'
+        }
+    };
+
+    function switchLang(lang) {
+        document.getElementById('btnLangEN').classList.toggle('active', lang === 'EN');
+        document.getElementById('btnLangBM').classList.toggle('active', lang === 'BM');
+
+        const dict = translations[lang];
+        if (!dict) return;
+
+        for (let key in dict) {
+            const el = document.getElementById(key);
+            if (el) {
+                el.innerHTML = dict[key];
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
